@@ -1,0 +1,76 @@
+
+
+
+
+<div>
+  
+  <div class="main_div">
+    
+      <nav class="navbar navbar-expand-lg navbar-light welcome_nav">
+          <a class="navbar-brand navbar_item_color"  href="#">Checkarr</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item active">
+                <a class="navbar_item_color"  href="#">Help</a>
+              </li>
+             
+            </ul>
+
+            
+            <form class="form-inline my-2 my-lg-0" novalidate (ngSubmit)="onLoginTry(loginForm)" #loginForm="ngForm">
+              <input class="form-control mr-sm-2 input_control"
+                     type="text" 
+                     placeholder="Email"
+                     ngModel
+                     name="email"
+                     required
+                     pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+                     #emailControl="ngModel"
+                     [ngClass]="{'invalid-form-control': (emailControl.dirty && !emailControl.valid)}"
+                     >
+                     
+              <input class="form-control mr-sm-2 input_control" 
+                    type="password" 
+                    placeholder="Password"
+                    ngModel
+                    name="password"
+                    required
+                    #passwordControl="ngModel"
+                    [ngClass]="{'invalid-form-control': (emailControl.dirty && passwordControl.touched && !passwordControl.valid)}"
+                    >
+              <button class="btn my-2 my-sm-0 nav_button" [disabled]="!loginForm.valid" type="submit">Login</button>
+            
+            </form>
+          </div>
+        </nav>
+        
+        
+
+
+
+    <div class="main_message_div">
+        <h1 class="main_message">Be aware, do your share!</h1>
+        <p style="color: rgb(65, 11, 88);font-size: 15px;">Share your experience, thoughts or creativity with others and let them be your fans</p>
+        <button class="btn register_button">Register</button>
+    </div>
+
+    
+  </div>
+  
+
+  
+    
+
+  
+  <div class="footer">
+      <p style="font-size: 10px">Made in Pakistan - Checkarr © 2018</p>
+  </div>
+
+</div>
+
+
+
