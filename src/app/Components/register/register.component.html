@@ -1,0 +1,199 @@
+<div>
+
+    
+
+
+    <div class="main_div">
+        <nav class="navbar navbar-expand-lg navbar-light welcome_nav">
+            <a class="navbar-brand navbar_item_color"  [routerLink]="['/']">
+                <div class="logo_crop">
+                    <img src="/assets/images/Checkarr_logo_transparent.png" class="main_logo">
+                </div>
+                
+              </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              </ul>
+              <a style="color:slategray; cursor:pointer;padding-left: 10px; padding-right:30px;" onclick="alert('log out button test')"><strong>Log Out</strong></a>
+              <button [hidden]="true" class="nav_button" (click)="onClickLogin()">Already Registered</button>
+            </div>
+          </nav>
+          
+        <div *ngIf="connectionError" class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Unable to connect</strong> - Either there is some problem with internet or server is not responding
+        </div>
+
+
+
+          <div class="register_div" style="min-width: 600px;">
+              <div [hidden]="false">
+
+              
+                <div *ngIf="registerError" style="position:absolute ;width: 100%;height: 38px;text-align: center;" class="alert alert-warning alert-dismissible">
+            
+                    <strong>Account exists</strong>  - Provided email is already associated with an account 
+               </div>
+              <h1 class="register_heading">Register</h1>
+              <p class="register_description">Get to know the world around you. Start to share what's on your mind, help other thorugh your experience or show your skills to the world</p>
+              <div style="height: 12px"></div>
+              <form class="" novalidate (ngSubmit)="onRegisterTry(registerForm)" #registerForm="ngForm">
+
+                <ng-template #fullnamePopContent let-greeting="greeting">We think it's a good idea to know your<br/>name to be more personal.<br/><br/><b>Example: </b>Muhammad Abdullah</ng-template>
+                <ng-template #emailPopContent let-greeting="greeting">You'll use this when you log in and if you<br/> ever need to reset your password.<br/><br/><b>Example: </b>abdullah@example.com</ng-template>
+                <ng-template #passwordPopContent let-greeting="greeting">Enter a combination of at least six numbers, letters and punctuation marks<br/><br/><b>Strong password is recommended</b></ng-template>
+                        
+                <input class="form-control register_input"
+                 type="text"
+                 placeholder="Full name"
+                 ngModel
+                 name="fullname"
+                 required
+                 #fullnameControl="ngModel"
+                 [ngClass]="{'invalid-form-control': (emailControl.dirty && !fullnameControl.valid)}"                     
+                 placement="left"
+                 [ngbPopover]="fullnamePopContent"
+                 popoverTitle="What's your name?"
+                 #namePopover="ngbPopover"
+                 (blur)="namePopover.close()"
+                >
+
+
+                <input class="form-control register_input" 
+                 type="email" 
+                 placeholder="Email"
+                 ngModel
+                 name="email"
+                 required
+                 #emailControl="ngModel"
+                 pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+                 [ngClass]="{'invalid-form-control': (emailControl.dirty && !emailControl.valid)}"                     
+                 placement="left"
+                 [ngbPopover]="emailPopContent"
+                 popoverTitle="What's your email?"
+                 #emailPopover="ngbPopover"
+                 (blur)="emailPopover.close()"
+                 >
+
+
+                <input class="form-control register_input" 
+                 type="password" 
+                 placeholder="New password"
+                 ngModel
+                 name="password"
+                 required
+                 #passwordControl="ngModel"
+                 minlength="6"
+                 maxlength="25"
+                 [ngClass]="{'invalid-form-control': (passwordControl.dirty && !passwordControl.valid)}"                     
+                 placement="left"
+                 [ngbPopover]="passwordPopContent"
+                 popoverTitle="Think a password"
+                 #passwordPopover="ngbPopover"
+                 (blur)="passwordPopover.close()"
+                 >
+
+                <div style="padding-top: 15px">
+                    <input class="register_radio"
+                     checked type="radio" 
+                     name="gender"
+                     (click)="registerGender='male'"> Male<br/>
+                    
+                     <input class="register_radio" 
+                     type="radio" 
+                     name="gender"
+                     (click)="registerGender='female'"
+                     > Female
+    
+                </div>
+
+                <button class="register_button" (click)="emailPopover.close();namePopover.close();passwordPopover.close()" [disabled]="!registerForm.valid" type="submit">Get Started</button>
+                
+                <a target="_blank" href="http://localhost:4200/terms-and-policy" style="text-decoration: none; cursor: pointer; color:gray">
+                <p class="terms">By clicking Get Started, you agree to our <u>Terms</u>, <u>Data Policy</u> and <u>Cookie Policy</u>.</p>
+                </a>
+              </form>
+
+              <div class="footer">
+                  <p style="font-size: 10px">Made in Pakistan - Checkarr © 2018</p>
+              </div>
+
+            </div>
+
+            <div [hidden]="true">
+                <h3 class="register_heading">So nice to meet you!</h3>
+                <h4 class="register_description" style="color:darkslategrey"><strong>Almost there...</strong>
+                <br/>
+                First impression matters a lot but it's not a last impression at all as you can always change your picture later in the <strong>settings</strong>.
+                </h4>
+                <br/>
+
+                    <label class="button_image_select" style="padding-left: 17px; padding-top: 3px;">
+                        Select <input style="display: none;" accept="image/*" type="file" (change)="fileChangeEvent($event)" />
+                    </label>
+
+                
+                <br/>
+                
+                <img [src]="croppedImage" onerror="this.src='/assets/images/default-profile.jpg'" class="crop_preview" />
+                <p style="float:right;margin-right: -56px; margin-top:12px; color:slategray">Preview</p>
+
+                
+                <image-cropper
+                    [imageChangedEvent]="imageChangedEvent"
+                    [maintainAspectRatio]="true"
+                    [aspectRatio]="4 / 4"
+                    [resizeToWidth]="1000"
+                    format="png"
+                    (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()"
+                    (loadImageFailed)="loadImageFailed()"
+
+                    style="position:absolute;border: 2px dashed #800209; min-width: 250px; min-height: 250px; width: 45%; height:250px; margin-left: 10%; margin-top: 15px"
+                ></image-cropper>
+                <h3 [hidden]="(imageChangedEvent != '')" style="position:absolute; margin-top: 120px;margin-left: 24%; color:grey;">SELECT IMAGE</h3>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                
+
+                <div style="margin-top:40px;margin-right: 10%;float:right;right:0;bottom: 0">
+                    
+                    <a style="color:grey; padding-right: 5px; cursor:pointer;" onclick="alert('test')"><u>I will add it later</u></a>
+                    <button class="button_small" [routerLink]="['/']">Next</button>        
+                </div>
+                
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                
+                
+                <div style="width: 100%;text-align: right;margin-left: -10%;">
+                        <p style="font-size: 10px">Made in Pakistan - Checkarr © 2018</p>
+                    </div>
+            </div>
+          </div>
+          
+
+    </div>
+
+    <div class="loading_screen" [hidden]="!registerTry">
+        <div class="loading_box">
+          <h5 style="margin-top: 15%;">Setting up your new account...</h5>
+          <div class="loading_icon"></div>
+          <h4>Please Wait</h4>
+        </div>
+      </div>
+    
+
+</div>

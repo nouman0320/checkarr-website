@@ -1,0 +1,99 @@
+
+
+
+
+<div>
+  
+  
+  <div class="main_div">
+    
+      <nav class="navbar navbar-expand-lg navbar-light welcome_nav">
+          <a class="navbar-brand navbar_item_color"  [routerLink]="['/']">
+            <div class="logo_crop">
+                <img src="/assets/images/Checkarr_logo_transparent.png" class="main_logo">
+            </div>
+            
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item active" style="margin-top:18px; font-weight: bold;" >
+                <a class="navbar_item_color" placement="bottom"  ngbTooltip="Forgot password?"  href="#">Help Me</a>
+              </li>
+             
+            </ul>
+
+            
+            <form class="form-inline my-2 my-lg-0" novalidate (ngSubmit)="onLoginTry(loginForm)" #loginForm="ngForm">
+              <input class="form-control mr-sm-2 input_control"
+                     type="text" 
+                     placeholder="Email"
+                     ngModel
+                     name="email"
+                     required
+                     pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+                     #emailControl="ngModel"
+                     [ngClass]="{'invalid-form-control': (emailControl.dirty && !emailControl.valid)}"
+                     >
+                     
+              <input class="form-control mr-sm-2 input_control" 
+                    type="password" 
+                    placeholder="Password"
+                    ngModel
+                    name="password"
+                    minlength="6"
+                    required
+                    #passwordControl="ngModel"
+                    [ngClass]="{'invalid-form-control': (emailControl.dirty && passwordControl.touched && !passwordControl.valid)}"
+                    >
+              <button class="btn my-2 my-sm-0 nav_button" [disabled]="!loginForm.valid" type="submit">Login</button>
+            
+            </form>
+          </div>
+        </nav>
+        <div *ngIf="loginError" style="position: fixed;width: 100%;" class="alert alert-warning alert-dismissible">
+            
+            <strong><a href="#">Forgot password</a></strong>  - Account details are incorrect, try again 
+        </div>
+        <div *ngIf="connectionError" class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Unable to connect</strong> - Either there is some problem with internet or server is not responding
+        </div>
+        
+
+
+
+    <div class="main_message_div">
+        <h1 class="main_message">Be aware, do your share!</h1>
+        <p style="color: #2e0204;font-size: 15px;">Share your experience, thoughts or creativity with others and let them be your fans</p>
+        <button class="btn register_button" (click)="onClickRegister()">Register</button>
+    </div>
+
+    
+  </div>
+  
+
+  
+    
+
+  
+  <div class="footer">
+      <p style="font-size: 10px">Made in Pakistan - Checkarr © 2018</p>
+  </div>
+
+
+   <div class="loading_screen" [hidden]="!loginTry">
+    <div class="loading_box">
+      <h5 style="margin-top: 15%;">Verifying your details...</h5>
+      <div class="loading_icon"></div>
+      <h4>Please Wait</h4>
+    </div>
+  </div>
+
+</div>
+
+
+
