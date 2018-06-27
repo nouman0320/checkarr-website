@@ -11,7 +11,7 @@ import 'rxjs/add/operator/catch'
 export class WebService {
 
   web_url: String = "localhost";
-  web_port: String = "50006";
+  web_port: String = "6367";
 
   constructor(private http: Http) { }
 /*

@@ -27,6 +27,10 @@ export class StartComponent implements OnInit {
       data => {
         //console.log(data)
         this.loginError = !data;
+        if(data){
+          // temp alert
+          alert("Login Successful");
+        }
       },error => {
         console.log("Unable to connect to the server");
         this.connectionError = true;
@@ -36,6 +40,8 @@ export class StartComponent implements OnInit {
         // 'onCompleted' callback.
         // No errors, route to new page here
         this.connectionError = false;
+        this.loginTry = false;
+
       }
     );
   }

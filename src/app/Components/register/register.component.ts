@@ -50,6 +50,10 @@ export class RegisterComponent implements OnInit {
         data => {
           console.log(data)
           this.registerError = !data;
+          if(data){
+            // temp alert
+            alert("Register Successful");
+          }
         },error => {
           console.log("Unable to connect to the server");
           this.connectionError = true;
@@ -59,6 +63,8 @@ export class RegisterComponent implements OnInit {
           // 'onCompleted' callback.
           // No errors, route to new page here
           this.connectionError = false;
+          this.registerTry = false;
+          
         }
       );
 
