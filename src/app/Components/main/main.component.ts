@@ -14,21 +14,32 @@ export class MainComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  
   ngOnInit() {
 
+  /*
     //to verify if user is logged in 
     this.loggedIn = this.verifyAuthentication();
 
     // routing to welcome component if user is not verified
     if(!this.loggedIn) this.router.navigate(['welcome'])
-
+  */
   }
 
+
+  /*
    // login verification function
   verifyAuthentication(){
     return false;
   }
 
+  */
+
+  logout(){
+    console.log("Logout function called");
+  }
+
   
+ 
 
 }
