@@ -12,7 +12,7 @@ import 'rxjs/add/operator/catch'
 export class WebService {
 
   web_url: String = "localhost";
-  web_port: String = "6367";
+  web_port: String = "6367";// always change this with port of your api server
 
   constructor(private http: Http) { }
 /*
