@@ -13,6 +13,7 @@ export class StartComponent implements OnInit {
 
   loginError: Boolean = false;
   connectionError: Boolean = false;
+  userNotFoundError: Boolean = false;
   loginTry: Boolean = false;
 
   constructor(public router: Router, public accountService: AccountService) { }
@@ -22,25 +23,39 @@ export class StartComponent implements OnInit {
 
   onLoginTry(loginForm: NgForm) {
     this.loginTry = true;
+    
+    this.connectionError = false;
+    this.loginError = false;
+    this.userNotFoundError = false;
+
     this.accountService.loginUser(loginForm.value.email, loginForm.value.password)
     .subscribe(
       data => {
         console.log(JSON.stringify(data))
-        this.loginError = !data;
-        if(data){
-          // temp alert
+        if(data["ok"] == 1){//login sucess
           alert("Login Successful");
         }
+        else if(data["ok"] == 2){ // incorrect password
+          this.loginError = true;
+        }
+        else if(data["ok"] == 3){ // account not found
+          this.userNotFoundError = true;
+          console.log("not found");
+        }
+        
+        
       },error => {
         console.log("Unable to connect to the server");
         this.connectionError = true;
         this.loginTry = false;
+       
       },
       () => {
         // 'onCompleted' callback.
         // No errors, route to new page here
         this.connectionError = false;
         this.loginTry = false;
+        
 
       }
     );

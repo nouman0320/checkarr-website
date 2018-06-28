@@ -38,7 +38,7 @@ export class WebService {
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://'+this.web_url+':'+this.web_port+'/api/User_login', body, { headers })
       .map(
-        (data: Response) => data.json()
+        (res: Response) => res.json()
       );
    }
 

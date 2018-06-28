@@ -58,6 +58,10 @@
             
             <strong><a href="#">Forgot password</a></strong>  - Account details are incorrect, try again 
         </div>
+        <div *ngIf="userNotFoundError" style="position: fixed;width: 100%;" class="alert alert-warning alert-dismissible">
+            
+          This email is not associated with any account, please register account
+      </div>
         <div *ngIf="connectionError" class="alert alert-danger alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <strong>Unable to connect</strong> - Either there is some problem with internet or server is not responding
