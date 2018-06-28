@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 
 
+
 @Injectable()
 export class WebService {
 
@@ -21,6 +22,19 @@ export class WebService {
       return res.json();
     });
   }*/
+
+  isTokenValid(token: any){
+    
+    const body = token;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://'+this.web_url+':'+this.web_port+'/api/Authentication', body, {
+      headers: headers
+    })
+    .map((data: Response) =>data.json());
+  }
+
+
 
   registerUser(user: any){
     const body = JSON.stringify(user);

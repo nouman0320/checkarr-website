@@ -18,6 +18,7 @@ import { routing } from './app.routing';
 import { WebService } from './Services/web.service';
 import { AccountService } from './Services/account.service';
 import { TermsAndPolicyComponent } from './Components/terms-and-policy/terms-and-policy.component';
+import { TokenService } from './Services/token.service';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { TermsAndPolicyComponent } from './Components/terms-and-policy/terms-and
     FormsModule,
     ImageCropperModule
   ],
-  providers: [WebService, AccountService],
+  providers: [WebService, AccountService, TokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

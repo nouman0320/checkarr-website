@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from '../../Services/account.service';
+import { TokenService } from '../../Services/token.service';
 
 @Component({
   selector: 'app-start',
@@ -16,7 +17,7 @@ export class StartComponent implements OnInit {
   userNotFoundError: Boolean = false;
   loginTry: Boolean = false;
 
-  constructor(public router: Router, public accountService: AccountService) { }
+  constructor(public router: Router, public accountService: AccountService, public tokenService: TokenService) { }
 
   ngOnInit() {
   }
@@ -32,8 +33,11 @@ export class StartComponent implements OnInit {
     .subscribe(
       data => {
         console.log(JSON.stringify(data))
-        if(data["ok"] == 1){//login sucess
+        if(data["ok"] == 1 && data["issued"] == true){//login sucess
           alert("Login Successful");
+
+          this.tokenService.setAccessToken(data["token"], loginForm.value.email);
+
         }
         else if(data["ok"] == 2){ // incorrect password
           this.loginError = true;

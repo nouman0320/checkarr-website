@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenService } from '../../Services/token.service';
 
 @Component({
   selector: 'app-main',
@@ -12,10 +13,11 @@ export class MainComponent implements OnInit {
 
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private tokenService:TokenService) { }
 
   
   ngOnInit() {
+    this.tokenService.verifyAccessToken();
 
   /*
     //to verify if user is logged in 
