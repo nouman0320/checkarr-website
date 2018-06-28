@@ -8,6 +8,8 @@ import 'rxjs/add/operator/map'
 export class AccountService {
 
 
+  loginStatus: Boolean = false;
+  
   constructor(private webService: WebService) {}
 
 
