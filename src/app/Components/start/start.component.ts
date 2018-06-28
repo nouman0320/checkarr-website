@@ -25,7 +25,7 @@ export class StartComponent implements OnInit {
     this.accountService.loginUser(loginForm.value.email, loginForm.value.password)
     .subscribe(
       data => {
-        //console.log(data)
+        console.log(JSON.stringify(data))
         this.loginError = !data;
         if(data){
           // temp alert
