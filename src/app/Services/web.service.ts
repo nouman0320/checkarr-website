@@ -11,6 +11,8 @@ import 'rxjs/add/operator/catch'
 @Injectable()
 export class WebService {
 
+  // this is web service....
+  
   web_url: String = "localhost";
   web_port: String = "6367";// always change this with port of your api server
 
