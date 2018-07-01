@@ -17,8 +17,8 @@ export class MainComponent implements OnInit {
 
   
   ngOnInit() {
-    this.tokenService.verifyAccessToken();
-
+    this.tokenService.verifyAccessToken("","/welcome", true);
+    
   /*
     //to verify if user is logged in 
     this.loggedIn = this.verifyAuthentication();

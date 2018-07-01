@@ -13,6 +13,9 @@ export class AccountService {
   constructor(private webService: WebService) {}
 
 
+ 
+
+
   registerUser(Fullname: String, Email: String, Password: String, Gender: String){
     return this.webService.registerUser({Fullname: Fullname, Email: Email, Password: Password, Gender: Gender});
   }

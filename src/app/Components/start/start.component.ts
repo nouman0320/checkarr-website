@@ -20,7 +20,9 @@ export class StartComponent implements OnInit {
   constructor(public router: Router, public accountService: AccountService, public tokenService: TokenService) { }
 
   ngOnInit() {
-    this.tokenService.clearAllTokens();
+    this.tokenService.verifyAccessToken("/welcome","",false);
+
+    //this.tokenService.clearAllTokens();
   }
 
   onLoginTry(loginForm: NgForm) {
