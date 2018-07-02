@@ -17,10 +17,61 @@ export class StartComponent implements OnInit {
   userNotFoundError: Boolean = false;
   loginTry: Boolean = false;
 
+  pageLoading: Boolean = true;
+  noInternet: Boolean = false;
+
   constructor(public router: Router, public accountService: AccountService, public tokenService: TokenService) { }
 
   ngOnInit() {
-    this.tokenService.verifyAccessToken("/welcome","",false);
+
+    
+    var localStorageObj = localStorage.getItem('currentUser');
+    if(localStorageObj == null){
+      // no user details present in browser
+      // means user not logged in
+      this.pageLoading = false;
+      return;
+    }
+
+    var currentUser = JSON.parse(localStorageObj);
+    var token = currentUser.AccessToken;
+    var email = currentUser.Email;
+    var isAccessTokenValid = false;
+    console.log(token);
+    var jsonStr = {
+      "AccessToken": token,
+      "Email": email
+    }
+    this.tokenService.verifyAccessToken(jsonStr)
+    .subscribe(
+      data => {
+        isAccessTokenValid = data["AccessValidation"]; 
+        console.log("TOKEN SERVICE => isValid: "+isAccessTokenValid);
+        // success connection
+
+        if(!isAccessTokenValid){
+          // access token is not valid now we will send refresh token
+          console.log("=> Access token is not valid sending refresh token... ");
+          this.pageLoading = false;
+          //this.router.navigate(["/welcome"]);
+        }
+        else{
+          // access token is valid
+          this.router.navigate([""]);
+          
+        }
+        
+      },error => {
+        console.log("Error while validating token");
+        this.noInternet = true;
+        // error
+      },
+      () => {
+        // 'onCompleted' callback.
+        // No errors, route to new page here
+        
+      }
+    ); // END VERIFY ACCESS TOKEN
 
     //this.tokenService.clearAllTokens();
   }

@@ -1,6 +1,22 @@
 
 
 
+<div [hidden]="!pageLoading" class="pageLoadingDiv">
+    <img src="/assets/images/loader.gif" alt="loading.." class="loader_gif">
+</div>
+
+<div [hidden]="!noInternet" class="noInternetDiv">
+    <img src="/assets/images/Checkarr_logo_transparent.png" class="main_logo" style="margin-left: 30px;margin-top:20px">
+    <img src="/assets/images/no-internet.png" class="noInternetImage">
+    <div class="noInternetMsgDiv">
+        <h2 class="noInternetMsg">We are unable to connect our services</h2>
+        <p>Either there is some problem is your internet connection or our servers are not responding at the moment</p>
+        <button class="btn btn-primary" onclick="location.reload();">Try again</button>
+    </div>
+    
+  </div>
+  
+<div [hidden]="pageLoading || noInternet">
 
 <div>
   
@@ -97,6 +113,7 @@
     </div>
   </div>
 
+</div>
 </div>
 
 
