@@ -20,11 +20,19 @@ export class AccountService {
     return this.webService.registerUser({Fullname: Fullname, Email: Email, Password: Password, Gender: Gender});
   }
 
-
-  
-
   loginUser(Email: string, Password: string): Observable<any> {
     return this.webService.loginUser({Email: Email, Password: Password});
   }
+
+  recoverAccount(recoveryEmail: String){
+    var jsonStr = {
+      "RECOVERY_EMAIL": recoveryEmail
+    }
+    return this.webService.recoverAccount(jsonStr);
+  }
+
+  
+
+
 
 }

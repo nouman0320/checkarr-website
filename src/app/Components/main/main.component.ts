@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenService } from '../../Services/token.service';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-main',
@@ -15,8 +16,12 @@ export class MainComponent implements OnInit {
   noInternet: Boolean = false;
 
 
+  accountVerificationError: Boolean = false;
+  accountVerificationErrorMessage: String = "Something went wrong";
 
-  constructor(private router: Router, private tokenService:TokenService) { }
+
+
+  constructor(private router: Router, private modalService: NgbModal, private tokenService:TokenService) { }
 
   
   ngOnInit() {
@@ -91,7 +96,14 @@ export class MainComponent implements OnInit {
     console.log("Logout function called");
   }
 
+
   
- 
+  
+  private accountVerificationModal: NgbModalRef;
+  accountVerificationClick(currentModal){
+    this.accountVerificationError = false;
+    this.accountVerificationErrorMessage = "Something went wrong";
+    this.accountVerificationModal = this.modalService.open(currentModal, { centered: true });
+  }
 
 }

@@ -25,6 +25,17 @@ export class WebService {
     });
   }*/
 
+
+  recoverAccount(jsonStr: any){
+    const body = jsonStr;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://'+this.web_url+':'+this.web_port+'/api/Confirmation/Account_recovery', body, {
+      headers: headers
+    })
+    .map((data: Response) =>data.json());
+  }
+
   isTokenValid(token: any){
     
     const body = token;

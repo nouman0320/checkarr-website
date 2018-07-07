@@ -3,6 +3,7 @@
 
 <div [hidden]="!pageLoading" class="pageLoadingDiv">
     <img src="/assets/images/loader.gif" alt="loading.." class="loader_gif">
+    <h4 class="loader_msg">making a connection between us.. <div style="color:red;">♥</div></h4>
 </div>
 
 <div [hidden]="!noInternet" class="noInternetDiv">
@@ -23,6 +24,11 @@
   
   <div class="main_div">
     
+
+
+  
+
+    
       <nav class="navbar navbar-expand-lg navbar-light welcome_nav">
           <a class="navbar-brand navbar_item_color"  [routerLink]="['/']">
             <div class="logo_crop">
@@ -37,7 +43,7 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item active" style="margin-top:18px; font-weight: bold;" >
-                <a class="navbar_item_color" placement="bottom"  ngbTooltip="Forgot password?"  href="#">Help Me</a>
+                <a placement="bottom" ngbTooltip="Forgot password?" (click)="onHelpButtonClick(accountRecoveryModal)" ><h6 class="navbar_item_color" style="margin-top:10px">assistance</h6></a>
               </li>
              
             </ul>
@@ -72,7 +78,7 @@
         </nav>
         <div *ngIf="loginError" style="position: fixed;width: 100%;" class="alert alert-warning alert-dismissible">
             
-            <strong><a href="#">Forgot password</a></strong>  - Account details are incorrect, try again 
+            <strong><a (click)="onHelpButtonClick(accountRecoveryModal)" style="text-decoration: none;cursor: pointer;"><u>Forgot password</u></a></strong>  - Account details are incorrect, try again 
         </div>
         <div *ngIf="userNotFoundError" style="position: fixed;width: 100%;" class="alert alert-warning alert-dismissible">
             
@@ -115,6 +121,84 @@
 
 </div>
 </div>
+
+
+<!-- Modal Recovery -->
+<ng-template id="#accountRecoveryModal" #accountRecoveryModal let-c="close" let-d="dismiss">
+  
+    <div class="modal-header">
+      <h5 class="modal-title" id="recoveryModalLongTitle">Account Recovery</h5>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <ngb-progressbar [hidden]="!modalProgressBar" type="danger" [value]="100" [striped]="true" [animated]="true" height="6px"></ngb-progressbar>
+
+    <div *ngIf="recoveryEmailError" style="width: 100%;" class="alert alert-danger alert-dismissible">
+        {{recoveryEmailErrorMessage}}
+    </div>
+    <div class="modal-body">
+        <h5>We will help you to get back to your account</h5>
+        <p style="margin-top: 10px;">You just need to provide us the email that you used during the registration process so that we can send you further instructions.</p>
+        
+        <input class="form-control mr-sm-2 input_control"
+          type="text" 
+          placeholder="Recovery Email"
+          ngModel
+          name="email"
+          required
+          pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+          #emailRecoveryControl="ngModel"
+          [ngClass]="{'invalid-form-control': (emailRecoveryControl.dirty && !emailRecoveryControl.valid)}"
+          style="width: 100%;"
+          >
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" [disabled]="!emailRecoveryControl.valid || modalProgressBar" (click)="sendRecoveryMail(emailRecoveryControl.value, recoveryCodeModal)">Recover my account</button>
+      </div>
+  </ng-template>
+
+
+
+
+
+<!-- Modal Recovery Code-->
+<ng-template #recoveryCodeModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title" id="recoveryCodeModalLongTitle">Recovery code</h5>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div *ngIf="recoveryCodeError" style="width: 100%;" class="alert alert-warning alert-dismissible">
+        {{recoveryCodeErrorMessage}}
+    </div>
+    <div class="modal-body">
+
+        
+
+      <p>Email has been sent to <b>{{currentRecoveryEmail}}</b> with the recovery instructions.</p>
+      <input class="form-control mr-sm-2 input_control"
+        type="text" 
+        placeholder="Recovery Code"
+        ngModel
+        name="recoveryCode"
+        required
+        #recoveryCodeControl="ngModel"
+        [ngClass]="{'invalid-form-control': (recoveryCodeControl.dirty && !recoveryCodeControl.valid)}"
+        style="width: 40%;font-size: 18px"
+        >
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" [disabled]="!recoveryCodeControl.valid" (click)="verifyRecoveryCode(recoveryCodeControl.value)">Verify</button>
+    </div>
+  </ng-template>
+
 
 
 

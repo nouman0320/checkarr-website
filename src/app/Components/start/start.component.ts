@@ -3,6 +3,11 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from '../../Services/account.service';
 import { TokenService } from '../../Services/token.service';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+
+
+
+//declare var jQuery:any;
 
 @Component({
   selector: 'app-start',
@@ -20,7 +25,17 @@ export class StartComponent implements OnInit {
   pageLoading: Boolean = true;
   noInternet: Boolean = false;
 
-  constructor(public router: Router, public accountService: AccountService, public tokenService: TokenService) { }
+  recoveryEmailErrorMessage: String = "Something went wrong";
+  recoveryCodeErrorMessage: String = "Something went wrong";
+  currentRecoveryEmail: String = "";
+
+  recoveryEmailError: Boolean = false;
+  recoveryCodeError: Boolean = false;
+
+  modalProgressBar: Boolean = false;
+  
+
+  constructor(public router: Router, private modalService: NgbModal, public accountService: AccountService, public tokenService: TokenService) { }
 
   ngOnInit() {
 
@@ -123,4 +138,68 @@ export class StartComponent implements OnInit {
     this.router.navigate(['/register']);
   }
 
+  private recoveryEmailModal: NgbModalRef;
+  onHelpButtonClick(content){
+    this.recoveryEmailError = false;
+    this.recoveryEmailErrorMessage = "Something went wrong";
+    this.recoveryEmailModal = this.modalService.open(content, { centered: true });
+    this.modalProgressBar = false;
+  }
+
+  
+  private RECOVERY_TOKEN: String;
+  private recoveryCodeModal: NgbModalRef;
+  sendRecoveryMail(recoveryMail: String, nextModal){
+
+    this.currentRecoveryEmail = recoveryMail;
+    this.modalProgressBar = true;
+
+    this.accountService.recoverAccount(recoveryMail)
+    .subscribe(
+      data => {
+        //alert(data["RETURN_CODE"]+"\n"+data["RECOVERY_TOKEN"])
+
+        if(data["RETURN_CODE"] == 1){
+          // mail is sent
+          
+          this.recoveryCodeError = false;
+          this.recoveryCodeErrorMessage = "Something went wrong";
+
+          this.RECOVERY_TOKEN = data["RECOVERY_TOKEN"];
+          //console.log(this.RECOVERY_TOKEN);
+          this.modalProgressBar = false;
+
+          this.recoveryEmailModal.close();
+          this.recoveryCodeModal = this.modalService.open(nextModal, {centered: true});
+        }
+        else if(data["RETURN_CODE"] == 2){
+          // mail is not sent
+          this.recoveryEmailError = true;
+          this.recoveryEmailErrorMessage = "This email is not associated with any account";
+          this.modalProgressBar = false;
+        }
+        else if(data["RETURN_CODE"] == 3){
+          // exception in API
+          this.recoveryEmailError = true;
+          this.recoveryEmailErrorMessage = "Server ran into some unexpected error";
+          this.modalProgressBar = false;
+        }
+      },error => {
+        this.recoveryEmailError = true;
+          this.recoveryEmailErrorMessage = "Unable to connect to the services";
+          this.modalProgressBar = false;
+      },
+      () => {
+        // 'onCompleted' callback.
+        // No errors, route to new page here  
+      }
+    );
+
+  }
+
+  verifyRecoveryCode(recoveryCode: String){
+    this.recoveryCodeModal.close();
+  }
+
+  
 }

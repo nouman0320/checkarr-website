@@ -60,6 +60,14 @@
    margin: auto;
 }
 
+.loader_msg{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    width: 600px;
+    text-align: center;
+    display: block;
+}
 .loader_gif{
     margin-left: auto;
     margin-right: auto;

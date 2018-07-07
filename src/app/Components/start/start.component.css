@@ -4,6 +4,7 @@
 
 .navbar_item_color{
     color: #776060;
+    cursor: pointer;
 }
 .navbar_item_color:hover{
 
