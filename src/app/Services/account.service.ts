@@ -31,8 +31,8 @@ export class AccountService {
     return this.webService.recoverAccount(jsonStr);
   }
 
-  
-
+  recoveryConfirmation()
+  {}
 
 
 }

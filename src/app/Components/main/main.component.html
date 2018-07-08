@@ -21,11 +21,62 @@
         Unverified accounts are automatically removed after some duration. Please <strong><a (click)="accountVerificationClick(accountVerificationModal)" style="text-decoration: none;cursor: pointer;"><u>verify</u></a></strong> your account to get best out of our services
     </div>
 
-    <p>
-        This is home..
-      </p>
-      
-      <button (click)="logout()">Log out</button>      
+    <nav class="navbar navbar-expand-lg navbar-light welcome_nav">
+      <a class="navbar-brand navbar_item_color"  [routerLink]="['/']">
+        <div class="logo_crop">
+            <img src="/assets/images/Checkarr_logo_transparent.png" class="main_logo">
+        </div>
+        
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li style="width: 20px"></li>
+          <li class="nav-item active" style="margin-top:0px; font-weight: bold;" >
+            <div placement="bottom" ngbTooltip="Fans" class="fan_icon_div" style="margin-top: 8px"> <span style="margin-left: -8px;margin-top: 15px;opacity: 0.8;" class="badge badge-danger">1</span> </div>
+            
+          </li>
+          <li style="width: 18px" ></li>
+          <li><div placement="bottom" ngbTooltip="Notifications" class="notification_icon_div" style="margin-top: 8px"><span style="margin-left: -8px;margin-top: 15px;opacity: 0.8;" class="badge badge-danger">9</span></div></li>
+         
+          <li style="width: 18px" ></li>
+          <li><div placement="bottom" ngbTooltip="Messages" class="message_icon_div" style="margin-top: 7px"><span style="margin-left: -8px;margin-top: 15px;opacity: 0.8;" class="badge badge-danger">2</span></div></li>
+
+          <li style="width: 18px" class="separator"></li>
+          <li style="width: 30px"></li>
+
+          <div class="input-group">
+              <input type="text" class="form-control" style="border-radius: 25px 0px 0px 25px;" placeholder="Search">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary search_button" style="border-radius: 0px 25px 25px 0px;" type="button"><div class="search_icon_div"></div></button>
+              </div>
+            </div>
+
+         
+          
+
+
+        </ul>
+
+       
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-link navbar_username" id="nameDropdown" ngbDropdownToggle>Nouman Arshad</button>
+            <div ngbDropdownMenu class="name_dropdown_menu" aria-labelledby="nameDropdown">
+              <button class="dropdown-item">Profile</button>
+              <button class="dropdown-item">Settings and privacy</button>
+              <button class="dropdown-item">Log out</button>
+            </div>
+          </div>
+       
+        <div placement="bottom" ngbTooltip="Profile" class="navbar_profile_image_div"></div>
+        
+        
+
+      </div>
+    </nav>    
 </div>
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenService } from '../../Services/token.service';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbDropdownConfig, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-main',
@@ -9,6 +9,9 @@ import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+
+  // for deployment testing should be false
+  testing: Boolean = true;
 
   loggedIn: Boolean = false; //login status
 
@@ -21,10 +24,15 @@ export class MainComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private modalService: NgbModal, private tokenService:TokenService) { }
+  constructor(private router: Router, configDropdown: NgbDropdownConfig, private modalService: NgbModal, private tokenService:TokenService) {
+    configDropdown.placement = "bottom-right";
+    configDropdown.autoClose = false;
+   }
 
   
   ngOnInit() {
+
+    if(this.testing) this.pageLoading = false;
     
     var localStorageObj = localStorage.getItem('currentUser');
     if(localStorageObj == null){
@@ -52,7 +60,12 @@ export class MainComponent implements OnInit {
         if(!isAccessTokenValid){
           // access token is not valid now we will send refresh token
           console.log("=> Access token is not valid sending refresh token... ");
-          this.router.navigate(["/welcome"]);
+          if(!this.testing){
+            this.router.navigate(["/welcome"]);
+          }
+            
+          
+          
         }
         else{
           // access token is valid so we can continue operation
@@ -62,13 +75,20 @@ export class MainComponent implements OnInit {
         
       },error => {
         console.log("Error while validating token");
+
+        
         this.pageLoading = false;
-        this.noInternet = true;
+        if(!this.testing){
+          this.noInternet = true;  
+        }
         // error
       },
       () => {
         // 'onCompleted' callback.
         // No errors, route to new page here
+
+        
+        
         
       }
     ); // END VERIFY ACCESS TOKEN
