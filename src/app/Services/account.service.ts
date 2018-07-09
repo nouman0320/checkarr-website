@@ -31,8 +31,17 @@ export class AccountService {
     return this.webService.recoverAccount(jsonStr);
   }
 
-  recoveryConfirmation()
-  {}
+  recoveryConfirmation(recoveryCode: String, recoveryToken: String, recoveryEmail)
+  {
+    var jsonStr = {
+      "RECOVERY_CODE": recoveryCode,
+      "RECOVERY_TOKEN": recoveryToken,
+      "RECOVERY_EMAIL": recoveryEmail
+    }
+
+    return this.webService.recoveryConfirmation(jsonStr);
+
+  }
 
 
 }

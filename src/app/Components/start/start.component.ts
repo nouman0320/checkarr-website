@@ -148,6 +148,7 @@ export class StartComponent implements OnInit {
 
   
   private RECOVERY_TOKEN: String;
+  private RECOVERY_EMAIL: String
   private recoveryCodeModal: NgbModalRef;
   sendRecoveryMail(recoveryMail: String, nextModal){
 
@@ -166,6 +167,7 @@ export class StartComponent implements OnInit {
           this.recoveryCodeErrorMessage = "Something went wrong";
 
           this.RECOVERY_TOKEN = data["RECOVERY_TOKEN"];
+          this.RECOVERY_EMAIL = recoveryMail;
           //console.log(this.RECOVERY_TOKEN);
           this.modalProgressBar = false;
 
@@ -198,7 +200,21 @@ export class StartComponent implements OnInit {
   }
 
   verifyRecoveryCode(recoveryCode: String){
-    this.recoveryCodeModal.close();
+    
+    //this.recoveryCodeModal.close();
+    this.accountService.recoveryConfirmation(recoveryCode, this.RECOVERY_TOKEN, this.RECOVERY_EMAIL)
+    .subscribe(
+      data => {
+        alert(data["RETURN_CODE"] +"\n"+data["RESET_TOKEN"]);
+      },error => {
+        alert("ERROR");
+      },
+      () => {
+        // 'onCompleted' callback.
+        // No errors, route to new page here  
+      }
+    );
+
   }
 
   
