@@ -37,8 +37,10 @@ export class MainComponent implements OnInit {
     var localStorageObj = localStorage.getItem('currentUser');
     if(localStorageObj == null){
       // no user details present in browser
-      this.router.navigate(["/welcome"]);
-      return;
+      if(!this.testing){
+        this.router.navigate(["/welcome"]);
+        return;
+      }
     }
 
     var currentUser = JSON.parse(localStorageObj);
