@@ -202,12 +202,47 @@ export class StartComponent implements OnInit {
   verifyRecoveryCode(recoveryCode: String){
     
     //this.recoveryCodeModal.close();
+    
     this.accountService.recoveryConfirmation(recoveryCode, this.RECOVERY_TOKEN, this.RECOVERY_EMAIL)
     .subscribe(
       data => {
         alert(data["RETURN_CODE"] +"\n"+data["RESET_TOKEN"]);
+        var retCode = data["RETURN_CODE"];
+        var resetToken = data["RESET_TOKEN"];
+
+        if(retCode == 1){
+          // recovery code is confirmed
+          this.recoveryCodeError = false;
+        }
+        else if(retCode == 2){
+          // recovery code is invalid
+          this.recoveryCodeErrorMessage = "Provided code is either expired or not valid";
+          this.recoveryCodeError = true;
+        }
+        else if(retCode == 3){
+          // recovery token is invalid
+          this.recoveryCodeErrorMessage = "Please re-do the recovery process";
+          this.recoveryCodeError = true;
+        }
+        else if(retCode == 4){
+          // exception in api
+          this.recoveryCodeErrorMessage = "Internal server error";
+          this.recoveryCodeError = true;
+        }
+        else if(retCode == 5){
+          // internal error
+          this.recoveryCodeErrorMessage = "Internal server error while processing your request";
+          this.recoveryCodeError = true;
+        }
+        else{
+          // unknown
+          this.recoveryCodeErrorMessage = "Unknown error has occured";
+          this.recoveryCodeError = true;
+        }
+
       },error => {
-        alert("ERROR");
+        this.recoveryCodeErrorMessage = "There is something wrong with the connection";
+        this.recoveryCodeError = true;
       },
       () => {
         // 'onCompleted' callback.

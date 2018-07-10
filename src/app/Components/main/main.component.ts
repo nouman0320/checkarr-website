@@ -11,7 +11,7 @@ import {NgbModal, NgbDropdownConfig, NgbModalRef} from '@ng-bootstrap/ng-bootstr
 export class MainComponent implements OnInit {
 
   // for deployment testing should be false
-  testing: Boolean = false;
+  testing: Boolean = true;
 
   loggedIn: Boolean = false; //login status
 
