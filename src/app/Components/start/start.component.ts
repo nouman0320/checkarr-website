@@ -199,10 +199,11 @@ export class StartComponent implements OnInit {
 
   }
 
+  private RESET_TOKEN:String;
   verifyRecoveryCode(recoveryCode: String){
     
     //this.recoveryCodeModal.close();
-    
+    this.modalProgressBar = true;
     this.accountService.recoveryConfirmation(recoveryCode, this.RECOVERY_TOKEN, this.RECOVERY_EMAIL)
     .subscribe(
       data => {
@@ -213,6 +214,10 @@ export class StartComponent implements OnInit {
         if(retCode == 1){
           // recovery code is confirmed
           this.recoveryCodeError = false;
+          this.RESET_TOKEN = resetToken;
+          this.tokenService.setResetToken(this.RESET_TOKEN, this.RECOVERY_EMAIL);
+          this.router.navigate(["/password-change"]);
+          this.recoveryCodeModal.close();
         }
         else if(retCode == 2){
           // recovery code is invalid
@@ -247,6 +252,7 @@ export class StartComponent implements OnInit {
       () => {
         // 'onCompleted' callback.
         // No errors, route to new page here  
+        this.modalProgressBar = false;
       }
     );
 

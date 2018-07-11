@@ -5,6 +5,7 @@ import { LoginComponent } from "./Components/login/login.component";
 import { RegisterComponent } from "./Components/register/register.component";
 import { NotFoundComponent } from "./Components/not-found/not-found.component";
 import { TermsAndPolicyComponent } from './Components/terms-and-policy/terms-and-policy.component';
+import { RecoveryPasswordChangeComponent } from "./Components/start/recovery-password-change/recovery-password-change.component";
 
 const APP_ROUTES: Routes =[
 
@@ -13,6 +14,7 @@ const APP_ROUTES: Routes =[
     {   path: 'login', component: LoginComponent   },
     {   path: 'register', component: RegisterComponent   },
     {   path:  'terms-and-policy', component: TermsAndPolicyComponent },
+    {   path:  'password-change', component: RecoveryPasswordChangeComponent},
     {   path: '**', component: NotFoundComponent    }
 ];
 

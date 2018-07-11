@@ -173,6 +173,8 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
+    <ngb-progressbar [hidden]="!modalProgressBar" type="danger" [value]="100" [striped]="true" [animated]="true" height="6px"></ngb-progressbar>
+
     <div *ngIf="recoveryCodeError" style="width: 100%;" class="alert alert-warning alert-dismissible">
         {{recoveryCodeErrorMessage}}
     </div>
@@ -195,7 +197,7 @@
 
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-danger" [disabled]="!recoveryCodeControl.valid" (click)="verifyRecoveryCode(recoveryCodeControl.value)">Verify</button>
+      <button type="button" class="btn btn-danger" [disabled]="!recoveryCodeControl.valid  || modalProgressBar" (click)="verifyRecoveryCode(recoveryCodeControl.value)">Verify</button>
     </div>
   </ng-template>
 

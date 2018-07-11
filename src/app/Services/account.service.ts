@@ -43,5 +43,14 @@ export class AccountService {
 
   }
 
+  reset_change_password(RESET_TOKEN: String, RESET_EMAIL: String, NEW_PASSWORD: String){
+    var jsonObj = {
+      "RESET_TOKEN": RESET_TOKEN,
+      "RESET_EMAIL": RESET_EMAIL,
+      "NEW_PASSWORD": NEW_PASSWORD
+    }
+    return this.webService.reset_change_password(jsonObj);
+  }
+
 
 }

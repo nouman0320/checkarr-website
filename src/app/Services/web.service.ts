@@ -46,6 +46,26 @@ export class WebService {
     .map((data: Response) =>data.json());
   }
 
+  reset_change_password(jsonStr: any){
+    const body = jsonStr;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://'+this.web_url+':'+this.web_port+'/api/Confirmation/Reset_change_password', body, {
+      headers: headers
+    })
+    .map((data: Response) =>data.json());
+  }
+
+  verifyResetToken(jsonStr: any){
+    const body = jsonStr;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://'+this.web_url+':'+this.web_port+'/api/Confirmation/Verify_reset_token', body, {
+      headers: headers
+    })
+    .map((data: Response) =>data.json());
+  }
+
   isTokenValid(token: any){
     
     const body = token;

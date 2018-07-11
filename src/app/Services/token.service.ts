@@ -20,4 +20,50 @@ export class TokenService {
     localStorage.removeItem('currentUser');
   }
 
+
+  setResetToken(newKey: String, email: String){
+    localStorage.setItem('currentUserResetInfo', JSON.stringify({ResetToken: newKey, ResetEmail: email}));
+  }
+
+  doResetTokenExist(){
+    var localStorageObj = localStorage.getItem('currentUserResetInfo');
+    if(localStorageObj == null) return false;
+    else return true;
+  }
+  
+  removeResetToken(){
+    localStorage.removeItem('currentUserResetInfo');
+  }
+
+  getResetTokenObject(){
+    if(this.doResetTokenExist()){
+      var localStorageObj = localStorage.getItem('currentUserResetInfo');
+      if(localStorageObj != null)
+      {
+        var currentUserResetInfo = JSON.parse(localStorageObj);
+        var jsonStr = {
+          "RESET_TOKEN":currentUserResetInfo.ResetToken,
+          "RESET_EMAIL":currentUserResetInfo.ResetEmail
+        }
+        return jsonStr;
+      }
+      else return null;
+    }
+    else return null;
+  }
+
+  verifyResetToken(){
+
+    var localStorageObj = localStorage.getItem('currentUserResetInfo');
+    if(localStorageObj != null)
+    {
+      var currentUserResetInfo = JSON.parse(localStorageObj);
+      var jsonStr = {
+        "RESET_TOKEN":currentUserResetInfo.ResetToken,
+        "RESET_EMAIL":currentUserResetInfo.ResetEmail
+      }
+      return this.webService.verifyResetToken(jsonStr);
+    }
+  }
+
 }

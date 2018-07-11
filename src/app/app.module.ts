@@ -19,6 +19,7 @@ import { WebService } from './Services/web.service';
 import { AccountService } from './Services/account.service';
 import { TermsAndPolicyComponent } from './Components/terms-and-policy/terms-and-policy.component';
 import { TokenService } from './Services/token.service';
+import { RecoveryPasswordChangeComponent } from './Components/start/recovery-password-change/recovery-password-change.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { TokenService } from './Services/token.service';
     RegisterComponent,
     MainComponent,
     NotFoundComponent,
-    TermsAndPolicyComponent
+    TermsAndPolicyComponent,
+    RecoveryPasswordChangeComponent
   ],
   imports: [
     BrowserModule,
