@@ -19,7 +19,7 @@
   
     <div style="width: 100%; height: 60px"></div>
 
-    <div *ngIf="true" style="width: 100%; text-align: center" class="alert alert-warning">
+    <div *ngIf="!this.accountService.isUserAccountActivated" style="width: 100%; text-align: center" class="alert alert-warning">
         Unverified accounts are automatically removed after some duration. Please <strong><a (click)="accountVerificationClick(accountVerificationModal)" style="text-decoration: none;cursor: pointer;"><u>verify</u></a></strong> your account to get best out of our services
     </div>
 
@@ -85,7 +85,7 @@
 
 
 
-<!-- Modal Recovery -->
+<!-- Modal Account Verification -->
 <ng-template id="#accountVerificationModal" #accountVerificationModal let-c="close" let-d="dismiss">
     <div class="modal-header">
       <h5 class="modal-title" id="verificationModalLongTitle">Account Verification</h5>
@@ -93,12 +93,13 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div *ngIf="recoveryEmailError" style="width: 100%;" class="alert alert-danger alert-dismissible">
-        {{recoveryEmailErrorMessage}}
+    <ngb-progressbar [hidden]="!verificationModalProgressBar" type="danger" [value]="100" [striped]="true" [animated]="true" height="6px"></ngb-progressbar>
+    <div *ngIf="accountVerificationError" style="width: 100%;" class="alert alert-danger alert-dismissible">
+        {{accountVerificationErrorMessage}}
     </div>
     <div class="modal-body">
       
-        <p>An email containing the verification code was sent to you during the registration process. Please follow the instructions in the email to get your account verified.</p>
+        <p> Verification email has been sent to <b>{{this.accountService.USER_EMAIL}}</b></p>
           
 
         
@@ -117,7 +118,7 @@
               >
             </div>
               <span class="input-group-btn">
-                  <button type="button" style="margin-left: 10px" class="btn btn-info">Resend email</button>
+                  <button (click)="resendActivationMail()" type="button" [disabled]="resendActivationMailCountdown/1000 > 0 || verificationModalProgressBar" style="margin-left: 10px" class="btn btn-info">{{resendButtonText}}</button>
               </span>
           </div>
 
@@ -127,44 +128,7 @@
 
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-danger" [disabled]="!verificationCodeControl.valid" (click)="verifyRecoveryCode(recoveryCodeControl.value)">Verify</button>
+          <button type="button" class="btn btn-danger" [disabled]="!verificationCodeControl.valid || verificationModalProgressBar" (click)="verifyActivationCode(verificationCodeControl.value)">Verify</button>
         </div>
   </ng-template>
 
-
-<!-- Modal Account Verification-->
-<ng-template #accountVerificationMoadal let-c="close" let-d="dismiss">
-        <div class="modal-header">
-            <h5 class="modal-title" id="accountVerificationModalLongTitle">Account verification</h5>
-          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div *ngIf="accountVerificationError" style="width: 100%;" class="alert alert-warning alert-dismissible">
-            {{accountVerificationErrorMessage}}
-        </div>
-        <div class="modal-body">
-    
-            
-    
-          <p>An email containing the verification code was sent to you during the registration process. Please follow the instructions in the email to get your account verified.</p>
-          <button type="button" class="btn btn-info">Resend verification email</button>
-          <input class="form-control mr-sm-2 input_control"
-            type="text" 
-            placeholder="Verification code"
-            ngModel
-            name="verficationCode"
-            required
-            #verifcationCodeControl="ngModel"
-            [ngClass]="{'invalid-form-control': (verificationCodeControl.dirty && !verificationCodeControl.valid)}"
-            style="width: 40%;font-size: 18px"
-            >
-    
-    
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" [disabled]="!verificationCodeControl.valid" (click)="verifyRecoveryCode(recoveryCodeControl.value)">Verify</button>
-        </div>
-      </ng-template>
-
-      

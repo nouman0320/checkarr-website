@@ -21,8 +21,18 @@ export class TokenService {
   }
 
 
+  setActivationToken(newKey: String){
+    localStorage.setItem('currentUserActivationInfo', JSON.stringify({ActivationToken: newKey}));
+  }
+
   setResetToken(newKey: String, email: String){
     localStorage.setItem('currentUserResetInfo', JSON.stringify({ResetToken: newKey, ResetEmail: email}));
+  }
+
+  doActivationTokenExist(){
+    var localStorageObj = localStorage.getItem('currentUserActivationInfo');
+    if(localStorageObj == null) return false;
+    else return true;
   }
 
   doResetTokenExist(){
@@ -30,10 +40,32 @@ export class TokenService {
     if(localStorageObj == null) return false;
     else return true;
   }
+
+  removeActivationToken(){
+    localStorage.removeItem('currentUserActivationInfo');
+  }
   
   removeResetToken(){
     localStorage.removeItem('currentUserResetInfo');
   }
+
+
+  getActivationTokenObject(){
+    if(this.doActivationTokenExist()){
+      var localStorageObj = localStorage.getItem('currentUserActivationInfo');
+      if(localStorageObj != null)
+      {
+        var currentUserActivationInfo = JSON.parse(localStorageObj);
+        var jsonStr = {
+          "ACTIVATION_TOKEN": currentUserActivationInfo.ActivationToken
+        }
+        return jsonStr;
+      }
+      else return null;
+    }
+    else return null;
+  }
+
 
   getResetTokenObject(){
     if(this.doResetTokenExist()){

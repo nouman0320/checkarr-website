@@ -26,6 +26,28 @@ export class WebService {
   }*/
 
 
+
+  activate_user_account(jsonStr: any){
+    const body = jsonStr;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://'+this.web_url+':'+this.web_port+'/api/Home/activate_user_account', body, {
+      headers: headers
+    })
+    .map((data: Response) =>data.json());
+  }
+
+  sendActivationMail(jsonStr: any){
+    const body = jsonStr;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://'+this.web_url+':'+this.web_port+'/api/Home/send_activation_mail', body, {
+      headers: headers
+    })
+    .map((data: Response) =>data.json());
+  }
+
+
   recoverAccount(jsonStr: any){
     const body = jsonStr;
     const headers = new Headers();

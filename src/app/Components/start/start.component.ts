@@ -104,7 +104,17 @@ export class StartComponent implements OnInit {
         console.log(JSON.stringify(data))
         if(data["ok"] == 1 && data["issued"] == true){//login sucess
           alert("Login Successful");
+          
+          if(data["activation_status"] == "T"){
+            this.accountService.isUserAccountActivated = true;
+          }
+          else {
+            this.accountService.isUserAccountActivated = false;
+          }
 
+          this.accountService.USER_EMAIL = data["user_email"];
+          //alert(this.accountService.USER_EMAIL);
+          this.accountService.USER_ID = data["user_id"];
           this.tokenService.setAccessToken(data["token"], loginForm.value.email);
 
         }
@@ -207,7 +217,7 @@ export class StartComponent implements OnInit {
     this.accountService.recoveryConfirmation(recoveryCode, this.RECOVERY_TOKEN, this.RECOVERY_EMAIL)
     .subscribe(
       data => {
-        alert(data["RETURN_CODE"] +"\n"+data["RESET_TOKEN"]);
+        //alert(data["RETURN_CODE"] +"\n"+data["RESET_TOKEN"]);
         var retCode = data["RETURN_CODE"];
         var resetToken = data["RESET_TOKEN"];
 
