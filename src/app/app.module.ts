@@ -20,6 +20,8 @@ import { AccountService } from './Services/account.service';
 import { TermsAndPolicyComponent } from './Components/terms-and-policy/terms-and-policy.component';
 import { TokenService } from './Services/token.service';
 import { RecoveryPasswordChangeComponent } from './Components/start/recovery-password-change/recovery-password-change.component';
+import { RedirectRecoveryComponent } from './Components/redirect-components/redirect-recovery/redirect-recovery.component';
+import { RedirectActivationComponent } from './Components/redirect-components/redirect-activation/redirect-activation.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { RecoveryPasswordChangeComponent } from './Components/start/recovery-pas
     MainComponent,
     NotFoundComponent,
     TermsAndPolicyComponent,
-    RecoveryPasswordChangeComponent
+    RecoveryPasswordChangeComponent,
+    RedirectRecoveryComponent,
+    RedirectActivationComponent
   ],
   imports: [
     BrowserModule,

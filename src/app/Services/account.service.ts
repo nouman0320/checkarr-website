@@ -95,5 +95,15 @@ export class AccountService {
     return this.webService.activate_user_account(jsonStr);
   }
 
+  activate_user_account_with_link(iUserID: String, iActivationCode: String, iActivationToken: String){
+    var jsonStr = {
+      "USER_ID": iUserID,
+      "ACTIVATION_CODE": iActivationCode,
+      "ACTIVATION_TOKEN": iActivationToken
+    }
+    console.log(JSON.stringify(jsonStr));
+    return this.webService.activate_user_account(jsonStr);
+  }
+
 
 }
