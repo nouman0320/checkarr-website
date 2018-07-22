@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from '../../Services/account.service';
+import { MediaService } from '../../Services/media.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,9 @@ export class RegisterComponent implements OnInit {
 
   registerTry: Boolean = false;
 
-  constructor(public router: Router, public accountService: AccountService) { }
+  registered: Boolean = false;
+
+  constructor(public router: Router, public accountService: AccountService, private mediaService: MediaService) { }
 
   ngOnInit() {
   }
@@ -52,7 +55,8 @@ export class RegisterComponent implements OnInit {
           this.registerError = !data;
           if(data){
             // temp alert
-            alert("Register Successful");
+            //alert("Register Successful");
+            this.registered = true;
           }
         },error => {
           console.log("Unable to connect to the server");
@@ -69,6 +73,11 @@ export class RegisterComponent implements OnInit {
       );
 
 
+  }
+
+
+  on_dp_select(){
+    this.mediaService.upload_dp(this.croppedImage);
   }
 
 }

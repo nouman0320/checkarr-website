@@ -18,7 +18,7 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
               <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               </ul>
-              <a style="color:slategray; cursor:pointer;padding-left: 10px; padding-right:30px;" onclick="alert('log out button test')"><strong>Log Out</strong></a>
+              <a [hidden]="!registered" style="color:slategray; cursor:pointer;padding-left: 10px; padding-right:30px;" onclick="alert('log out button test')"><strong>Log Out</strong></a>
               <button [hidden]="true" class="nav_button" (click)="onClickLogin()">Already Registered</button>
             </div>
           </nav>
@@ -31,7 +31,7 @@
 
 
           <div class="register_div" style="min-width: 600px;">
-              <div [hidden]="false">
+              <div [hidden]="registered">
 
               
                 <div *ngIf="registerError" style="position:absolute ;width: 100%;height: 38px;text-align: center;" class="alert alert-warning alert-dismissible">
@@ -124,7 +124,7 @@
 
             </div>
 
-            <div [hidden]="true">
+            <div [hidden]="!registered">
                 <h3 class="register_heading">So nice to meet you!</h3>
                 <h4 class="register_description" style="color:darkslategrey"><strong>Almost there...</strong>
                 <br/>
@@ -169,7 +169,7 @@
                 <div style="margin-top:40px;margin-right: 10%;float:right;right:0;bottom: 0">
                     
                     <a style="color:grey; padding-right: 5px; cursor:pointer;" onclick="alert('test')"><u>I will add it later</u></a>
-                    <button class="button_small" [routerLink]="['/']">Next</button>        
+                    <button class="button_small" (click)="on_dp_select()">Next</button>        
                 </div>
                 
                 <br/>

@@ -121,4 +121,20 @@ export class WebService {
       );
    }
 
+   // media related following
+
+   upload_dp(input_data: any){
+    console.log("uploading picture");
+    const body = input_data;
+    const headers = new Headers();
+    headers.append('Content-Type', 'multipart/form-data');
+    return this.http.post('http://'+this.web_url+':'+this.web_port+'/api/Home/update_dp', body, {
+      headers: headers
+    })
+    .map((data: Response) =>data.json());
+  
+   }
+
+   //========================
+
 }

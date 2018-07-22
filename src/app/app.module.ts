@@ -22,6 +22,7 @@ import { TokenService } from './Services/token.service';
 import { RecoveryPasswordChangeComponent } from './Components/start/recovery-password-change/recovery-password-change.component';
 import { RedirectRecoveryComponent } from './Components/redirect-components/redirect-recovery/redirect-recovery.component';
 import { RedirectActivationComponent } from './Components/redirect-components/redirect-activation/redirect-activation.component';
+import { MediaService } from './Services/media.service';
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import { RedirectActivationComponent } from './Components/redirect-components/re
     FormsModule,
     ImageCropperModule
   ],
-  providers: [WebService, AccountService, TokenService],
+  providers: [WebService, AccountService, TokenService, MediaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
