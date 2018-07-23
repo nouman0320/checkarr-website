@@ -46,7 +46,10 @@ export class MainComponent implements OnInit {
   
   ngOnInit() {
 
-    if(this.testing) this.pageLoading = false;
+    if(this.testing) {
+      this.pageLoading = false;
+      console.log("** RUNNING IN TESTING MODE");
+    }
     
     var localStorageObj = localStorage.getItem('currentUser');
     if(localStorageObj == null){
@@ -72,7 +75,7 @@ export class MainComponent implements OnInit {
       data => {
         isAccessTokenValid = data["AccessValidation"]; 
 
-        this.accountService.setSessionDetails(data);
+        
 
         console.log("TOKEN SERVICE => isValid: "+isAccessTokenValid);
         // success connection
@@ -80,18 +83,84 @@ export class MainComponent implements OnInit {
         if(!isAccessTokenValid){
           // access token is not valid now we will send refresh token
           console.log("=> Access token is not valid sending refresh token... ");
+
           if(!this.testing){
-            this.router.navigate(["/welcome"]);
+            var localStorageObjForRefreshToken = localStorage.getItem('currentUserRefreshInfo');
+
+
+            if(localStorageObjForRefreshToken == null){
+              // no refresh details present in browser
+              if(!this.testing){
+                this.router.navigate(["/welcome"]);                
+              }
+              return;
+            }
+
+            var currentUserRefreshInfo = JSON.parse(localStorageObjForRefreshToken);
+            var REFRESH_TOKEN = currentUserRefreshInfo.RefreshToken;
+            var REFRESH_EMAIL = currentUserRefreshInfo.Email;
+
+            var jsonObj = {
+              "refresh_token":REFRESH_TOKEN,
+              "email": REFRESH_EMAIL
+            }
+
+            this.tokenService.refreshAccessToken(jsonObj).subscribe(
+              data =>{
+                // getting response for checking refresh token
+                var RETURN_CODE = data["RETURN_CODE"];
+
+                if(RETURN_CODE == 1){
+                  // refresh token is valid
+                  var NEW_REFRESH_TOKEN = data["NEW_REFRESH_TOKEN"];
+                  var NEW_ACCESS_TOKEN = data["NEW_ACCESS_TOKEN"];
+
+                  console.log("NEW REFRESH TOKEN: "+NEW_REFRESH_TOKEN);
+                  console.log("NEW ACCESS TOKEN: "+ NEW_ACCESS_TOKEN);
+                  var EMAIL = data["EMAIL"];
+
+                  this.tokenService.setRefreshToken(NEW_REFRESH_TOKEN, EMAIL);
+                  this.tokenService.setAccessToken(NEW_ACCESS_TOKEN, EMAIL);
+
+                  this.pageLoading = false;
+
+                  this.accountService.setSessionDetails(data);
+
+                  console.log(" GOT NEW REFRESH TOKEN AND ACCESS TOKEN");
+                }
+                else if(RETURN_CODE == 2){
+                  // refresh token is not valid
+                  console.log(" REFRESH TOKEN NOT VALID");
+                  this.router.navigate(["/welcome"]);
+                }
+                else if(RETURN_CODE == 3){
+                  // exception in web api
+                }
+                else{
+                  // unknown error
+                }
+              },
+              err =>{
+                // encountered some error while 
+                this.pageLoading = false;
+                if(!this.testing){
+                  this.noInternet = true;  
+                }
+                console.log(" ERROR WHILE SENDING REFRESH TOKEN");
+              },
+              () =>{
+                // call back complete
+              }
+            );
+  
           }
-            
-          
-          
+
           
         }
         else{
           // access token is valid so we can continue operation
           this.pageLoading = false;
-          
+          this.accountService.setSessionDetails(data);
         }
         
       },error => {
@@ -159,6 +228,8 @@ export class MainComponent implements OnInit {
 
   logout(){
     console.log("Logout function called");
+    this.accountService.logout();
+    window.location.reload();
   }
 
 

@@ -103,7 +103,7 @@ export class StartComponent implements OnInit {
       data => {
         console.log(JSON.stringify(data))
         if(data["ok"] == 1 && data["issued"] == true){//login sucess
-          alert("Login Successful");
+          //alert("Login Successful");
           
           if(data["activation_status"] == "T"){
             this.accountService.isUserAccountActivated = true;
@@ -116,7 +116,10 @@ export class StartComponent implements OnInit {
           //alert(this.accountService.USER_EMAIL);
           this.accountService.USER_ID = data["user_id"];
           this.tokenService.setAccessToken(data["token"], loginForm.value.email);
+          this.tokenService.setRefreshToken(data["refresh_token"], loginForm.value.email);
 
+          this.router.navigate([""]);
+          
         }
         else if(data["ok"] == 2){ // incorrect password
           this.loginError = true;

@@ -7,6 +7,9 @@ export class TokenService {
 
   constructor(private webService: WebService, private router: Router) { }
 
+  refreshAccessToken(jsonStr: any){
+    return this.webService.refreshAccessToken(jsonStr);
+  }
 
   verifyAccessToken(jsonStr: any){
     return this.webService.isTokenValid(jsonStr);
@@ -16,8 +19,13 @@ export class TokenService {
     localStorage.setItem('currentUser', JSON.stringify({AccessToken: newKey, Email: email}));
   }
 
+  setRefreshToken(refreshToken: String, email: String){
+    localStorage.setItem('currentUserRefreshInfo', JSON.stringify({RefreshToken: refreshToken, Email: email}));
+  }
+
   clearAllTokens(){
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUserRefreshInfo');
   }
 
 

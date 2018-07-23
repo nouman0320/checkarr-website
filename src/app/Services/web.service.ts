@@ -93,12 +93,21 @@ export class WebService {
     const body = token;
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://'+this.web_url+':'+this.web_port+'/api/Authentication', body, {
+    return this.http.post('http://'+this.web_url+':'+this.web_port+'/api/Authentication/validate_access_token', body, {
       headers: headers
     })
     .map((data: Response) =>data.json());
   }
 
+  refreshAccessToken(jsonStr: any){
+    const body = jsonStr;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://'+this.web_url+':'+this.web_port+'/api/Authentication/refresh_access_token', body, {
+      headers: headers
+    })
+    .map((data: Response) =>data.json());
+  }
 
 
   registerUser(user: any){

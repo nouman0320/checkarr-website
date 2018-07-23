@@ -3,6 +3,8 @@ import { WebService } from './web.service';
 
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map'
+import { TokenService } from './token.service';
+import { Router } from '../../../node_modules/@angular/router';
 
 @Injectable()
 export class AccountService {
@@ -14,8 +16,15 @@ export class AccountService {
   USER_ID: String = null;
   USER_EMAIL: String = null;
   
-  constructor(private webService: WebService) {}
+  constructor(private webService: WebService, private tokenService: TokenService) {}
 
+  logout(){
+    this.loginStatus= false;
+    this.isUserAccountActivated = false;
+    this.USER_ID = null;
+    this.USER_EMAIL = null;
+    this.tokenService.clearAllTokens();
+  }
 
  setSessionDetails(object: any){
 
