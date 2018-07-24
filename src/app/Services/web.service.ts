@@ -136,7 +136,7 @@ export class WebService {
     console.log("uploading picture");
     const body = input_data;
     const headers = new Headers();
-    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Content-Type', 'multi-part/form-data');
     return this.http.post('http://'+this.web_url+':'+this.web_port+'/api/Home/update_dp', body, {
       headers: headers
     })
