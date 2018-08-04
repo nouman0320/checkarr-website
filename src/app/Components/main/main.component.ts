@@ -19,7 +19,7 @@ import "rxjs/add/operator/map";
 export class MainComponent implements OnInit {
 
   // for deployment testing should be false
-  testing: Boolean = false;
+  testing: Boolean = true;
 
   loggedIn: Boolean = false; //login status
 

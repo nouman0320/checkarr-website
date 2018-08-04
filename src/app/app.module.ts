@@ -23,6 +23,10 @@ import { RecoveryPasswordChangeComponent } from './Components/start/recovery-pas
 import { RedirectRecoveryComponent } from './Components/redirect-components/redirect-recovery/redirect-recovery.component';
 import { RedirectActivationComponent } from './Components/redirect-components/redirect-activation/redirect-activation.component';
 import { MediaService } from './Services/media.service';
+import { LeftMainComponent } from './Components/main/left-main/left-main.component';
+import { MiddleMainComponent } from './Components/main/middle-main/middle-main.component';
+import { RightMainComponent } from './Components/main/right-main/right-main.component';
+import { DefaultPostComponent } from './Components/main/middle-main/posts/default-post/default-post.component';
 
 
 @NgModule({
@@ -36,7 +40,11 @@ import { MediaService } from './Services/media.service';
     TermsAndPolicyComponent,
     RecoveryPasswordChangeComponent,
     RedirectRecoveryComponent,
-    RedirectActivationComponent
+    RedirectActivationComponent,
+    LeftMainComponent,
+    MiddleMainComponent,
+    RightMainComponent,
+    DefaultPostComponent
   ],
   imports: [
     BrowserModule,

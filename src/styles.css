@@ -1,11 +1,11 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 .default_background{
-    background-color: #f7f2f2;
+    background-color: #f0e6e6;
 }
 
 .root_division{
-    width: 1366px;
+    width: 1344px;
     margin-left: auto;
     margin-right: auto;
     /*border: 1px solid black;*/

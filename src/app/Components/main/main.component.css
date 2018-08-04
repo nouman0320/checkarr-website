@@ -170,3 +170,39 @@
     border-color: #ced4da;
     background-color: rgb(238, 237, 237);
   }
+
+
+  .leftpane{
+    width: 19.5%;
+    height: 100%;
+    float: left;
+    background-color: white;
+    border-collapse: collapse;
+    border-radius: 2px;
+    margin-left: 1%;
+    
+    
+  }
+
+  .middlepane{
+    width: 56%;
+    height: 100%;
+    float: left;
+    background-color: #f0e6e6;
+    border-collapse: collapse;
+    margin-left: 1%;
+    border-radius: 2px;
+  }
+
+  .rightpane{
+    width: 20.5%;
+    height: 100%;
+    
+    float: right;
+    background-color: white;
+    border-collapse: collapse;
+    margin-left: 0%;
+    margin-right: 1%;
+    border-radius: 2px;
+  }
+

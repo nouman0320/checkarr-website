@@ -1,0 +1,59 @@
+.left-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    padding-left: 20%;
+    padding-top: 10%;
+    font-size: 13px;
+    padding-bottom: 10%;
+  }
+
+  .profile_menu_icon{
+    background-image: url('/assets/images/main/profile_icon.png');
+    background-size: 24px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    width: 50px;
+    height:24px;
+    padding-bottom: 30px;
+    color: #4b4c4c;
+  }
+
+  .suggestion_menu_icon{
+    background-image: url('/assets/images/main/star.png');
+    background-size: 24px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    width: 160px;
+    height:24px;
+    padding-bottom: 34px;
+    color: #4b4c4c;
+  }
+
+  .trend_menu_icon{
+    background-image: url('/assets/images/main/list.png');
+    background-size: 24px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    width: 150px;
+    height:24px;
+    padding-bottom: 36px;
+    color: #4b4c4c;
+  }
+
+  .fan_menu_icon{
+    background-image: url('/assets/images/main/fans.png');
+    background-size: 24px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    width: 100px;
+    height:24px;
+    padding-bottom: 30px;
+    color: #4b4c4c;
+  }
+
+
+  li:hover{
+      cursor: pointer;
+      color: black;
+  }
