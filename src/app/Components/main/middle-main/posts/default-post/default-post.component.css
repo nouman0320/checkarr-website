@@ -64,8 +64,7 @@
 }
 
 .love:hover{
-    border-collapse: unset;
-    margin: 1px solid red;
+    background-color: #ededed;
 }
 .love_icon{
     background-image: url('/assets/images/main/love.png');
@@ -89,7 +88,7 @@
     cursor: pointer;
 }
 .comment:hover{
-    margin: 1px solid grey;
+    background-color: #ededed;
 }
 .suggest{
     float: right;
@@ -104,5 +103,5 @@
     cursor: pointer;
 }
 .suggest:hover{
-    margin: 1px solid grey;
+    background-color: #ededed;
 }

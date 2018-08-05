@@ -1,3 +1,7 @@
-<p>
-  right-main works!
-</p>
+<div class="broadcast" *ngIf="!this.accountService.showComposePost" (click) ="toggleCompose()" >
+  <div class="broadcast_content">Broadcast</div>
+</div>
+
+<div class="broadcast_cancel" *ngIf="this.accountService.showComposePost" (click) ="toggleCompose()" >
+  <div class="broadcast_content_cancel">Cancel</div>
+</div>

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -27,6 +28,7 @@ import { LeftMainComponent } from './Components/main/left-main/left-main.compone
 import { MiddleMainComponent } from './Components/main/middle-main/middle-main.component';
 import { RightMainComponent } from './Components/main/right-main/right-main.component';
 import { DefaultPostComponent } from './Components/main/middle-main/posts/default-post/default-post.component';
+import { CreatePostComponent } from './Components/main/middle-main/posts/create-post/create-post.component';
 
 
 @NgModule({
@@ -44,10 +46,12 @@ import { DefaultPostComponent } from './Components/main/middle-main/posts/defaul
     LeftMainComponent,
     MiddleMainComponent,
     RightMainComponent,
-    DefaultPostComponent
+    DefaultPostComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     routing,
     HttpModule,
     NgbModule.forRoot(),

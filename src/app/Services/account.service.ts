@@ -15,6 +15,8 @@ export class AccountService {
   isUserAccountActivated: Boolean = false;
   USER_ID: String = null;
   USER_EMAIL: String = null;
+
+  showComposePost: Boolean = false;
   
   constructor(private webService: WebService, private tokenService: TokenService) {}
 

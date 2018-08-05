@@ -1,0 +1,58 @@
+.cat{
+    width: 100%;
+    padding-top:4px;
+    margin-bottom: 10px;
+    height: 45px;
+    background-color: white;
+    border-radius: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.cat_type{
+    float:left;
+    width: 20%;
+    height: 36px;
+    
+}
+
+.cat_type:hover{
+    background-color: #efefef;
+    cursor: pointer;
+}
+
+.cat_type_content{
+    margin-top: 8%;
+    font-size: 14px;
+}
+
+.food{
+    background-image: url('/assets/images/main/pizza-slice.png');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    padding-left: 24px;
+    background-position-y: 3px;
+    margin-left: 25%;
+}
+
+.music{
+    background-image: url('/assets/images/main/music.png');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    padding-left: 24px;
+    background-position-y: 3px;
+    margin-left: 23%; 
+}
+
+.humour{
+    background-image: url('/assets/images/main/laughing.png');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    padding-left: 24px;
+    background-position-y: 3px;
+    margin-left: 20%; 
+}
+
+.other{
+    text-align: center;
+}

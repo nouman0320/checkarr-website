@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../../../Services/account.service';
+
 
 @Component({
   selector: 'app-right-main',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RightMainComponent implements OnInit {
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit() {
+  }
+
+  toggleCompose(){
+    this.accountService.showComposePost = !this.accountService.showComposePost;
+  
   }
 
 }
