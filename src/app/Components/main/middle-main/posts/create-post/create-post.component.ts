@@ -7,17 +7,29 @@ import { AccountService } from '../../../../../Services/account.service';
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.css'],
   animations: [
-    trigger('slideInOut', [
-      state('in', style({height: '*'})),
-      transition('void => *', [
-        style({transform: 'translateY(-100%)'}),
-        animate(250)
+    trigger('expandCollapseDetails', [
+      state('void', style({
+          'height': '0px',
+          'margin-bottom': '0px',
+          overflow: 'hidden'
+      })),
+      //element being added into DOM.
+      transition(':enter', [
+          animate('500ms ease-in-out', style({
+              'height': '*',
+              'margin-bottom': '*',
+              overflow: 'hidden'
+          }))
       ]),
-      transition('* => void', [
-        style({height: '*'}),
-        animate(250, style({height: 0}))
+      //element being removed from DOM.
+      transition(':leave', [
+          animate('500ms ease-in-out', style({
+              'height': '0px',
+              'margin-bottom': '0px',
+              overflow: 'hidden'
+          }))
       ])
-    ])
+  ])
   ]
 })
 export class CreatePostComponent implements OnInit {
