@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -53,7 +53,7 @@ import { CreatePostComponent } from './Components/main/middle-main/posts/create-
     BrowserModule,
     BrowserAnimationsModule,
     routing,
-    HttpModule,
+    HttpClientModule,
     NgbModule.forRoot(),
     FormsModule,
     ImageCropperModule

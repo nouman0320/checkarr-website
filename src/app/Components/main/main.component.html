@@ -82,10 +82,10 @@
 <div style="width: 100%; height: 80px"></div>
 <!-- CHANGE THIS *ngIf="!this.accountService.isUserAccountActivated" -->
 
-<div *ngIf="true" style="margin-top:-20px;position: fixed;width: 1344px; text-align: center" class="alert alert-warning">
+<div *ngIf="!this.accountService.isUserAccountActivated && !this.pageLoading" style="margin-top:-20px;position: fixed;width: 1344px; text-align: center" class="alert alert-warning">
     Unverified accounts are automatically removed after some duration. Please <strong><a (click)="accountVerificationClick(accountVerificationModal)" style="text-decoration: none;cursor: pointer;"><u>verify</u></a></strong> your account to get best out of our services
 </div>
-<div *ngIf="true" style="width: 100%; height: 50px;"></div>
+<div *ngIf="!this.accountService.isUserAccountActivated" style="width: 100%; height: 50px;"></div>
 
 
 <div style="margin-top: -10px; width: 80%;">

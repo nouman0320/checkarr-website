@@ -2,19 +2,22 @@
 <div class="cat" [@topCatAnim]="catSelectAnim" >
     <div class="cat_type other" style="border-right: 1px solid #e0e0e0;">
         <div class="cat_type_content"><b>All</b></div>
-        <div class="activeIndicatorDiv active"></div>
+        <div #activeIndicatorAll [className]="'activeIndicatorDiv'"></div>
     </div>
 
     <div class="cat_type" style="border-right: 1px solid #e0e0e0;">
         <div class="cat_type_content food">Food</div>
+        <div #activeIndicatorFood [className]="'activeIndicatorDiv'"></div>
     </div>
 
     <div class="cat_type" style="border-right: 1px solid #e0e0e0;">
         <div class="cat_type_content music">Music</div>
+        <div #activeIndicatorMusic [className]="'activeIndicatorDiv'"></div>
     </div>
 
-    <div class="cat_type" style="border-right: 1px solid #e0e0e0;">
+    <div class="cat_type">
         <div class="cat_type_content humour">Humour</div>
+        <div #activeIndicatorHumour [className]="'activeIndicatorDiv'"></div>
     </div>
 
     <div class="cat_type other more" (click)="toggleCatSelect()">
@@ -26,24 +29,29 @@
 
 <div class="cat next_line middle" *ngIf="this.catSelectOpen" [@expandCollapseDetails] >
     <hr/>
-    <div class="cat_type other" style="border-right: 1px solid #e0e0e0;">
-        <div class="cat_type_content"><b>All</b></div>
+    <div class="cat_type" style="border-right: 1px solid #e0e0e0;">
+        <div class="cat_type_content movie">Movie</div>
+        <div #activeIndicatorMovie [className]="'activeIndicatorDiv'"></div>
     </div>
 
     <div class="cat_type" style="border-right: 1px solid #e0e0e0;">
-        <div class="cat_type_content food">Food</div>
+        <div class="cat_type_content drama">Drama & Season</div>
+        <div #activeIndicatorDrama [className]="'activeIndicatorDiv'"></div>
     </div>
 
     <div class="cat_type" style="border-right: 1px solid #e0e0e0;">
-        <div class="cat_type_content music">Music</div>
+        <div class="cat_type_content fashion">Fashion</div>
+        <div #activeIndicatorFashion [className]="'activeIndicatorDiv'"></div>
     </div>
 
     <div class="cat_type" style="border-right: 1px solid #e0e0e0;">
-        <div class="cat_type_content humour">Humour</div>
+        <div class="cat_type_content vehicle">Vehicle</div>
+        <div #activeIndicatorVehicle [className]="'activeIndicatorDiv'"></div>
     </div>
 
-    <div class="cat_type other">
-        <div class="cat_type_content">Other</div>
+    <div class="cat_type">
+        <div class="cat_type_content politics">Politics</div>
+        <div #activeIndicatorPolitics [className]="'activeIndicatorDiv'"></div>
     </div>
 
 </div>
@@ -51,25 +59,22 @@
 
 <div class="cat next_line" *ngIf="this.catSelectOpen" [@expandCollapseDetails] >
         <hr/>
+        <div class="cat_type" style="border-right: 1px solid #e0e0e0;">
+            <div class="cat_type_content education">Education</div>
+            <div #activeIndicatorEducation [className]="'activeIndicatorDiv'"></div>
+        </div>
+    
+        <div class="cat_type" style="border-right: 1px solid #e0e0e0;">
+            <div class="cat_type_content adventure">Adventure</div>
+            <div #activeIndicatorAdventure [className]="'activeIndicatorDiv'"></div>
+        </div>
+    
         <div class="cat_type other" style="border-right: 1px solid #e0e0e0;">
-            <div class="cat_type_content"><b>All</b></div>
-        </div>
-    
-        <div class="cat_type" style="border-right: 1px solid #e0e0e0;">
-            <div class="cat_type_content food">Food</div>
-        </div>
-    
-        <div class="cat_type" style="border-right: 1px solid #e0e0e0;">
-            <div class="cat_type_content music">Music</div>
-        </div>
-    
-        <div class="cat_type" style="border-right: 1px solid #e0e0e0;">
-            <div class="cat_type_content humour">Humour</div>
-        </div>
-    
-        <div class="cat_type other">
             <div class="cat_type_content">Other</div>
+            <div #activeIndicatorOther [className]="'activeIndicatorDiv'"></div>
         </div>
+    
+        
     
     </div>
 

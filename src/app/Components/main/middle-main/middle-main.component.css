@@ -21,9 +21,79 @@
     cursor: pointer;
 }
 
+.cat_type:active{
+    background-color: #e0e0e0;
+}
+
 .cat_type_content{
     margin-top: 8%;
     font-size: 14px;
+}
+
+.movie{
+    background-image: url('/assets/images/main/popcorn.png');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    padding-left: 24px;
+    background-position-y: 3px;
+    margin-left: 25%;
+}
+
+.drama{
+    background-image: url('/assets/images/main/theater.png');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    padding-left: 18px;
+    background-position-y: 2px;
+    margin-left: 5%;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.fashion{
+    background-image: url('/assets/images/main/diamond.png');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    padding-left: 22px;
+    background-position-y: 3px;
+    margin-left: 20%;
+}
+
+
+.vehicle{
+    background-image: url('/assets/images/main/car.png');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    padding-left: 24px;
+    background-position-y: 3px;
+    margin-left: 20%;
+}
+
+.politics{
+    background-image: url('/assets/images/main/elections.png');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    padding-left: 24px;
+    background-position-y: 3px;
+    margin-left: 20%;
+}
+
+.education{
+    background-image: url('/assets/images/main/books.png');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    padding-left: 24px;
+    background-position-y: 3px;
+    margin-left: 20%;
+}
+
+.adventure{
+    background-image: url('/assets/images/main/trekking.png');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    padding-left: 24px;
+    background-position-y: 3px;
+    margin-left: 16%;
 }
 
 .food{
