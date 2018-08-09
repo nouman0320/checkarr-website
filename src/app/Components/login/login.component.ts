@@ -11,12 +11,12 @@ export class LoginComponent implements OnInit {
 
   constructor(public router: Router, private modalService: NgbModal) { }
 
- 
+
 
   ngOnInit() {
   }
 
-  onClick(){
+  onClick() {
     this.router.navigate(['/']);
   }
 

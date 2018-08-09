@@ -10,8 +10,7 @@ import { MediaService } from '../../Services/media.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
-  registerGender: String = "male";
+  registerGender: String = 'male';
   registerError: Boolean = false;
   connectionError: Boolean = false;
 
@@ -19,47 +18,57 @@ export class RegisterComponent implements OnInit {
 
   registered: Boolean = false;
 
-  constructor(public router: Router, public accountService: AccountService, private mediaService: MediaService) { }
+  constructor(
+    public router: Router,
+    public accountService: AccountService,
+    private mediaService: MediaService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
 
   fileChangeEvent(event: any): void {
-      this.imageChangedEvent = event;
+    this.imageChangedEvent = event;
   }
   imageCropped(image: string) {
-      this.croppedImage = image;
+    this.croppedImage = image;
   }
   imageLoaded() {
-      // show cropper
+    // show cropper
   }
   loadImageFailed() {
-      // show message
+    // show message
   }
 
-  onClickLogin(){
+  onClickLogin() {
     this.router.navigate(['/welcome']);
   }
 
-  onRegisterTry(registerForm: NgForm){
+  onRegisterTry(registerForm: NgForm) {
     console.log(registerForm.value);
     console.log(this.registerGender);
     this.registerTry = true;
-    this.accountService.registerUser(registerForm.value.fullname, registerForm.value.email, 
-      registerForm.value.password, this.registerGender).subscribe(
+    this.accountService
+      .registerUser(
+        registerForm.value.fullname,
+        registerForm.value.email,
+        registerForm.value.password,
+        this.registerGender
+      )
+      .subscribe(
         data => {
-          console.log(data)
+          console.log(data);
           this.registerError = !data;
-          if(data){
+          if (data) {
+            // alert("Register Successful");
             // temp alert
-            //alert("Register Successful");
             this.registered = true;
           }
-        },error => {
-          console.log("Unable to connect to the server");
+        },
+        error => {
+          console.log('Unable to connect to the server');
           this.connectionError = true;
           this.registerTry = false;
         },
@@ -68,16 +77,11 @@ export class RegisterComponent implements OnInit {
           // No errors, route to new page here
           this.connectionError = false;
           this.registerTry = false;
-          
         }
       );
-
-
   }
 
-
-  on_dp_select(){
+  on_dp_select() {
     this.mediaService.upload_dp(this.croppedImage);
   }
-
 }

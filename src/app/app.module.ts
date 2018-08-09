@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
+
 import { AppComponent } from './app.component';
 import { StartComponent } from './Components/start/start.component';
 import { LoginComponent } from './Components/login/login.component';

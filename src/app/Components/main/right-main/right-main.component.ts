@@ -9,14 +9,13 @@ import { AccountService } from '../../../Services/account.service';
 })
 export class RightMainComponent implements OnInit {
 
-  constructor(private accountService: AccountService) { }
+  constructor(public accountService: AccountService) { }
 
   ngOnInit() {
   }
 
-  toggleCompose(){
+  toggleCompose() {
     this.accountService.showComposePost = !this.accountService.showComposePost;
-  
   }
 
 }

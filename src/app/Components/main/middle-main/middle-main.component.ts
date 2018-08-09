@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild,ElementRef} from '@angular/core';
-import { trigger, transition, animate, style, state} from '@angular/animations'
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { trigger, transition, animate, style, state} from '@angular/animations';
 import { AccountService } from '../../../Services/account.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { AccountService } from '../../../Services/account.service';
           'padding-top': '0px',
           overflow: 'hidden'
       })),
-      //element being added into DOM.
+      // element being added into DOM.
       transition(':enter', [
           animate('500ms ease-in-out', style({
               'height': '*',
@@ -23,7 +23,7 @@ import { AccountService } from '../../../Services/account.service';
               overflow: 'hidden'
           }))
       ]),
-      //element being removed from DOM.
+      // element being removed from DOM.
       transition(':leave', [
           animate('500ms ease-in-out', style({
               'height': '0px',
@@ -36,16 +36,16 @@ import { AccountService } from '../../../Services/account.service';
 
   trigger('topCatAnim', [
 
-    state('enter',style({
+    state('enter', style({
       'margin-bottom': '0px',
       'padding-top': '25px',
-      'height': '70px', 
+      'height': '70px',
        overflow: 'hidden'
     })),
-    state('leave',style({
+    state('leave', style({
        'margin-bottom': '*',
        'padding-top': '*',
-       'height': '*', 
+       'height': '*',
       overflow: 'hidden'
     })),
     transition('enter => leave', animate('100ms ease-in')),
@@ -74,7 +74,7 @@ export class MiddleMainComponent implements OnInit {
   activeIndicatorEducationStatus: Boolean = false;
   activeIndicatorAdventureStatus: Boolean = false;
   activeIndicatorOtherStatus: Boolean = false;
-  
+
   @ViewChild('activeIndicatorAll') activeIndicatorAll: ElementRef;
   @ViewChild('activeIndicatorFood') activeIndicatorFood: ElementRef;
   @ViewChild('activeIndicatorMusic') activeIndicatorMusic: ElementRef;
@@ -88,31 +88,30 @@ export class MiddleMainComponent implements OnInit {
   @ViewChild('activeIndicatorAdventure') activeIndicatorAdventure: ElementRef;
   @ViewChild('activeIndicatorOther') activeIndicatorOther: ElementRef;
 
-  statusActiveClass:String = "activeIndicatorDiv active";
-  statusInactiveClass:String = "activeIndicatorDiv";
+  statusActiveClass: String = 'activeIndicatorDiv active';
+  statusInactiveClass: String = 'activeIndicatorDiv';
 
 
   constructor(private accountService: AccountService) {
-    
+
    }
 
   ngOnInit() {
-    
+
   }
 
-  toggleCatSelect(){
+  toggleCatSelect() {
     this.catSelectOpen = !this.catSelectOpen;
-    if(this.catSelectOpen) {
+    if (this.catSelectOpen) {
       this.catSelectAnim = 'enter';
       this.moreLess = 'Less ...';
-    }
-    else{
+    } else {
       this.catSelectAnim = 'leave';
       this.moreLess = 'More ...';
-    } 
+    }
   }
 
-  turn_off_all_cats(){
+  turn_off_all_cats() {
     this.activeIndicatorAllStatus = false;
     this.activeIndicatorFoodStatus = false;
     this.activeIndicatorMusicStatus = false;
@@ -125,7 +124,7 @@ export class MiddleMainComponent implements OnInit {
     this.activeIndicatorEducationStatus = false;
     this.activeIndicatorAdventureStatus = false;
     this.activeIndicatorOtherStatus = false;
-    
+
     this.activeIndicatorAll.nativeElement.className = this.statusInactiveClass;
     this.activeIndicatorFood.nativeElement.className = this.statusInactiveClass;
     this.activeIndicatorMusic.nativeElement.className = this.statusInactiveClass;
@@ -140,94 +139,82 @@ export class MiddleMainComponent implements OnInit {
     this.activeIndicatorOther.nativeElement.className = this.statusInactiveClass;
   }
 
-  update_cat_status(){
-    if(this.activeIndicatorAllStatus == true){
+  update_cat_status() {
+    if (this.activeIndicatorAllStatus === true) {
       this.turn_off_all_cats();
       this.activeIndicatorAll.nativeElement.className = this.statusActiveClass;
       this.activeIndicatorAllStatus = true;
-    }
-    else if(this.activeIndicatorAllStatus == false){
+    } else if (this.activeIndicatorAllStatus === false) {
       this.activeIndicatorAll.nativeElement.className = this.statusInactiveClass;
       this.activeIndicatorAllStatus = false;
 
-      if(this.activeIndicatorFoodStatus == true){
+      if (this.activeIndicatorFoodStatus === true) {
         this.activeIndicatorFood.nativeElement.className = this.statusActiveClass;
-      }
-      else if(this.activeIndicatorFoodStatus == false){
+      } else if (this.activeIndicatorFoodStatus === false) {
         this.activeIndicatorFood.nativeElement.className = this.statusInactiveClass;
       }
-      //=====
-      if(this.activeIndicatorMusicStatus == true){
+      // =====
+      if (this.activeIndicatorMusicStatus === true) {
         this.activeIndicatorMusic.nativeElement.className = this.statusActiveClass;
-      }
-      else if(this.activeIndicatorMusicStatus == false){
+      } else if (this.activeIndicatorMusicStatus === false) {
         this.activeIndicatorMusic.nativeElement.className = this.statusInactiveClass;
       }
-      //=====
-      if(this.activeIndicatorHumourStatus == true){
+      // =====
+      if (this.activeIndicatorHumourStatus === true) {
         this.activeIndicatorHumour.nativeElement.className = this.statusActiveClass;
-      }
-      else if(this.activeIndicatorHumourStatus == false){
+      } else if (this.activeIndicatorHumourStatus === false) {
         this.activeIndicatorHumour.nativeElement.className = this.statusInactiveClass;
       }
-      //=====
-      if(this.activeIndicatorMovieStatus == true){
+      // =====
+      if (this.activeIndicatorMovieStatus === true) {
         this.activeIndicatorMovie.nativeElement.className = this.statusActiveClass;
-      }
-      else if(this.activeIndicatorMovieStatus == false){
+      } else if (this.activeIndicatorMovieStatus === false) {
         this.activeIndicatorMovie.nativeElement.className = this.statusInactiveClass;
       }
-      //=====
-      if(this.activeIndicatorDramaStatus == true){
+      // =====
+      if (this.activeIndicatorDramaStatus === true) {
         this.activeIndicatorDrama.nativeElement.className = this.statusActiveClass;
-      }
-      else if(this.activeIndicatorDramaStatus == false){
+      } else if (this.activeIndicatorDramaStatus === false) {
         this.activeIndicatorDrama.nativeElement.className = this.statusInactiveClass;
       }
-      //=====
-      if(this.activeIndicatorFashionStatus == true){
+      // =====
+      if (this.activeIndicatorFashionStatus === true) {
         this.activeIndicatorFashion.nativeElement.className = this.statusActiveClass;
-      }
-      else if(this.activeIndicatorFashionStatus == false){
+      } else if (this.activeIndicatorFashionStatus === false) {
         this.activeIndicatorFashion.nativeElement.className = this.statusInactiveClass;
       }
-      //=====
-      if(this.activeIndicatorVehicleStatus == true){
+      // =====
+      if (this.activeIndicatorVehicleStatus === true) {
         this.activeIndicatorVehicle.nativeElement.className = this.statusActiveClass;
-      }
-      else if(this.activeIndicatorVehicleStatus == false){
+      } else if (this.activeIndicatorVehicleStatus === false) {
         this.activeIndicatorVehicle.nativeElement.className = this.statusInactiveClass;
       }
-      //=====
-      if(this.activeIndicatorPoliticsStatus == true){
+      // =====
+      if (this.activeIndicatorPoliticsStatus === true) {
         this.activeIndicatorPolitics.nativeElement.className = this.statusActiveClass;
-      }
-      else if(this.activeIndicatorPoliticsStatus == false){
+      } else if (this.activeIndicatorPoliticsStatus === false) {
         this.activeIndicatorPolitics.nativeElement.className = this.statusInactiveClass;
       }
-      //=====
-      if(this.activeIndicatorEducationStatus == true){
+      // =====
+      if (this.activeIndicatorEducationStatus === true) {
         this.activeIndicatorEducation.nativeElement.className = this.statusActiveClass;
-      }
-      else if(this.activeIndicatorEducationStatus == false){
+      } else if (this.activeIndicatorEducationStatus === false) {
         this.activeIndicatorEducation.nativeElement.className = this.statusInactiveClass;
       }
-      //=====
-      if(this.activeIndicatorAdventureStatus == true){
+      // =====
+      if (this.activeIndicatorAdventureStatus === true) {
         this.activeIndicatorAdventure.nativeElement.className = this.statusActiveClass;
-      }
-      else if(this.activeIndicatorAdventureStatus == false){
+      } else if (this.activeIndicatorAdventureStatus === false) {
         this.activeIndicatorAdventure.nativeElement.className = this.statusInactiveClass;
       }
-      //=====
-      if(this.activeIndicatorOtherStatus == true){
+      // =====
+      if (this.activeIndicatorOtherStatus === true) {
         this.activeIndicatorOther.nativeElement.className = this.statusActiveClass;
-      }
-      else if(this.activeIndicatorOtherStatus == false){
+      } else if (this.activeIndicatorOtherStatus === false) {
         this.activeIndicatorOther.nativeElement.className = this.statusInactiveClass;
       }
-      //=====
-      
+      // =====
+
 
     }
   }

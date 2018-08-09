@@ -7,101 +7,92 @@ export class TokenService {
 
   constructor(private webService: WebService, private router: Router) { }
 
-  refreshAccessToken(jsonStr: any){
+  refreshAccessToken(jsonStr: any) {
     return this.webService.refreshAccessToken(jsonStr);
   }
 
-  verifyAccessToken(jsonStr: any){
+  verifyAccessToken(jsonStr: any) {
     return this.webService.isTokenValid(jsonStr);
   }
 
-  setAccessToken(newKey: String, email: String){
+  setAccessToken(newKey: String, email: String) {
     localStorage.setItem('currentUser', JSON.stringify({AccessToken: newKey, Email: email}));
   }
 
-  setRefreshToken(refreshToken: String, email: String){
+  setRefreshToken(refreshToken: String, email: String) {
     localStorage.setItem('currentUserRefreshInfo', JSON.stringify({RefreshToken: refreshToken, Email: email}));
   }
 
-  clearAllTokens(){
+  clearAllTokens() {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('currentUserRefreshInfo');
   }
 
 
-  setActivationToken(newKey: String){
+  setActivationToken(newKey: String) {
     localStorage.setItem('currentUserActivationInfo', JSON.stringify({ActivationToken: newKey}));
   }
 
-  setResetToken(newKey: String, email: String){
+  setResetToken(newKey: String, email: String) {
     localStorage.setItem('currentUserResetInfo', JSON.stringify({ResetToken: newKey, ResetEmail: email}));
   }
 
-  doActivationTokenExist(){
-    var localStorageObj = localStorage.getItem('currentUserActivationInfo');
-    if(localStorageObj == null) return false;
-    else return true;
+  doActivationTokenExist() {
+    const localStorageObj = localStorage.getItem('currentUserActivationInfo');
+    if (localStorageObj == null) { return false; } else { return true; }
   }
 
-  doResetTokenExist(){
-    var localStorageObj = localStorage.getItem('currentUserResetInfo');
-    if(localStorageObj == null) return false;
-    else return true;
+  doResetTokenExist() {
+    const localStorageObj = localStorage.getItem('currentUserResetInfo');
+    if (localStorageObj == null) { return false; } else { return true; }
   }
 
-  removeActivationToken(){
+  removeActivationToken() {
     localStorage.removeItem('currentUserActivationInfo');
   }
-  
-  removeResetToken(){
+
+  removeResetToken() {
     localStorage.removeItem('currentUserResetInfo');
   }
 
 
-  getActivationTokenObject(){
-    if(this.doActivationTokenExist()){
-      var localStorageObj = localStorage.getItem('currentUserActivationInfo');
-      if(localStorageObj != null)
-      {
-        var currentUserActivationInfo = JSON.parse(localStorageObj);
-        var jsonStr = {
-          "ACTIVATION_TOKEN": currentUserActivationInfo.ActivationToken
-        }
+  getActivationTokenObject() {
+    if (this.doActivationTokenExist()) {
+      const localStorageObj = localStorage.getItem('currentUserActivationInfo');
+      if (localStorageObj != null) {
+        const currentUserActivationInfo = JSON.parse(localStorageObj);
+        const jsonStr = {
+          'ACTIVATION_TOKEN': currentUserActivationInfo.ActivationToken
+        };
         return jsonStr;
-      }
-      else return null;
-    }
-    else return null;
+      } else { return null; }
+    } else { return null; }
   }
 
 
-  getResetTokenObject(){
-    if(this.doResetTokenExist()){
-      var localStorageObj = localStorage.getItem('currentUserResetInfo');
-      if(localStorageObj != null)
-      {
-        var currentUserResetInfo = JSON.parse(localStorageObj);
-        var jsonStr = {
-          "RESET_TOKEN":currentUserResetInfo.ResetToken,
-          "RESET_EMAIL":currentUserResetInfo.ResetEmail
-        }
+  getResetTokenObject() {
+    if (this.doResetTokenExist()) {
+      const localStorageObj = localStorage.getItem('currentUserResetInfo');
+      if (localStorageObj != null) {
+        const currentUserResetInfo = JSON.parse(localStorageObj);
+        const jsonStr = {
+          'RESET_TOKEN': currentUserResetInfo.ResetToken,
+          'RESET_EMAIL': currentUserResetInfo.ResetEmail
+        };
         return jsonStr;
-      }
-      else return null;
-    }
-    else return null;
+      } else { return null; }
+    } else { return null; }
   }
 
-  verifyResetToken(){
+  verifyResetToken() {
 
-    var localStorageObj = localStorage.getItem('currentUserResetInfo');
-    if(localStorageObj != null)
-    {
-      var currentUserResetInfo = JSON.parse(localStorageObj);
-      var jsonStr = {
-        "RESET_TOKEN":currentUserResetInfo.ResetToken,
-        "RESET_EMAIL":currentUserResetInfo.ResetEmail
-      }
+    const localStorageObj = localStorage.getItem('currentUserResetInfo');
+    if (localStorageObj != null) {
+      const currentUserResetInfo = JSON.parse(localStorageObj);
+      const jsonStr = {
+        'RESET_TOKEN': currentUserResetInfo.ResetToken,
+        'RESET_EMAIL': currentUserResetInfo.ResetEmail
+      };
       return this.webService.verifyResetToken(jsonStr);
     }
   }

@@ -20,20 +20,18 @@ export class RecoveryPasswordChangeComponent implements OnInit {
   noInternet: Boolean = false;
   pageLoading: Boolean = true;
 
-  error: String = "";
-  //pageLoading: Boolean = false;
+  error: String = '';
+  // pageLoading: Boolean = false;
 
   constructor(private tokenService: TokenService, private router: Router, private accountService: AccountService) {
-    var isResetTokenExist = this.tokenService.doResetTokenExist()
-    if(isResetTokenExist){
+    const isResetTokenExist = this.tokenService.doResetTokenExist();
+    if (isResetTokenExist) {
 
       this.tokenService.verifyResetToken()
       .subscribe(
         data => {
-          var reset_token_status = data["RESET_TOKEN_STATUS"];
-          
-
-        },error => {
+          const reset_token_status = data['RESET_TOKEN_STATUS'];
+        }, error => {
           this.noInternet = true;
           this.pageLoading = false;
         },
@@ -44,95 +42,86 @@ export class RecoveryPasswordChangeComponent implements OnInit {
         }
       );
 
-    }
-    else this.router.navigate([""]);
-    
+    } else { this.router.navigate(['']); }
   }
 
   ngOnInit() {
   }
 
-  changePassword(newPassword: String){
+  changePassword(newPassword: String) {
     this.requestError = false;
     this.progressbar = true;
     this.passwordChanged = false;
-    this.error = "";
+    this.error = '';
 
-    if(this.tokenService.doResetTokenExist()){
-      var resetJson = this.tokenService.getResetTokenObject();
-      if(resetJson != null){
-        var RESET_TOKEN = resetJson["RESET_TOKEN"];
-        var RESET_EMAIL = resetJson["RESET_EMAIL"];
+    if (this.tokenService.doResetTokenExist()) {
+      const resetJson = this.tokenService.getResetTokenObject();
+      if (resetJson != null) {
+        const RESET_TOKEN = resetJson['RESET_TOKEN'];
+        const RESET_EMAIL = resetJson['RESET_EMAIL'];
 
-        //RESET_TOKEN = RESET_TOKEN + "1231";
+        // RESET_TOKEN = RESET_TOKEN + "1231";
       this.accountService.reset_change_password(RESET_TOKEN, RESET_EMAIL, newPassword)
       .subscribe(
         data => {
-          //alert(data["RETURN_CODE"]);
+          // alert(data["RETURN_CODE"]);
 
-          var RETURN_CODE = data["RETURN_CODE"];
-          if(RETURN_CODE == 1){
+          const RETURN_CODE = data['RETURN_CODE'];
+          if (RETURN_CODE === 1) {
             // success
             this.requestError = false;
             this.passwordChanged = true;
             this.tokenService.removeResetToken();
-          }
-          else if(RETURN_CODE == 2){
+          } else if (RETURN_CODE === 2) {
             // exception in controller
             this.requestError = true;
-            this.error = "Our servers encountered some internal error";
-          }
-          else if(RETURN_CODE == 3){
+            this.error = 'Our servers encountered some internal error';
+          } else if (RETURN_CODE === 3) {
             // reset token is not valid
             this.requestError = true;
-            this.error = "Please refresh the page";
-          }
-          else if(RETURN_CODE == 4){
+            this.error = 'Please refresh the page';
+          } else if (RETURN_CODE === 4) {
             // password not changed
             this.requestError = true;
-            this.error = "Unable to change password right now, try later.";
-          }
-          else if(RETURN_CODE == 5){
+            this.error = 'Unable to change password right now, try later.';
+          } else if (RETURN_CODE === 5) {
             // New password is same as old password
             this.requestError = true;
-            this.error = "You have entered your current password";
-          }
-          else{
+            this.error = 'You have entered your current password';
+          } else {
             this.requestError = true;
-            this.error = "Some unknown error has occured";
+            this.error = 'Some unknown error has occured';
           }
 
-          
-          this.progressbar = false;
-          
 
-        },error => {
-          alert("ERROR");
-          this.error = "Unable to connect our services";
+          this.progressbar = false;
+
+
+        }, error => {
+          alert('ERROR');
+          this.error = 'Unable to connect our services';
           this.requestError = true;
           this.progressbar = false;
         },
         () => {
           this.progressbar = false;
-          //this.requestError = false;
+          // this.requestError = false;
         }
       );
 
-      }
-      else{
+      } else {
         // object is null
         this.cancel();
       }
-    }
-    else{
+    } else {
       // reset token does not exist
       this.cancel();
     }
   }
 
-  cancel(){
+  cancel() {
     this.tokenService.removeResetToken();
-    this.router.navigate([""]);
+    this.router.navigate(['']);
 
   }
 

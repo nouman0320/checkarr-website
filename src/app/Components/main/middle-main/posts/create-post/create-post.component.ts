@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, transition, animate, style, state} from '@angular/animations'
+import { trigger, transition, animate, style, state} from '@angular/animations';
 import { AccountService } from '../../../../../Services/account.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { AccountService } from '../../../../../Services/account.service';
           'margin-bottom': '0px',
           overflow: 'hidden'
       })),
-      //element being added into DOM.
+      // element being added into DOM.
       transition(':enter', [
           animate('500ms ease-in-out', style({
               'height': '*',
@@ -21,7 +21,7 @@ import { AccountService } from '../../../../../Services/account.service';
               overflow: 'hidden'
           }))
       ]),
-      //element being removed from DOM.
+      // element being removed from DOM.
       transition(':leave', [
           animate('500ms ease-in-out', style({
               'height': '0px',
@@ -35,12 +35,12 @@ import { AccountService } from '../../../../../Services/account.service';
 export class CreatePostComponent implements OnInit {
 
   val: Boolean = false;
-  constructor(private accountService: AccountService) { }
+  constructor(public accountService: AccountService) { }
 
   ngOnInit() {
   }
 
 
-  
+
 
 }
