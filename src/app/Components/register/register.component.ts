@@ -22,7 +22,11 @@ export class RegisterComponent implements OnInit {
     public router: Router,
     public accountService: AccountService,
     private mediaService: MediaService
-  ) {}
+  ) {
+    if (this.accountService.loginStatus) {
+      this.router.navigate(['']);
+    }
+  }
 
   ngOnInit() {}
 
@@ -47,6 +51,31 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegisterTry(registerForm: NgForm) {
+    this.registerTry = true;
+
+    const Fullname: String = registerForm.value.fullname;
+    const Email: String = registerForm.value.email;
+    const Password: String = registerForm.value.password;
+    const Sex: String = this.registerGender;
+
+    console.log('register method called');
+    this.accountService.registerUser(Fullname, Email, Password, Sex).subscribe(
+      data => {
+        console.log('Register is successful');
+      },
+      error => {
+        console.log(error);
+        this.connectionError = true;
+        this.registerTry = false;
+      },
+      () => {
+        this.connectionError = false;
+        this.registerTry = false;
+      }
+    );
+  }
+
+  onRegisterTry_(registerForm: NgForm) {
     console.log(registerForm.value);
     console.log(this.registerGender);
     this.registerTry = true;

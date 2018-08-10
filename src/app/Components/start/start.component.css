@@ -89,27 +89,48 @@
     /*font-family: League Gothic, Arial, Helvetica, sans-serif;*/
     font-weight: bold;
     font-size: 55px;
-    color: #800209;
-    
+    color: #470909;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
     text-align: center;
     /*text-shadow: 2px 2px 4px #000000;*/
     opacity: 0.9;
 
 }
 
+.main_message_detail{
+    color: whitesmoke;
+    font-size: 15px;
+    background-color: #00000048;
+    border-radius: 3px;
+}
+
 .register_button{
-    background-color: rgba(255, 255, 255, 0);
-    color: #800209;
+    background-color: #ff101765;
+    color: white;
     font-size: 20px;
     border-radius: 50px;
     width: 140px;
     font-weight: 500;
-    border: 2px solid #800209;
+    border: 2px solid #940a0e;
 }
 .register_button:hover{
     background-color: #800209;
     color: white;
     cursor:pointer;
+}
+
+.image_credit_div{
+    position:absolute;
+    bottom:0;
+    right:0;
+    color: #e0e0e0;
+    background-color: rgba(14, 14, 14, 0.623);
+    font-size: 11px;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    border-top-left-radius: 4px;
 }
 
 .nav_button{
@@ -188,6 +209,11 @@
         opacity: 0.7;
         color: black;
         text-align: center;
+        height: 32px;
      }
 
      
+     div.container {
+        display:inline-block;
+        padding-top: 50px;
+      }

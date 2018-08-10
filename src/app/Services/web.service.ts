@@ -14,6 +14,9 @@ import { HttpClient, HttpResponse, HttpHeaders } from '../../../node_modules/@an
 export class WebService {
 
   // this is web service....
+  baseURL: String = 'https://localhost:5000/api/';
+
+
   web_url: String = 'localhost';
   web_port: String = '6367'; // always change this with port of your api server
 
@@ -105,7 +108,7 @@ export class WebService {
     const body = JSON.stringify(user);
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.http.post('http://' + this.web_url + ':' + this.web_port + '/api/Register', body, {
+    return this.http.post(this.baseURL + 'auth/register', body, {
       headers: headers
     });
   }
@@ -114,7 +117,7 @@ export class WebService {
     const body = JSON.stringify(user);
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.http.post('http://' + this.web_url + ':' + this.web_port + '/api/User_login', body, { headers });
+    return this.http.post(this.baseURL + 'auth/login', body, { headers });
    }
 
    // media related following

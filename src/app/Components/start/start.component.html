@@ -94,10 +94,15 @@
 
     <div class="main_message_div">
         <h1 class="main_message">Be aware, do your share!</h1>
-        <p style="color: #2e0204;font-size: 15px;">Share your experience, thoughts or creativity with others and let them be your fans</p>
+        <p class="main_message_detail">Share your experience, thoughts or creativity with others and let them be your fans</p>
         <button class="btn register_button" (click)="onClickRegister()">Register</button>
     </div>
 
+    <div class="container">
+      <img src="\assets\images\welcome_page\android.png"/>
+      <img src="\assets\images\welcome_page\apple.png"/>
+    </div>
+   
     
   </div>
   
@@ -107,9 +112,12 @@
 
   
   <div class="footer">
-      <p style="font-size: 10px">Made in Pakistan - Checkarr © 2018</p>
+      <p style="font-size: 10px; padding-top: 10px;">Made in Pakistan - Checkarr © 2018 - <u>Terms</u> - <u>Data Policy</u> - <u>Cookie Policy</u></p>
   </div>
 
+  <div class="image_credit_div">
+    {{photo_credit}}
+  </div>
 
    <div class="loading_screen" [hidden]="!loginTry">
     <div class="loading_box">

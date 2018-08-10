@@ -34,8 +34,15 @@ export class StartComponent implements OnInit {
 
   modalProgressBar: Boolean = false;
 
+  photo_credit: String = 'Badshahi Mosque, Lahore, Pakistan (@hussainibrahim_hi)';
+
   constructor(public router: Router, private modalService: NgbModal,
-    public accountService: AccountService, public tokenService: TokenService) { }
+    public accountService: AccountService, public tokenService: TokenService) {
+      if (this.accountService.loginStatus) {
+        // account is logged in
+        this.router.navigate(['']);
+      }
+    }
 
   ngOnInit() {
     this.pageLoading = false; // remove

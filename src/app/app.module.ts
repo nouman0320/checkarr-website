@@ -30,6 +30,7 @@ import { MiddleMainComponent } from './Components/main/middle-main/middle-main.c
 import { RightMainComponent } from './Components/main/right-main/right-main.component';
 import { DefaultPostComponent } from './Components/main/middle-main/posts/default-post/default-post.component';
 import { CreatePostComponent } from './Components/main/middle-main/posts/create-post/create-post.component';
+import { ErrorInterceptorProvider } from './Services/error.interceptor';
 
 
 @NgModule({
@@ -59,7 +60,13 @@ import { CreatePostComponent } from './Components/main/middle-main/posts/create-
     FormsModule,
     ImageCropperModule
   ],
-  providers: [WebService, AccountService, TokenService, MediaService],
+  providers: [
+    WebService,
+    AccountService,
+    TokenService,
+    MediaService,
+    ErrorInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
