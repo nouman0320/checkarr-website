@@ -29,10 +29,9 @@ export class RecoveryPasswordChangeComponent implements OnInit {
 
       this.tokenService.verifyResetToken()
       .subscribe(
-        data => {
-          const reset_token_status = data['RESET_TOKEN_STATUS'];
-        }, error => {
-          this.noInternet = true;
+        data => {},
+        error => {
+          this.router.navigate(['']);
           this.pageLoading = false;
         },
         () => {

@@ -77,8 +77,8 @@
           </div>
         </nav>
         <div *ngIf="loginError" style="position: fixed;width: 100%;" class="alert alert-warning alert-dismissible">
-            
-            <strong><a (click)="onHelpButtonClick(accountRecoveryModal)" style="text-decoration: none;cursor: pointer;"><u>Forgot password</u></a></strong>  - Account details are incorrect, try again 
+          <div [innerHTML]="loginErrorHtml"></div>
+          {{loginErrorMessage}} 
         </div>
         <div *ngIf="userNotFoundError" style="position: fixed;width: 100%;" class="alert alert-warning alert-dismissible">
             
@@ -112,7 +112,7 @@
 
   
   <div class="footer">
-      <p style="font-size: 10px; padding-top: 10px;">Made in Pakistan - Checkarr © 2018 - <u>Terms</u> - <u>Data Policy</u> - <u>Cookie Policy</u></p>
+      <p style="font-size: 10px; padding-top: 10px;">Made in Pakistan - Checkarr © 2018 - <u style="cursor:pointer"><a target="_blank" href="http://localhost:4200/terms-and-policy" class="footer-color">Terms</a></u> - <u style="cursor:pointer"><a target="_blank" href="http://localhost:4200/terms-and-policy" class="footer-color">Data Policy</a></u> - <u style="cursor:pointer"><a target="_blank" href="http://localhost:4200/terms-and-policy" class="footer-color">Cookie Policy</a></u></p>
   </div>
 
   <div class="image_credit_div">
@@ -136,7 +136,7 @@
   
     <div class="modal-header">
       <h5 class="modal-title" id="recoveryModalLongTitle">Account Recovery</h5>
-      <button type="button" class="close" aria-label="Close" (click)="dc">
+      <button type="button" class="close" aria-label="Close" (click)="closeRecoveryModal()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -174,12 +174,12 @@
 
 
 <!-- Modal Recovery Code-->
-<ng-template #recoveryCodeModal let-c="close" let-dc = "d('Cross click')" let-d="dismiss">
+<ng-template #recoveryCodeModal let-c="close" let-d="dismiss">
     <div class="modal-header">
         <h5 class="modal-title" id="recoveryCodeModalLongTitle">Recovery code</h5>
-      <button type="button" class="close" aria-label="Close" (click)="dc">
-        <span aria-hidden="true">&times;</span>
-      </button>
+        <button type="button" class="close" aria-label="Close" (click)="closeRecoveryCodeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <ngb-progressbar [hidden]="!modalProgressBar" type="danger" [value]="100" [striped]="true" [animated]="true" height="6px"></ngb-progressbar>
 

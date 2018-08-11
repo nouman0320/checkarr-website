@@ -17,6 +17,8 @@ import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 export class StartComponent implements OnInit {
 
 
+  loginErrorHtml: any = '';
+  loginErrorMessage: String = '';
   loginError: Boolean = false;
   connectionError: Boolean = false;
   userNotFoundError: Boolean = false;
@@ -101,41 +103,45 @@ export class StartComponent implements OnInit {
     this.connectionError = false;
     this.loginError = false;
     this.userNotFoundError = false;
+    this.loginErrorHtml = '';
 
     this.accountService.loginUser(loginForm.value.email, loginForm.value.password)
     .subscribe(
       data => {
-        console.log(JSON.stringify(data));
-        if (data['ok'] == 1 && data['issued'] == true) { // login sucess
-          // alert("Login Successful");
-          if (data['activation_status'] == 'T') {
-            this.accountService.isUserAccountActivated = true;
-          } else {
-            this.accountService.isUserAccountActivated = false;
-          }
-
-          this.accountService.USER_EMAIL = data['user_email'];
-          // alert(this.accountService.USER_EMAIL);
-          this.accountService.USER_ID = data['user_id'];
-          this.tokenService.setAccessToken(data['token'], loginForm.value.email);
-          this.tokenService.setRefreshToken(data['refresh_token'], loginForm.value.email);
-
-          this.router.navigate(['']);
-        } else if (data['ok'] == 2) { // incorrect password
-          this.loginError = true;
-        } else if (data['ok'] == 3) { // account not found
-          this.userNotFoundError = true;
-          console.log('not found');
+        const user = data;
+        const activation_status = user.activation_status;
+        const user_email = user.user_email;
+        const access_token = user.token;
+        const user_id = user.user_id;
+        console.log('login success');
+        console.log(user_email);
+        console.log(access_token);
+        console.log(user_id);
+        if (activation_status == 'T') {
+          this.accountService.isUserAccountActivated = true;
+        } else {
+          this.accountService.isUserAccountActivated = false;
         }
-      }, error => {
-        console.log('Unable to connect to the server');
-        this.connectionError = true;
+        this.accountService.USER_EMAIL = user_email;
+        this.accountService.USER_ID = user_id;
+        this.tokenService.setAccessToken(access_token, user_email);
+        // this.tokenService.setRefreshToken(data['refresh_token'], loginForm.value.email);
+        // this.router.navigate(['']);
+      },
+      error => {
+        if (error == 'Unauthorized') {
+          this.loginErrorHtml = '<strong>If you need help then click on assistance above</strong>';
+          error = 'Email or password is incorrect';
+        }
+        this.loginErrorMessage = error;
+        this.loginError = true;
+        // console.error(error);
+        // this.connectionError = true;
         this.loginTry = false;
       },
       () => {
-        // 'onCompleted' callback.
-        // No errors, route to new page here
         this.connectionError = false;
+        this.loginError = false;
         this.loginTry = false;
       }
     );
@@ -155,55 +161,73 @@ export class StartComponent implements OnInit {
 
   private RECOVERY_TOKEN: String;
   private RECOVERY_EMAIL: String;
-  private recoveryCodeModal: NgbModalRef;
-  sendRecoveryMail(recoveryMail: String, nextModal) {
 
+  closeRecoveryModal() {
+    this.recoveryEmailModal.close();
+  }
+
+  private recoveryCodeModal: NgbModalRef;
+
+  sendRecoveryMail(recoveryMail: String, nextModal) {
+    // FIRST MODAL TO ENTER EMAIL
     this.currentRecoveryEmail = recoveryMail;
     this.modalProgressBar = true;
 
-    this.accountService.recoverAccount(recoveryMail)
-    .subscribe(
+    this.accountService.recoverAccount(recoveryMail).subscribe(
       data => {
-        // alert(data["RETURN_CODE"]+"\n"+data["RECOVERY_TOKEN"])
-
-        if (data['RETURN_CODE'] == 1) {
-          // mail is sent
-          this.recoveryCodeError = false;
-          this.recoveryCodeErrorMessage = 'Something went wrong';
-
-          this.RECOVERY_TOKEN = data['RECOVERY_TOKEN'];
-          this.RECOVERY_EMAIL = recoveryMail;
-          // console.log(this.RECOVERY_TOKEN);
-          this.modalProgressBar = false;
-
-          this.recoveryEmailModal.close();
-          this.recoveryCodeModal = this.modalService.open(nextModal, {centered: true});
-        } else if (data['RETURN_CODE'] == 2) {
-          // mail is not sent
-          this.recoveryEmailError = true;
-          this.recoveryEmailErrorMessage = 'This email is not associated with any account';
-          this.modalProgressBar = false;
-        } else if (data['RETURN_CODE'] == 3) {
-          // exception in API
-          this.recoveryEmailError = true;
-          this.recoveryEmailErrorMessage = 'Server ran into some unexpected error';
-          this.modalProgressBar = false;
-        }
-      }, error => {
+        const response = data;
+        const recovery_token = response.recovery_token;
+        this.RECOVERY_TOKEN = recovery_token;
+        this.RECOVERY_EMAIL = this.currentRecoveryEmail;
+        this.recoveryCodeError = false;
+        this.modalProgressBar = false;
+        this.recoveryEmailModal.close();
+        this.recoveryCodeModal = this.modalService.open(nextModal, {centered: true});
+      },
+      error => {
         this.recoveryEmailError = true;
-          this.recoveryEmailErrorMessage = 'Unable to connect to the services';
-          this.modalProgressBar = false;
+        this.recoveryEmailErrorMessage = error;
+        this.modalProgressBar = false;
       },
       () => {
-        // 'onCompleted' callback.
-        // No errors, route to new page here
+        this.modalProgressBar = false;
       }
     );
+  }
 
+
+
+  closeRecoveryCodeModal() {
+    this.recoveryCodeModal.close();
   }
 
   private RESET_TOKEN: String;
+
   verifyRecoveryCode(recoveryCode: String) {
+    this.modalProgressBar = true;
+    console.log(this.RECOVERY_TOKEN);
+    this.accountService.recoveryConfirmation(recoveryCode, this.RECOVERY_TOKEN, this.RECOVERY_EMAIL)
+    .subscribe(
+      data => {
+        this.modalProgressBar = false;
+        const reset_token = data.reset_token;
+        this.RESET_TOKEN = reset_token;
+        this.recoveryCodeError = false;
+        this.tokenService.setResetToken(this.RESET_TOKEN, this.RECOVERY_EMAIL);
+        this.router.navigate(['/password-change']);
+        this.recoveryCodeModal.close();
+      },
+      error => {
+        this.modalProgressBar = false;
+        this.recoveryCodeErrorMessage = error;
+        this.recoveryCodeError = true;
+      },
+      () => {}
+    );
+  }
+
+
+  verifyRecoveryCode_(recoveryCode: String) {
     // this.recoveryCodeModal.close();
     this.modalProgressBar = true;
     this.accountService.recoveryConfirmation(recoveryCode, this.RECOVERY_TOKEN, this.RECOVERY_EMAIL)
@@ -254,3 +278,5 @@ export class StartComponent implements OnInit {
     );
   }
 }
+
+

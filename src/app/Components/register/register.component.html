@@ -36,7 +36,7 @@
               
                 <div *ngIf="registerError" style="position:absolute ;width: 100%;height: 38px;text-align: center;" class="alert alert-warning alert-dismissible">
             
-                    <strong>Account exists</strong>  - Provided email is already associated with an account 
+                    {{registerErrorMessage}} 
                </div>
               <h1 class="register_heading">Register</h1>
               <p class="register_description">Get to know the world around you. Start to share what's on your mind, help other thorugh your experience or show your skills to the world - Yes, it's free</p>

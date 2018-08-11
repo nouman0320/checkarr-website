@@ -54,7 +54,7 @@ export class WebService {
     const body = jsonStr;
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.http.post('http://' + this.web_url + ':' + this.web_port + '/api/Confirmation/Account_recovery', body, {
+    return this.http.post(this.baseURL + 'accounts/recover', body, {
       headers: headers
     });
   }
@@ -63,7 +63,7 @@ export class WebService {
     const body = jsonStr;
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.http.post('http://' + this.web_url + ':' + this.web_port + '/api/Confirmation/Recovery_confirmation', body, {
+    return this.http.post(this.baseURL + 'accounts/recover/confirm', body, {
       headers: headers
     });
   }
@@ -81,7 +81,7 @@ export class WebService {
     const body = jsonStr;
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.http.post('http://' + this.web_url + ':' + this.web_port + '/api/Confirmation/Verify_reset_token', body, {
+    return this.http.post(this.baseURL + 'accounts/recover/reset/confirm', body, {
       headers: headers
     });
   }

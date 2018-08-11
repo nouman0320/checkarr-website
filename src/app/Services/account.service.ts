@@ -50,14 +50,14 @@ export class AccountService {
     return this.webService.loginUser({Email: Email, Password: Password});
   }
 
-  recoverAccount(recoveryEmail: String) {
+  recoverAccount(recoveryEmail: String): Observable<any> {
     const jsonStr = {
       'RECOVERY_EMAIL': recoveryEmail
     };
     return this.webService.recoverAccount(jsonStr);
   }
 
-  recoveryConfirmation(recoveryCode: String, recoveryToken: String, recoveryEmail) {
+  recoveryConfirmation(recoveryCode: String, recoveryToken: String, recoveryEmail): Observable<any> {
     const jsonStr = {
       'RECOVERY_CODE': recoveryCode,
       'RECOVERY_TOKEN': recoveryToken,

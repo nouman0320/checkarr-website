@@ -12,6 +12,7 @@ import { MediaService } from '../../Services/media.service';
 export class RegisterComponent implements OnInit {
   registerGender: String = 'male';
   registerError: Boolean = false;
+  registerErrorMessage: String = '';
   connectionError: Boolean = false;
 
   registerTry: Boolean = false;
@@ -64,50 +65,16 @@ export class RegisterComponent implements OnInit {
         console.log('Register is successful');
       },
       error => {
-        console.log(error);
-        this.connectionError = true;
+        // console.log(error);
+        this.registerErrorMessage = error;
+        this.registerError = true;
         this.registerTry = false;
       },
       () => {
-        this.connectionError = false;
+        this.registerError = false;
         this.registerTry = false;
       }
     );
-  }
-
-  onRegisterTry_(registerForm: NgForm) {
-    console.log(registerForm.value);
-    console.log(this.registerGender);
-    this.registerTry = true;
-    this.accountService
-      .registerUser(
-        registerForm.value.fullname,
-        registerForm.value.email,
-        registerForm.value.password,
-        this.registerGender
-      )
-      .subscribe(
-        data => {
-          console.log(data);
-          this.registerError = !data;
-          if (data) {
-            // alert("Register Successful");
-            // temp alert
-            this.registered = true;
-          }
-        },
-        error => {
-          console.log('Unable to connect to the server');
-          this.connectionError = true;
-          this.registerTry = false;
-        },
-        () => {
-          // 'onCompleted' callback.
-          // No errors, route to new page here
-          this.connectionError = false;
-          this.registerTry = false;
-        }
-      );
   }
 
   on_dp_select() {
