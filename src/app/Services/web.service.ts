@@ -72,7 +72,7 @@ export class WebService {
     const body = jsonStr;
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.http.post('http://' + this.web_url + ':' + this.web_port + '/api/Confirmation/Reset_change_password', body, {
+    return this.http.post(this.baseURL + 'accounts/recover/reset/password', body, {
       headers: headers
     });
   }

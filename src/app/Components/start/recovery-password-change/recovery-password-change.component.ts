@@ -59,52 +59,22 @@ export class RecoveryPasswordChangeComponent implements OnInit {
         const RESET_TOKEN = resetJson['RESET_TOKEN'];
         const RESET_EMAIL = resetJson['RESET_EMAIL'];
 
-        // RESET_TOKEN = RESET_TOKEN + "1231";
       this.accountService.reset_change_password(RESET_TOKEN, RESET_EMAIL, newPassword)
       .subscribe(
         data => {
           // alert(data["RETURN_CODE"]);
-
-          const RETURN_CODE = data['RETURN_CODE'];
-          if (RETURN_CODE === 1) {
-            // success
-            this.requestError = false;
-            this.passwordChanged = true;
-            this.tokenService.removeResetToken();
-          } else if (RETURN_CODE === 2) {
-            // exception in controller
-            this.requestError = true;
-            this.error = 'Our servers encountered some internal error';
-          } else if (RETURN_CODE === 3) {
-            // reset token is not valid
-            this.requestError = true;
-            this.error = 'Please refresh the page';
-          } else if (RETURN_CODE === 4) {
-            // password not changed
-            this.requestError = true;
-            this.error = 'Unable to change password right now, try later.';
-          } else if (RETURN_CODE === 5) {
-            // New password is same as old password
-            this.requestError = true;
-            this.error = 'You have entered your current password';
-          } else {
-            this.requestError = true;
-            this.error = 'Some unknown error has occured';
-          }
-
-
+          this.requestError = false;
+          this.passwordChanged = true;
+          this.tokenService.removeResetToken();
           this.progressbar = false;
-
-
         }, error => {
-          alert('ERROR');
-          this.error = 'Unable to connect our services';
+          this.error = error;
           this.requestError = true;
           this.progressbar = false;
+          this.passwordChanged = false;
         },
         () => {
           this.progressbar = false;
-          // this.requestError = false;
         }
       );
 
