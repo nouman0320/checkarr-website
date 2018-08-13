@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 
 
@@ -32,6 +33,7 @@ import { DefaultPostComponent } from './Components/main/middle-main/posts/defaul
 import { CreatePostComponent } from './Components/main/middle-main/posts/create-post/create-post.component';
 import { ErrorInterceptorProvider } from './Services/error.interceptor';
 import { LoadingComponent } from './Components/helper-components/loading/loading.component';
+import { AlertifyService } from './Services/alertify.service';
 
 
 @NgModule({
@@ -60,14 +62,16 @@ import { LoadingComponent } from './Components/helper-components/loading/loading
     HttpClientModule,
     NgbModule.forRoot(),
     FormsModule,
-    ImageCropperModule
+    ImageCropperModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [
     WebService,
     AccountService,
     TokenService,
     MediaService,
-    ErrorInterceptorProvider
+    ErrorInterceptorProvider,
+    AlertifyService
   ],
   bootstrap: [AppComponent]
 })

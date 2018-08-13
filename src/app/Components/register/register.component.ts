@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from '../../Services/account.service';
 import { MediaService } from '../../Services/media.service';
+import { AlertifyService } from '../../Services/alertify.service';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     public router: Router,
     public accountService: AccountService,
-    private mediaService: MediaService
+    private mediaService: MediaService,
+    private alertifyService: AlertifyService
   ) {
     if (this.accountService.loginStatus == true) {
       this.router.navigate(['']);
@@ -65,11 +67,14 @@ export class RegisterComponent implements OnInit {
     this.accountService.registerUser(Fullname, Email, Password, Sex).subscribe(
       data => {
         console.log('Register is successful');
+        this.alertifyService.success('Great! Just few more steps');
       },
       error => {
         // console.log(error);
-        this.registerErrorMessage = error;
-        this.registerError = true;
+        // this.registerErrorMessage = error;
+        // this.registerError = true;
+
+        this.alertifyService.error(error);
         this.registerTry = false;
       },
       () => {

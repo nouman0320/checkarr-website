@@ -10,6 +10,7 @@ import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/map';
+import { AlertifyService } from '../../Services/alertify.service';
 
 @Component({
   selector: 'app-main',
@@ -39,7 +40,7 @@ export class MainComponent implements OnInit {
 
 
   constructor(private router: Router, public accountService: AccountService, configDropdown: NgbDropdownConfig,
-    private modalService: NgbModal, private tokenService: TokenService) {
+    private modalService: NgbModal, private tokenService: TokenService, private alertifyService: AlertifyService) {
     configDropdown.placement = 'bottom-right';
     configDropdown.autoClose = false;
 
@@ -108,7 +109,8 @@ export class MainComponent implements OnInit {
   logout() {
     console.log('Logout function called');
     this.accountService.logout();
-    window.location.reload();
+    this.router.navigate(['/welcome']);
+    this.alertifyService.message('Bye! see you soon');
   }
 
 

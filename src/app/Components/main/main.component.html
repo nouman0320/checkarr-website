@@ -19,25 +19,30 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li style="width: 20px"></li>
-          <li class="nav-item active" style="margin-top:0px; font-weight: bold;">
-            <div placement="bottom" ngbTooltip="Fans" class="fan_icon_div" style="margin-top: 8px">
-              <span style="margin-left: -8px;margin-top: 15px;opacity: 0.8;" class="badge badge-danger">1</span>
-            </div>
-
-          </li>
-          <li style="width: 18px"></li>
-          <li>
-            <div placement="bottom" ngbTooltip="Notifications" class="notification_icon_div" style="margin-top: 8px">
-              <span style="margin-left: -8px;margin-top: 15px;opacity: 0.8;" class="badge badge-danger">9</span>
-            </div>
-          </li>
 
           <li style="width: 18px"></li>
-          <li>
-            <div placement="bottom" ngbTooltip="Messages" class="message_icon_div" style="margin-top: 7px">
-              <span style="margin-left: -8px;margin-top: 15px;opacity: 0.8;" class="badge badge-danger">2</span>
+          <li placement="bottom" ngbTooltip="Fan" class="mt-2" style="cursor: pointer;">
+              <div style="margin-top: 8px;margin-left:-10px;position: absolute;">
+                  <span style="opacity: 0.8; font-size:10px;" class="badge badge-danger">14</span>
+              </div>
+                <i class="fa fa-user-plus" style="font-size: 24px"></i>
+            </li>
+          
+          <li style="width: 18px"></li>
+          <li placement="bottom" ngbTooltip="Notification" class="mt-2" style="cursor: pointer;" >
+              <div style="margin-top: 8px;margin-left:-7px;position: absolute;">
+                  <span style="opacity: 0.8; font-size:10px;" class="badge badge-danger">9</span>
             </div>
+              <i class="fa fa-bell" style="font-size: 24px"></i>
           </li>
+
+          <li style="width: 18px"></li>
+          <li placement="bottom" ngbTooltip="Message" class="mt-2" style="cursor: pointer;">
+              <div style="margin-top: 8px;margin-left:-10px;position: absolute;">
+                  <span style="opacity: 0.8; font-size:10px;" class="badge badge-danger">14</span>
+              </div>
+                <i class="fa fa-comments" style="font-size: 24px"></i>
+            </li>
 
           <li style="width: 18px" class="separator"></li>
           <li style="width: 30px"></li>
@@ -46,7 +51,10 @@
             <input type="text" class="form-control" style="border-radius: 25px 0px 0px 25px;" placeholder="Search">
             <div class="input-group-append">
               <button class="btn btn-outline-secondary search_button" style="border-radius: 0px 25px 25px 0px;" type="button">
-                <div class="search_icon_div"></div>
+
+               <!-- <div class="search_icon_div"></div>-->
+               <i class="fa fa-search"></i>
+
               </button>
             </div>
           </div>
@@ -60,6 +68,7 @@
 
         <button class="btn btn-link navbar_username" style="border-color: transparent;margin-right: 10px">Home</button>
 
+        <!--
         <div ngbDropdown class="d-inline-block">
           <button class="btn btn-link navbar_username" id="nameDropdown" ngbDropdownToggle>Nouman Arshad</button>
           <div ngbDropdownMenu class="name_dropdown_menu" aria-labelledby="nameDropdown">
@@ -68,6 +77,24 @@
             <button class="dropdown-item" (click)="logout()">Log out</button>
           </div>
         </div>
+        -->
+
+    <div class="btn-group" dropdown>
+      <button id="nav_btn" dropdownToggle type="button" class="btn btn-link navbar_username dropdown-toggle"
+              aria-controls="dropdown-basic">
+              Nouman Arshad <span class="caret"></span>
+      </button>
+      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu mt-2"
+          role="menu" aria-labelledby="button-basic">
+        <li role="menuitem"><a class="dropdown-item" href="#"><i class="fa fa-user-circle "></i> Profile</a></li>
+        <li role="menuitem"><a class="dropdown-item" href="#"><i class="fa fa-cog"></i> Settings</a></li>
+        <li class="divider dropdown-divider"></li>
+        <li role="menuitem"><a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Log out</a>
+        </li>
+      </ul>
+    </div>
+
+
 
         <div placement="bottom" ngbTooltip="Profile" class="navbar_profile_image_div"></div>
 

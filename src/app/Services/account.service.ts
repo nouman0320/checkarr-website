@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { TokenService } from './token.service';
 import { Router } from '../../../node_modules/@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
 export class AccountService {
@@ -23,7 +24,23 @@ export class AccountService {
   isTokenValidationComplete: Boolean = true;
   networkProblem: Boolean = false;
 
+  jwtHelper = new JwtHelperService();
+
   constructor(private webService: WebService, private tokenService: TokenService, private router: Router) {}
+
+  isTokenExpired() {
+    const localStorageObj = localStorage.getItem('currentUser');
+
+    var expiry = true;
+
+    if (localStorageObj != null) {
+      const currentUser = JSON.parse(localStorageObj);
+      const access_token = currentUser.AccessToken;
+      expiry = this.jwtHelper.isTokenExpired(access_token);
+    }
+
+    return expiry;
+  }
 
 
   refreshAccessToken(componentName: String) {
@@ -45,6 +62,18 @@ export class AccountService {
     const currentUserRefreshInfo = JSON.parse(localStorageObjForRefreshToken);
     const REFRESH_TOKEN = currentUserRefreshInfo.RefreshToken;
     const REFRESH_EMAIL = currentUserRefreshInfo.Email;
+
+    if (this.jwtHelper.isTokenExpired(REFRESH_TOKEN)) {
+        this.tokenService.clearAllTokens();
+        if (componentName == 'register') {
+        } else if (componentName == 'start' ) {
+        } else {
+         this.router.navigate(['/welcome']);
+        }
+        this.loginStatus = false;
+        this.isTokenValidationComplete = true;
+        return;
+    }
 
     const jsonObj = {
       'refresh_token': REFRESH_TOKEN,
@@ -102,6 +131,13 @@ export class AccountService {
 
   authorize (componentName: String) {
     this.isTokenValidationComplete = false;
+
+    if (this.isTokenExpired()) {
+      console.log('ACCESS TOKEN IS EXPIRED AUTH0');
+      this.refreshAccessToken(componentName);
+      return;
+    }
+
     const localStorageObj = localStorage.getItem('currentUser');
     if (localStorageObj == null) {
       // no user details present in browser
@@ -177,10 +213,10 @@ export class AccountService {
 
   logout() {
     this.loginStatus = false;
-    this.isUserAccountActivated = false;
     this.USER_ID = null;
     this.USER_EMAIL = null;
     this.tokenService.clearAllTokens();
+    this.isUserAccountActivated = false;
   }
 
  setSessionDetails(object: any) {

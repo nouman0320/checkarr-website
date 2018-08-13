@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AccountService } from '../../Services/account.service';
 import { TokenService } from '../../Services/token.service';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import { AlertifyService } from '../../Services/alertify.service';
 
 
 
@@ -39,7 +40,9 @@ export class StartComponent implements OnInit {
   photo_credit: String = 'Badshahi Mosque, Lahore, Pakistan (@hussainibrahim_hi)';
 
   constructor(public router: Router, private modalService: NgbModal,
-    public accountService: AccountService, public tokenService: TokenService) {
+    public accountService: AccountService, public tokenService: TokenService,
+    private alertifyService: AlertifyService) {
+
       if (this.accountService.loginStatus) {
         // account is logged in
         this.router.navigate(['']);
@@ -52,55 +55,6 @@ export class StartComponent implements OnInit {
     if (!this.accountService.loginStatus) {
       this.accountService.authorize('start');
     }
-
-    /*
-    var localStorageObj = localStorage.getItem('currentUser');
-    if(localStorageObj == null){
-      // no user details present in browser
-      // means user not logged in
-      this.pageLoading = false;
-      return;
-    }
-
-    var currentUser = JSON.parse(localStorageObj);
-    var token = currentUser.AccessToken;
-    var email = currentUser.Email;
-    var isAccessTokenValid = false;
-    console.log(token);
-    var jsonStr = {
-      "AccessToken": token,
-      "Email": email
-    }
-    this.tokenService.verifyAccessToken(jsonStr)
-    .subscribe(
-      data => {
-        isAccessTokenValid = data["AccessValidation"];
-        console.log("TOKEN SERVICE => isValid: "+isAccessTokenValid);
-        // success connection
-
-        if(!isAccessTokenValid){
-          // access token is not valid now we will send refresh token
-          console.log("=> Access token is not valid sending refresh token... ");
-          this.pageLoading = false;
-          //this.router.navigate(["/welcome"]);
-        }
-        else{
-          // access token is valid
-          this.router.navigate([""]);
-        }
-      }, error => {
-        console.log("Error while validating token");
-        this.noInternet = true;
-        // error
-      },
-      () => {
-        // 'onCompleted' callback.
-        // No errors, route to new page here
-      }
-    ); // END VERIFY ACCESS TOKEN
-
-    //this.tokenService.clearAllTokens();
-    */
   }
 
   onLoginTry(loginForm: NgForm) {
@@ -119,6 +73,8 @@ export class StartComponent implements OnInit {
         const access_token = user.token;
         const refresh_token = user.refresh_token;
         const user_id = user.user_id;
+        this.alertifyService.success('Welcome');
+        this.router.navigate(['']);
         console.log('login success');
         console.log(user_email);
         console.log(access_token);
@@ -140,9 +96,12 @@ export class StartComponent implements OnInit {
         if (error == 'Unauthorized') {
           this.loginErrorHtml = '<strong>If you need help then click on assistance above</strong>';
           error = 'Email or password is incorrect';
+          this.alertifyService.warning('If you need help then click on assistance above');
         }
-        this.loginErrorMessage = error;
-        this.loginError = true;
+
+        this.alertifyService.error(error);
+        // this.loginErrorMessage = error;
+        // this.loginError = true;
         // console.error(error);
         // this.connectionError = true;
         this.loginTry = false;
@@ -235,56 +194,6 @@ export class StartComponent implements OnInit {
   }
 
 
-  verifyRecoveryCode_(recoveryCode: String) {
-    // this.recoveryCodeModal.close();
-    this.modalProgressBar = true;
-    this.accountService.recoveryConfirmation(recoveryCode, this.RECOVERY_TOKEN, this.RECOVERY_EMAIL)
-    .subscribe(
-      data => {
-        // alert(data["RETURN_CODE"] +"\n"+data["RESET_TOKEN"]);
-        const retCode = data['RETURN_CODE'];
-        const resetToken = data['RESET_TOKEN'];
-
-        if (retCode == 1) {
-          // recovery code is confirmed
-          this.recoveryCodeError = false;
-          this.RESET_TOKEN = resetToken;
-          this.tokenService.setResetToken(this.RESET_TOKEN, this.RECOVERY_EMAIL);
-          this.router.navigate(['/password-change']);
-          this.recoveryCodeModal.close();
-        } else if (retCode == 2) {
-          // recovery code is invalid
-          this.recoveryCodeErrorMessage = 'Provided code is either expired or not valid';
-          this.recoveryCodeError = true;
-        } else if (retCode == 3) {
-          // recovery token is invalid
-          this.recoveryCodeErrorMessage = 'Please re-do the recovery process';
-          this.recoveryCodeError = true;
-        } else if (retCode == 4) {
-          // exception in api
-          this.recoveryCodeErrorMessage = 'Internal server error';
-          this.recoveryCodeError = true;
-        } else if (retCode == 5) {
-          // internal error
-          this.recoveryCodeErrorMessage = 'Internal server error while processing your request';
-          this.recoveryCodeError = true;
-        } else {
-          // unknown
-          this.recoveryCodeErrorMessage = 'Unknown error has occured';
-          this.recoveryCodeError = true;
-        }
-
-      }, error => {
-        this.recoveryCodeErrorMessage = 'There is something wrong with the connection';
-        this.recoveryCodeError = true;
-      },
-      () => {
-        // 'onCompleted' callback.
-        // No errors, route to new page here
-        this.modalProgressBar = false;
-      }
-    );
-  }
 }
 
 
