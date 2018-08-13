@@ -37,38 +37,13 @@ export class RedirectRecoveryComponent implements OnInit {
     .subscribe(
       data => {
         // alert(data["RETURN_CODE"] +"\n"+data["RESET_TOKEN"]);
-        const retCode = data['RETURN_CODE'];
-        const resetToken = data['RESET_TOKEN'];
-
-        if (retCode === 1) {
-          // recovery code is confirmed
-
-          this.RESET_TOKEN = resetToken;
-          this.tokenService.setResetToken(this.RESET_TOKEN, this.recoveryEmail);
-          this.displayMessage = 'redirecting...';
-          this.router.navigate(['/password-change']);
-        } else if (retCode === 2) {
-          // recovery code is invalid
-          this.displayMessage = 'Invalid request';
-
-        } else if (retCode === 3) {
-          // recovery token is invalid
-          this.displayMessage = 'Invalid session';
-
-        } else if (retCode === 4) {
-          // exception in api
-          this.displayMessage = 'Internal server error';
-
-        } else if (retCode === 5) {
-          // internal error
-          this.displayMessage = 'Internal server error while processing your request';
-        } else {
-          // unknown
-          this.displayMessage = 'Unknown error has occured';
-        }
-
+        const resetToken = data.reset_token;
+        this.RESET_TOKEN = resetToken;
+        this.tokenService.setResetToken(this.RESET_TOKEN, this.recoveryEmail);
+        this.displayMessage = 'redirecting...';
+        this.router.navigate(['/password-change']);
       }, error => {
-        this.displayMessage = 'Uable to complete this request due to connection problem.';
+        this.displayMessage = error;
       },
       () => {
         // 'onCompleted' callback.

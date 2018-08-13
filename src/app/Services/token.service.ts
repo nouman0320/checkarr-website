@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { WebService } from './web.service';
 import { Router } from '@angular/router';
+import { Observable } from '../../../node_modules/rxjs';
 
 @Injectable()
 export class TokenService {
 
   constructor(private webService: WebService, private router: Router) { }
 
-  refreshAccessToken(jsonStr: any) {
+
+
+  refreshAccessToken(jsonStr: any): Observable<any> {
     return this.webService.refreshAccessToken(jsonStr);
   }
 
-  verifyAccessToken(jsonStr: any) {
+  verifyAccessToken(jsonStr: any): Observable<any> {
     return this.webService.isTokenValid(jsonStr);
   }
 
@@ -26,6 +29,7 @@ export class TokenService {
   clearAllTokens() {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('currentUserRefreshInfo');
+    localStorage.removeItem('currentUserActivationInfo');
   }
 
 

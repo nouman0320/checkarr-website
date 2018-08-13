@@ -35,29 +35,12 @@ export class RedirectActivationComponent implements OnInit {
   verifyActivationCode() {
     this.accountService.activate_user_account_with_link(this.userId, this.activationCode, this.activationToken).subscribe(
       data => {
-        const RETURN_CODE = data['RETURN_CODE'];
-        // alert(RETURN_CODE);
-        if (RETURN_CODE === 1) {
-          // account is activated
-          this.displayMessage = 'redirecting...';
-          this.accountService.isUserAccountActivated = true;
-          this.router.navigate(['']);
-        } else if (RETURN_CODE === 2) {
-          // token is not valid
-          this.displayMessage = 'Session is expired or invalid';
-        } else if (RETURN_CODE === 3) {
-          // exception in api
-          this.displayMessage = 'unexpected error has occured in the server';
-        } else if (RETURN_CODE === 4) {
-          // wrong code
-          this.displayMessage = 'Session is either invalid or expired';
-        } else {
-          // unknown error
-          this.displayMessage = 'unexpected response from the server';
-        }
+        this.displayMessage = 'redirecting...';
+        this.accountService.isUserAccountActivated = true;
+        this.tokenService.removeActivationToken();
+        this.router.navigate(['']);
       }, error => {
-        // alert("ERROR");
-        this.displayMessage = 'unable to connect the services';
+        this.displayMessage = error;
       }, () => {
       }
     );

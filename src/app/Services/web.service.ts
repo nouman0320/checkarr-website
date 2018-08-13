@@ -35,7 +35,7 @@ export class WebService {
     const body = jsonStr;
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.http.post('http://' + this.web_url + ':' + this.web_port + '/api/Home/activate_user_account', body, {
+    return this.http.post(this.baseURL + 'accounts/activation', body, {
       headers: headers
     });
   }
@@ -44,7 +44,7 @@ export class WebService {
     const body = jsonStr;
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.http.post('http://' + this.web_url + ':' + this.web_port + '/api/Home/send_activation_mail', body, {
+    return this.http.post(this.baseURL + 'accounts/mail/activation', body, {
       headers: headers
     });
   }
@@ -90,7 +90,7 @@ export class WebService {
     const body = token;
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.http.post('http://' + this.web_url + ':' + this.web_port + '/api/Authentication/validate_access_token', body, {
+    return this.http.post(this.baseURL + 'auth/token/access/validate', body, {
       headers: headers
     });
   }
@@ -99,7 +99,7 @@ export class WebService {
     const body = jsonStr;
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.http.post('http://' + this.web_url + ':' + this.web_port + '/api/Authentication/refresh_access_token', body, {
+    return this.http.post(this.baseURL + 'auth/token/access/refresh', body, {
       headers: headers
     });
   }

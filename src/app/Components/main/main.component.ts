@@ -43,7 +43,7 @@ export class MainComponent implements OnInit {
     configDropdown.placement = 'bottom-right';
     configDropdown.autoClose = false;
 
-    this.router.navigate(['/welcome']); // remove
+    // this.router.navigate(['/welcome']); // remove
 
 
    }
@@ -54,135 +54,11 @@ export class MainComponent implements OnInit {
     if (this.testing) {
       this.pageLoading = false;
       console.log('** RUNNING IN TESTING MODE');
-    }
-
-    const localStorageObj = localStorage.getItem('currentUser');
-    if (localStorageObj == null) {
-      // no user details present in browser
-      if (!this.testing) {
-        this.router.navigate(['/welcome']);
-
+    } else {
+      if (!this.accountService.loginStatus) {
+        this.accountService.authorize('main');
       }
-      return;
     }
-
-    const currentUser = JSON.parse(localStorageObj);
-    const token = currentUser.AccessToken;
-    const email = currentUser.Email;
-    let isAccessTokenValid = false;
-    console.log(token);
-    const jsonStr = {
-      'AccessToken': token,
-      'Email': email
-    };
-    this.tokenService.verifyAccessToken(jsonStr)
-    .subscribe(
-      data => {
-        isAccessTokenValid = data['AccessValidation'];
-
-
-
-        console.log('TOKEN SERVICE => isValid: ' + isAccessTokenValid);
-        // success connection
-
-        if (!isAccessTokenValid) {
-          // access token is not valid now we will send refresh token
-          console.log('=> Access token is not valid sending refresh token... ');
-
-          if (!this.testing) {
-            const localStorageObjForRefreshToken = localStorage.getItem('currentUserRefreshInfo');
-
-
-            if (localStorageObjForRefreshToken == null) {
-              // no refresh details present in browser
-              if (!this.testing) {
-                this.router.navigate(['/welcome']);
-              }
-              return;
-            }
-
-            const currentUserRefreshInfo = JSON.parse(localStorageObjForRefreshToken);
-            const REFRESH_TOKEN = currentUserRefreshInfo.RefreshToken;
-            const REFRESH_EMAIL = currentUserRefreshInfo.Email;
-
-            const jsonObj = {
-              'refresh_token': REFRESH_TOKEN,
-              'email': REFRESH_EMAIL
-            };
-
-            this.tokenService.refreshAccessToken(jsonObj).subscribe(
-              data => {
-                // getting response for checking refresh token
-                const RETURN_CODE = data['RETURN_CODE'];
-
-                if (RETURN_CODE === 1) {
-                  // refresh token is valid
-                  const NEW_REFRESH_TOKEN = data['NEW_REFRESH_TOKEN'];
-                  const NEW_ACCESS_TOKEN = data['NEW_ACCESS_TOKEN'];
-
-                  console.log('NEW REFRESH TOKEN: ' + NEW_REFRESH_TOKEN);
-                  console.log('NEW ACCESS TOKEN: ' + NEW_ACCESS_TOKEN);
-                  const EMAIL = data['EMAIL'];
-
-                  this.tokenService.setRefreshToken(NEW_REFRESH_TOKEN, EMAIL);
-                  this.tokenService.setAccessToken(NEW_ACCESS_TOKEN, EMAIL);
-
-                  this.pageLoading = false;
-
-                  this.accountService.setSessionDetails(data);
-
-                  console.log(' GOT NEW REFRESH TOKEN AND ACCESS TOKEN');
-                } else if (RETURN_CODE === 2) {
-                  // refresh token is not valid
-                  console.log(' REFRESH TOKEN NOT VALID');
-                  this.router.navigate(['/welcome']);
-                } else if (RETURN_CODE === 3) {
-                  // exception in web api
-                } else {
-                  // unknown error
-                }
-              },
-              err => {
-                // encountered some error while
-                this.pageLoading = false;
-                if (!this.testing) {
-                  this.noInternet = true;
-                }
-                console.log(' ERROR WHILE SENDING REFRESH TOKEN');
-              },
-              () => {
-                // call back complete
-              }
-            );
-
-          }
-
-
-        } else {
-          // access token is valid so we can continue operation
-          this.pageLoading = false;
-          this.accountService.setSessionDetails(data);
-        }
-
-      }, error => {
-        console.log('Error while validating token');
-
-
-        this.pageLoading = false;
-        if (!this.testing) {
-          this.noInternet = true;
-        }
-        // error
-      },
-      () => {
-        // 'onCompleted' callback.
-        // No errors, route to new page here
-
-
-
-
-      }
-    ); // END VERIFY ACCESS TOKEN
 
 
   /*
@@ -212,6 +88,7 @@ export class MainComponent implements OnInit {
     const stream$ = Observable.timer(0, interval)
       .finally(() => {
         // console.log("All done!");
+        this.resendButtonText = 'Resend mail';
         this.resendActivationMailCountdown = null;
 
       })
@@ -219,7 +96,7 @@ export class MainComponent implements OnInit {
       .map(value => duration - value * interval);
     stream$.subscribe(value => {
       this.resendActivationMailCountdown = value;
-      if ((value / 1000) <= 0) {
+      if ((value / 1000) <= 1) {
         this.resendButtonText = 'Resend mail';
       } else {
       this.resendButtonText = 'Resend mail (' + this.resendActivationMailCountdown / 1000 + ')';
@@ -247,28 +124,13 @@ export class MainComponent implements OnInit {
     console.log('Sending activation mail');
     this.accountService.sendActivationMail().subscribe(
       data => {
-        const RETURN_CODE = data['RETURN_CODE'];
-        const ACTIVATION_TOKEN = data['ACTIVATION_TOKEN'];
+        const activation_token = data.activation_token;
         console.log('Received returned data from activation mail');
-        // alert(RETURN_CODE+"\n"+ACTIVATION_TOKEN);
-        if (RETURN_CODE === 1) {
-          this.tokenService.setActivationToken(ACTIVATION_TOKEN);
-          // mail is sent
-          this.accountVerificationError = false;
-
-        } else if (RETURN_CODE === 2) {
-          // exception
-          this.accountVerificationErrorMessage = 'Our servers encountered some internal error';
-          this.accountVerificationError = true;
-        } else {
-          this.accountVerificationErrorMessage = 'Something went wrong. Try again later.';
-          this.accountVerificationError = true;
-        }
-
+        this.tokenService.setActivationToken(activation_token);
+        this.accountVerificationError = false;
 
       }, error => {
-
-        this.accountVerificationErrorMessage = 'Unable to make connection';
+        this.accountVerificationErrorMessage = error;
         this.accountVerificationError = true;
         // error
       },
@@ -277,6 +139,11 @@ export class MainComponent implements OnInit {
         // No errors, route to new page here
       }
     );
+  }
+
+  verificationModal: any = null;
+  closeVerificationModal() {
+    this.verificationModal.close();
   }
 
 
@@ -290,6 +157,7 @@ export class MainComponent implements OnInit {
       this.accountVerificationResendEmailCountdown();
       this.accountVerificationError = false;
       this.accountVerificationErrorMessage = 'Something went wrong';
+      this.verificationModal = currentModal;
       this.accountVerificationModal = this.modalService.open(currentModal, { centered: true });
       if (this.tokenService.doActivationTokenExist()) {
         // activation token exist in local storage
@@ -306,7 +174,6 @@ export class MainComponent implements OnInit {
 
   verifyActivationCode(activationCode: String) {
 
-    console.log('called');
     this.verificationModalProgressBar = true;
 
     const activationJson = this.tokenService.getActivationTokenObject();
@@ -314,34 +181,14 @@ export class MainComponent implements OnInit {
 
     this.accountService.activate_user_account(activationJson, activationCode).subscribe(
       data => {
-        const RETURN_CODE = data['RETURN_CODE'];
-        // alert(RETURN_CODE);
-        if (RETURN_CODE === 1) {
-          // account is activated
           this.accountVerificationError = false;
           this.accountVerificationErrorMessage = '';
           this.accountService.isUserAccountActivated = true;
           this.accountVerificationModal.close();
-        } else if (RETURN_CODE === 2) {
-          // token is not valid
-          this.accountVerificationErrorMessage = 'Code appears to be expired. Please resend mail.';
-          this.accountVerificationError = true;
-        } else if (RETURN_CODE === 3) {
-          // exception in api
-          this.accountVerificationErrorMessage = 'unexpected error has occured in the server';
-          this.accountVerificationError = true;
-        } else if (RETURN_CODE === 4) {
-          // wrong code
-          this.accountVerificationErrorMessage = 'code is either invalid or expired';
-          this.accountVerificationError = true;
-        } else {
-          // unknown error
-          this.accountVerificationErrorMessage = 'unexpected response from the server';
-          this.accountVerificationError = true;
-        }
+          this.tokenService.removeActivationToken();
       }, error => {
         // alert("ERROR");
-        this.accountVerificationErrorMessage = 'unable to connect the services';
+          this.accountVerificationErrorMessage = error;
           this.accountVerificationError = true;
           this.verificationModalProgressBar = false;
       }, () => {

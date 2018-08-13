@@ -1,146 +1,150 @@
-<div [hidden]="!pageLoading" class="pageLoadingDiv">
-    <img src="/assets/images/loader.gif" alt="loading.." class="loader_gif">
-    <h4 class="loader_msg">making a connection between us.. <div style="color:red;">♥</div></h4>
-</div>
+<app-loading></app-loading>
 
-<div [hidden]="!noInternet" class="noInternetDiv">
-  <img src="/assets/images/Checkarr_logo_transparent.png" class="main_logo" style="margin-left: 30px;margin-top:20px">
-  <img src="/assets/images/no-internet.png" class="noInternetImage">
-  <div class="noInternetMsgDiv">
-      <h2 class="noInternetMsg">We are unable to connect our services</h2>
-      <p>Either there is some problem is your internet connection or our servers are not responding at the moment</p>
-      <button class="btn btn-primary" onclick="location.reload();">Try again</button>
-  </div>
-  
-</div>
+<div *ngIf="this.accountService.isTokenValidationComplete && !this.accountService.networkProblem">
+  <div>
 
-<div [hidden]="pageLoading || noInternet">
-    
-  
 
     <nav class="navbar fixed-top navbar-expand-lg navbar-light welcome_nav">
-      <a class="navbar-brand navbar_item_color"  [routerLink]="['/']">
+      <a class="navbar-brand navbar_item_color" [routerLink]="['/']">
         <div class="logo_crop">
-            <img src="/assets/images/Checkarr_logo_transparent.png" class="main_logo">
+          <img src="/assets/images/Checkarr_logo_transparent.png" class="main_logo">
         </div>
-        
+
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
+        aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-    
+
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li style="width: 20px"></li>
-          <li class="nav-item active" style="margin-top:0px; font-weight: bold;" >
-            <div placement="bottom" ngbTooltip="Fans" class="fan_icon_div" style="margin-top: 8px"> <span style="margin-left: -8px;margin-top: 15px;opacity: 0.8;" class="badge badge-danger">1</span> </div>
-            
+          <li class="nav-item active" style="margin-top:0px; font-weight: bold;">
+            <div placement="bottom" ngbTooltip="Fans" class="fan_icon_div" style="margin-top: 8px">
+              <span style="margin-left: -8px;margin-top: 15px;opacity: 0.8;" class="badge badge-danger">1</span>
+            </div>
+
           </li>
-          <li style="width: 18px" ></li>
-          <li><div placement="bottom" ngbTooltip="Notifications" class="notification_icon_div" style="margin-top: 8px"><span style="margin-left: -8px;margin-top: 15px;opacity: 0.8;" class="badge badge-danger">9</span></div></li>
-         
-          <li style="width: 18px" ></li>
-          <li><div placement="bottom" ngbTooltip="Messages" class="message_icon_div" style="margin-top: 7px"><span style="margin-left: -8px;margin-top: 15px;opacity: 0.8;" class="badge badge-danger">2</span></div></li>
+          <li style="width: 18px"></li>
+          <li>
+            <div placement="bottom" ngbTooltip="Notifications" class="notification_icon_div" style="margin-top: 8px">
+              <span style="margin-left: -8px;margin-top: 15px;opacity: 0.8;" class="badge badge-danger">9</span>
+            </div>
+          </li>
+
+          <li style="width: 18px"></li>
+          <li>
+            <div placement="bottom" ngbTooltip="Messages" class="message_icon_div" style="margin-top: 7px">
+              <span style="margin-left: -8px;margin-top: 15px;opacity: 0.8;" class="badge badge-danger">2</span>
+            </div>
+          </li>
 
           <li style="width: 18px" class="separator"></li>
           <li style="width: 30px"></li>
 
           <div class="input-group">
-              <input type="text" class="form-control" style="border-radius: 25px 0px 0px 25px;" placeholder="Search">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary search_button" style="border-radius: 0px 25px 25px 0px;" type="button"><div class="search_icon_div"></div></button>
-              </div>
+            <input type="text" class="form-control" style="border-radius: 25px 0px 0px 25px;" placeholder="Search">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary search_button" style="border-radius: 0px 25px 25px 0px;" type="button">
+                <div class="search_icon_div"></div>
+              </button>
             </div>
+          </div>
 
-            
-         
-          
+
+
+
 
 
         </ul>
 
-          <button class="btn btn-link navbar_username" style="border-color: transparent;margin-right: 10px">Home</button>
+        <button class="btn btn-link navbar_username" style="border-color: transparent;margin-right: 10px">Home</button>
 
-          <div ngbDropdown class="d-inline-block">
-            <button class="btn btn-link navbar_username" id="nameDropdown" ngbDropdownToggle>Nouman Arshad</button>
-            <div ngbDropdownMenu class="name_dropdown_menu" aria-labelledby="nameDropdown">
-              <button class="dropdown-item">Profile</button>
-              <button class="dropdown-item">Settings and privacy</button>
-              <button class="dropdown-item" (click)="logout()" >Log out</button>
-            </div>
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-link navbar_username" id="nameDropdown" ngbDropdownToggle>Nouman Arshad</button>
+          <div ngbDropdownMenu class="name_dropdown_menu" aria-labelledby="nameDropdown">
+            <button class="dropdown-item">Profile</button>
+            <button class="dropdown-item">Settings and privacy</button>
+            <button class="dropdown-item" (click)="logout()">Log out</button>
           </div>
-       
+        </div>
+
         <div placement="bottom" ngbTooltip="Profile" class="navbar_profile_image_div"></div>
-        
-        
+
+
 
       </div>
-    </nav>    
-</div>
+    </nav>
+  </div>
 
 
-<div style="width: 100%; height: 80px"></div>
-<!-- CHANGE THIS *ngIf="!this.accountService.isUserAccountActivated" -->
+  <div style="width: 100%; height: 80px"></div>
+  <!-- CHANGE THIS *ngIf="!this.accountService.isUserAccountActivated" -->
 
-<div *ngIf="!this.accountService.isUserAccountActivated && !this.pageLoading" style="margin-top:-20px;position: fixed;width: 1344px; text-align: center" class="alert alert-warning">
-    Unverified accounts are automatically removed after some duration. Please <strong><a (click)="accountVerificationClick(accountVerificationModal)" style="text-decoration: none;cursor: pointer;"><u>verify</u></a></strong> your account to get best out of our services
-</div>
-<div *ngIf="!this.accountService.isUserAccountActivated" style="width: 100%; height: 50px;"></div>
-
-
-<div style="margin-top: -10px; width: 80%;">
-  <app-left-main class="leftpane"></app-left-main>
-  <app-middle-main class="middlepane"></app-middle-main>
-  <app-right-main class="rightpane"></app-right-main>
-</div>
-
+  <div *ngIf="!this.accountService.isUserAccountActivated" style="margin-top:-20px;position: fixed;width: 1344px; text-align: center"
+    class="alert alert-warning">
+    Unverified accounts are automatically removed after some duration. Please
+    <strong>
+      <a (click)="accountVerificationClick(accountVerificationModal)" style="text-decoration: none;cursor: pointer;">
+        <u>verify</u>
+      </a>
+    </strong> your account to get best out of our services
+  </div>
+  <div *ngIf="!this.accountService.isUserAccountActivated" style="width: 100%; height: 50px;"></div>
 
 
+  <div style="margin-top: -10px; width: 80%;">
+    <app-left-main class="leftpane"></app-left-main>
+    <app-middle-main class="middlepane"></app-middle-main>
+    <app-right-main class="rightpane"></app-right-main>
+  </div>
 
-<!-- Modal Account Verification -->
-<ng-template id="#accountVerificationModal" #accountVerificationModal let-dc = "d('Cross click')" let-c="close" let-d="dismiss">
+
+
+
+  <!-- Modal Account Verification -->
+  <ng-template id="#accountVerificationModal" #accountVerificationModal let-c="close" let-d="dismiss">
     <div class="modal-header">
       <h5 class="modal-title" id="verificationModalLongTitle">Account Verification</h5>
-      <button type="button" class="close" aria-label="Close" (click)="dc">
+      
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <ngb-progressbar [hidden]="!verificationModalProgressBar" type="danger" [value]="100" [striped]="true" [animated]="true" height="6px"></ngb-progressbar>
+    <ngb-progressbar [hidden]="!verificationModalProgressBar" type="danger" [value]="100" [striped]="true" [animated]="true"
+      height="6px"></ngb-progressbar>
     <div *ngIf="accountVerificationError" style="width: 100%;" class="alert alert-danger alert-dismissible">
-        {{accountVerificationErrorMessage}}
+      {{accountVerificationErrorMessage}}
     </div>
     <div class="modal-body">
-      
-        <p> Verification email has been sent to <b>{{this.accountService.USER_EMAIL}}</b></p>
-          
 
-        
-          <div class="input-group">
-              
-              <div class="col-xs-4">
-                <input class="form-control"
-              type="text" 
-              placeholder="Verification code"
-              ngModel
-              name="verficationCode"
-              required
-              #verificationCodeControl="ngModel"
-              [ngClass]="{'invalid-form-control': (verificationCodeControl.dirty && !verificationCodeControl.valid)}"
-              style="font-size: 18px"
-              >
-            </div>
-              <span class="input-group-btn">
-                  <button (click)="resendActivationMail()" type="button" [disabled]="resendActivationMailCountdown/1000 > 0 || verificationModalProgressBar" style="margin-left: 10px" class="btn btn-info">{{resendButtonText}}</button>
-              </span>
-          </div>
+      <p> Verification email has been sent to
+        <b>{{this.accountService.USER_EMAIL}}</b>
+      </p>
 
 
-        
 
+      <div class="input-group">
 
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-danger" [disabled]="!verificationCodeControl.valid || verificationModalProgressBar" (click)="verifyActivationCode(verificationCodeControl.value)">Verify</button>
+        <div class="col-xs-4">
+          <input class="form-control" type="text" placeholder="Verification code" ngModel name="verficationCode" required #verificationCodeControl="ngModel"
+            [ngClass]="{'invalid-form-control': (verificationCodeControl.dirty && !verificationCodeControl.valid)}" style="font-size: 18px">
         </div>
+        <span class="input-group-btn">
+          <button (click)="resendActivationMail()" type="button" [disabled]="resendActivationMailCountdown/1000 > 0 || verificationModalProgressBar"
+            style="margin-left: 10px" class="btn btn-info">{{resendButtonText}}</button>
+        </span>
+      </div>
+
+
+
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" [disabled]="!verificationCodeControl.valid || verificationModalProgressBar"
+        (click)="verifyActivationCode(verificationCodeControl.value)">Verify</button>
+    </div>
   </ng-template>
 
+</div>

@@ -48,6 +48,11 @@ export class StartComponent implements OnInit {
 
   ngOnInit() {
     this.pageLoading = false; // remove
+
+    if (!this.accountService.loginStatus) {
+      this.accountService.authorize('start');
+    }
+
     /*
     var localStorageObj = localStorage.getItem('currentUser');
     if(localStorageObj == null){
@@ -112,10 +117,12 @@ export class StartComponent implements OnInit {
         const activation_status = user.activation_status;
         const user_email = user.user_email;
         const access_token = user.token;
+        const refresh_token = user.refresh_token;
         const user_id = user.user_id;
         console.log('login success');
         console.log(user_email);
         console.log(access_token);
+        console.log(refresh_token);
         console.log(user_id);
         if (activation_status == 'T') {
           this.accountService.isUserAccountActivated = true;
@@ -125,6 +132,7 @@ export class StartComponent implements OnInit {
         this.accountService.USER_EMAIL = user_email;
         this.accountService.USER_ID = user_id;
         this.tokenService.setAccessToken(access_token, user_email);
+        this.tokenService.setRefreshToken(refresh_token, user_email);
         // this.tokenService.setRefreshToken(data['refresh_token'], loginForm.value.email);
         // this.router.navigate(['']);
       },

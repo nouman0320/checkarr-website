@@ -24,8 +24,10 @@ export class RegisterComponent implements OnInit {
     public accountService: AccountService,
     private mediaService: MediaService
   ) {
-    if (this.accountService.loginStatus) {
+    if (this.accountService.loginStatus == true) {
       this.router.navigate(['']);
+    } else {
+      this.accountService.authorize('register');
     }
   }
 

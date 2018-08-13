@@ -23,7 +23,7 @@ export class RecoveryPasswordChangeComponent implements OnInit {
   error: String = '';
   // pageLoading: Boolean = false;
 
-  constructor(private tokenService: TokenService, private router: Router, private accountService: AccountService) {
+  constructor(private tokenService: TokenService, private router: Router, public accountService: AccountService) {
     const isResetTokenExist = this.tokenService.doResetTokenExist();
     if (isResetTokenExist) {
 

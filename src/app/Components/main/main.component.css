@@ -43,7 +43,7 @@
     padding-top: 0px;
     padding-right: 0px;
     height: 60px;
-
+    z-index: 5;
     border-bottom: 5px solid #ff1017;
     /*background-color: rgb(65, 11, 88);*/
     background-color: white;

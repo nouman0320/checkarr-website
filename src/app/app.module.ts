@@ -31,6 +31,7 @@ import { RightMainComponent } from './Components/main/right-main/right-main.comp
 import { DefaultPostComponent } from './Components/main/middle-main/posts/default-post/default-post.component';
 import { CreatePostComponent } from './Components/main/middle-main/posts/create-post/create-post.component';
 import { ErrorInterceptorProvider } from './Services/error.interceptor';
+import { LoadingComponent } from './Components/helper-components/loading/loading.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ErrorInterceptorProvider } from './Services/error.interceptor';
     MiddleMainComponent,
     RightMainComponent,
     DefaultPostComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

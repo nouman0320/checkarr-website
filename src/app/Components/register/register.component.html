@@ -1,4 +1,6 @@
-<div>
+<app-loading></app-loading>
+
+<div *ngIf="this.accountService.isTokenValidationComplete && !this.accountService.networkProblem">
 
     
 
