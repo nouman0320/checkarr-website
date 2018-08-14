@@ -64,7 +64,7 @@
 }
 
 .love:hover{
-    background-color: #ededed;
+    background-color: #fafafa;
 }
 .love_icon{
     background-image: url('/assets/images/main/love.png');
@@ -88,7 +88,7 @@
     cursor: pointer;
 }
 .comment:hover{
-    background-color: #ededed;
+    background-color: #fafafa;
 }
 .suggest{
     float: right;
@@ -103,5 +103,5 @@
     cursor: pointer;
 }
 .suggest:hover{
-    background-color: #ededed;
+    background-color: #fafafa;
 }

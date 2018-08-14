@@ -34,6 +34,7 @@ import { CreatePostComponent } from './Components/main/middle-main/posts/create-
 import { ErrorInterceptorProvider } from './Services/error.interceptor';
 import { LoadingComponent } from './Components/helper-components/loading/loading.component';
 import { AlertifyService } from './Services/alertify.service';
+import { AuthGuard } from './Guard/auth.guard';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { AlertifyService } from './Services/alertify.service';
     TokenService,
     MediaService,
     ErrorInterceptorProvider,
-    AlertifyService
+    AlertifyService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

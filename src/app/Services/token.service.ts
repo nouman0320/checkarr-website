@@ -18,12 +18,12 @@ export class TokenService {
     return this.webService.isTokenValid(jsonStr);
   }
 
-  setAccessToken(newKey: String, email: String) {
-    localStorage.setItem('currentUser', JSON.stringify({AccessToken: newKey, Email: email}));
+  setAccessToken(newKey: String, user_id: Number) {
+    localStorage.setItem('currentUser', JSON.stringify({AccessToken: newKey, user_id: user_id}));
   }
 
-  setRefreshToken(refreshToken: String, email: String) {
-    localStorage.setItem('currentUserRefreshInfo', JSON.stringify({RefreshToken: refreshToken, Email: email}));
+  setRefreshToken(refreshToken: String, user_id: Number) {
+    localStorage.setItem('currentUserRefreshInfo', JSON.stringify({RefreshToken: refreshToken, user_id: user_id}));
   }
 
   clearAllTokens() {

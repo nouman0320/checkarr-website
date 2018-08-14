@@ -1,1 +1,5 @@
+
+<div class="card">
 <div class="create_post" *ngIf="this.accountService.showComposePost" [@expandCollapseDetails]> this will contain compose post</div>
+</div>
+<div style="height: 10px; width: 100%;" [hidden] ="!this.accountService.showComposePost"></div>

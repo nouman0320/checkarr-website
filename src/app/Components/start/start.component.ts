@@ -52,9 +52,7 @@ export class StartComponent implements OnInit {
   ngOnInit() {
     this.pageLoading = false; // remove
 
-    if (!this.accountService.loginStatus) {
-      this.accountService.authorize('start');
-    }
+
   }
 
   onLoginTry(loginForm: NgForm) {
@@ -87,8 +85,8 @@ export class StartComponent implements OnInit {
         }
         this.accountService.USER_EMAIL = user_email;
         this.accountService.USER_ID = user_id;
-        this.tokenService.setAccessToken(access_token, user_email);
-        this.tokenService.setRefreshToken(refresh_token, user_email);
+        this.tokenService.setAccessToken(access_token, user_id);
+        this.tokenService.setRefreshToken(refresh_token, user_id);
         // this.tokenService.setRefreshToken(data['refresh_token'], loginForm.value.email);
         // this.router.navigate(['']);
       },

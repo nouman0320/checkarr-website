@@ -26,11 +26,6 @@ export class RegisterComponent implements OnInit {
     private mediaService: MediaService,
     private alertifyService: AlertifyService
   ) {
-    if (this.accountService.loginStatus == true) {
-      this.router.navigate(['']);
-    } else {
-      this.accountService.authorize('register');
-    }
   }
 
   ngOnInit() {}

@@ -8,16 +8,17 @@ import { TermsAndPolicyComponent } from './Components/terms-and-policy/terms-and
 import { RecoveryPasswordChangeComponent } from './Components/start/recovery-password-change/recovery-password-change.component';
 import { RedirectRecoveryComponent } from './Components/redirect-components/redirect-recovery/redirect-recovery.component';
 import { RedirectActivationComponent } from './Components/redirect-components/redirect-activation/redirect-activation.component';
+import { AuthGuard } from './Guard/auth.guard';
 
 const APP_ROUTES: Routes = [
 
-    {   path: '', component: MainComponent   },
-    {   path: 'welcome', component: StartComponent  },
+    {   path: '', component: MainComponent,  canActivate: [AuthGuard]},
+    {   path: 'welcome', component: StartComponent  , canActivate: [AuthGuard]},
     {   path: 'login', component: LoginComponent   },
-    {   path: 'register', component: RegisterComponent   },
+    {   path: 'register', component: RegisterComponent , canActivate: [AuthGuard]},
     {   path: 'terms-and-policy', component: TermsAndPolicyComponent },
     {   path: 'password-change', component: RecoveryPasswordChangeComponent },
-    {   path: 'redirect/recovery/:recoveryToken/:recoveryEmail/:recoveryCode' , component: RedirectRecoveryComponent },
+    {   path: 'redirect/recovery/:recoveryToken/:recoveryEmail/:recoveryCode' , component: RedirectRecoveryComponent},
     {   path: 'redirect/activation/:activationToken/:userId/:activationCode' , component: RedirectActivationComponent },
     {   path: '**', component: NotFoundComponent    }
 ];

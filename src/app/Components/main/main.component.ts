@@ -55,10 +55,6 @@ export class MainComponent implements OnInit {
     if (this.testing) {
       this.pageLoading = false;
       console.log('** RUNNING IN TESTING MODE');
-    } else {
-      if (!this.accountService.loginStatus) {
-        this.accountService.authorize('main');
-      }
     }
 
 

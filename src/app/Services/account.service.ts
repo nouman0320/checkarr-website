@@ -29,16 +29,25 @@ export class AccountService {
   constructor(private webService: WebService, private tokenService: TokenService, private router: Router) {}
 
   isTokenExpired() {
+    console.log('isTokenExpire method start');
     const localStorageObj = localStorage.getItem('currentUser');
-
+    console.log('test');
     var expiry = true;
 
     if (localStorageObj != null) {
+      console.log('test');
       const currentUser = JSON.parse(localStorageObj);
       const access_token = currentUser.AccessToken;
-      expiry = this.jwtHelper.isTokenExpired(access_token);
+      console.log('test');
+      try {
+        expiry = this.jwtHelper.isTokenExpired(access_token);
+      } catch {
+        expiry = true;
+      }
+      console.log(expiry);
+      console.log('test');
     }
-
+    console.log('isTokenExpire method finish');
     return expiry;
   }
 
@@ -51,8 +60,8 @@ export class AccountService {
       // no refresh details present in browser
       this.isTokenValidationComplete = true;
       this.tokenService.clearAllTokens();
-      if (componentName == 'register') {
-      } else if (componentName == 'start' ) {
+      if (componentName == 'RegisterComponent') {
+      } else if (componentName == 'StartComponent' ) {
       } else {
         this.router.navigate(['/welcome']);
       }
@@ -61,12 +70,21 @@ export class AccountService {
 
     const currentUserRefreshInfo = JSON.parse(localStorageObjForRefreshToken);
     const REFRESH_TOKEN = currentUserRefreshInfo.RefreshToken;
-    const REFRESH_EMAIL = currentUserRefreshInfo.Email;
+    const user_id = currentUserRefreshInfo.user_id;
 
-    if (this.jwtHelper.isTokenExpired(REFRESH_TOKEN)) {
+
+    var expiry = true;
+
+    try {
+      expiry = this.jwtHelper.isTokenExpired(REFRESH_TOKEN);
+    } catch {
+      expiry = true;
+    }
+
+    if (expiry) {
         this.tokenService.clearAllTokens();
-        if (componentName == 'register') {
-        } else if (componentName == 'start' ) {
+        if (componentName == 'RegisterComponent') {
+        } else if (componentName == 'StartComponent' ) {
         } else {
          this.router.navigate(['/welcome']);
         }
@@ -77,7 +95,7 @@ export class AccountService {
 
     const jsonObj = {
       'refresh_token': REFRESH_TOKEN,
-      'email': REFRESH_EMAIL
+      'user_id': user_id
     };
 
     this.tokenService.refreshAccessToken(jsonObj)
@@ -90,17 +108,17 @@ export class AccountService {
         console.log('NEW REFRESH TOKEN: ' + new_refresh_token);
         console.log('NEW ACCESS TOKEN: ' + new_access_token);
 
-        const EMAIL = data.user_email;
+        const user_id = data.user_id;
 
-        this.tokenService.setRefreshToken(new_refresh_token, EMAIL);
-        this.tokenService.setAccessToken(new_access_token, EMAIL);
+        this.tokenService.setRefreshToken(new_refresh_token, user_id);
+        this.tokenService.setAccessToken(new_access_token, user_id);
 
         this.isTokenValidationComplete = true;
         this.networkProblem = false;
 
         this.setSessionDetails(data);
 
-        if (componentName == 'start' || componentName == 'register') {
+        if (componentName == 'StartComponent' || componentName == 'RegisterComponent') {
           this.router.navigate(['']);
         }
 
@@ -112,8 +130,8 @@ export class AccountService {
           // refresh token is not valid
           this.tokenService.clearAllTokens();
 
-          if (componentName == 'register') {
-          } else if (componentName == 'start' ) {
+          if (componentName == 'RegisterComponent') {
+          } else if (componentName == 'StartComponent' ) {
           } else {
             this.router.navigate(['/welcome']);
           }
@@ -130,6 +148,9 @@ export class AccountService {
   }
 
   authorize (componentName: String) {
+
+    console.log("authourize");
+
     this.isTokenValidationComplete = false;
 
     if (this.isTokenExpired()) {
@@ -142,8 +163,8 @@ export class AccountService {
     if (localStorageObj == null) {
       // no user details present in browser
       this.isTokenValidationComplete = true;
-      if (componentName == 'register') {
-      } else if (componentName == 'start' ) {
+      if (componentName == 'RegisterComponent') {
+      } else if (componentName == 'StartComponent' ) {
       } else {
         this.router.navigate(['/welcome']);
       }
@@ -153,11 +174,11 @@ export class AccountService {
 
     const currentUser = JSON.parse(localStorageObj);
     const token = currentUser.AccessToken;
-    const email = currentUser.Email;
+    const user_id = currentUser.user_id;
     // console.log(token);
     const jsonStr = {
       'AccessToken': token,
-      'Email': email
+      'user_id': user_id
     };
     this.tokenService.verifyAccessToken(jsonStr)
     .subscribe(
@@ -172,7 +193,7 @@ export class AccountService {
         this.networkProblem = false;
         this.setSessionDetails(data);
 
-        if (componentName == 'start' || componentName == 'register') {
+        if (componentName == 'StartComponent' || componentName == 'RegisterComponent') {
           this.router.navigate(['']);
         }
         console.log('Access token is valid');
@@ -189,8 +210,8 @@ export class AccountService {
         } else if (error == 'Unauthorized') {
           // token is valid but stored email is not valid
           this.tokenService.clearAllTokens();
-          if (componentName == 'register') {
-          } else if (componentName == 'start' ) {
+          if (componentName == 'RegisterComponent') {
+          } else if (componentName == 'StartComponent' ) {
           } else {
             this.router.navigate(['/welcome']);
           }
