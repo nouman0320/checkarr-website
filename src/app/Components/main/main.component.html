@@ -96,7 +96,7 @@
 
 
 
-        <div placement="bottom" ngbTooltip="Profile" class="navbar_profile_image_div"></div>
+        <img placement="bottom" ngbTooltip="Profile" [src]="this.accountService.dp_url" onError="this.src='/assets/images/default-profile.jpg';" class="navbar_profile_image_div">
 
 
 

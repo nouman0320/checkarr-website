@@ -18,6 +18,8 @@ export class AccountService {
   USER_ID: String = null;
   USER_EMAIL: String = null;
 
+  dp_url: string = "";
+
   public showComposePost: Boolean = false;
 
 
@@ -238,6 +240,7 @@ export class AccountService {
     this.USER_EMAIL = null;
     this.tokenService.clearAllTokens();
     this.isUserAccountActivated = false;
+    this.dp_url = "";
   }
 
  setSessionDetails(object: any) {
@@ -245,10 +248,12 @@ export class AccountService {
   this.isUserAccountActivated = object.account_activated;
   this.USER_ID = object.user_id;
   this.USER_EMAIL = object.user_email;
+  this.dp_url = object.dp_url;
   console.log('== SET SESSION DETAILS ==');
   console.log('isUserAccountActivated ' + this.isUserAccountActivated);
   console.log('USER_ID ' + this.USER_ID);
   console.log('USER_EMAIL ' + this.USER_EMAIL);
+  console.log('DP_URL ' + this.dp_url);
   console.log('======');
 
  }

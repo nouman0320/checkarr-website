@@ -134,9 +134,9 @@
                 </h4>
                 <br/>
 
-                    <label class="button_image_select" style="padding-left: 17px; padding-top: 3px;">
-                        Select <input style="display: none;" accept="image/*" type="file" (change)="fileChangeEvent($event)" />
-                    </label>
+                    <label class="btn btn-success" style="margin-left: 110px;">
+                        Select Profile Picture <input style="display: none;" accept="image/*" type="file" (change)="fileChangeEvent($event)" />
+                    </label> <i *ngIf="this.imageDirty && !this.imageError" class="fa fa-check" style="font-size: 25px;color:green;padding-left: 15px"></i> <i *ngIf="this.imageDirty && this.imageError" class="fa fa-times" style="font-size: 25px;color:red;padding-left: 15px"></i>  
 
                 
                 <br/>
@@ -149,7 +149,7 @@
                     [imageChangedEvent]="imageChangedEvent"
                     [maintainAspectRatio]="true"
                     [aspectRatio]="4 / 4"
-                    [resizeToWidth]="1000"
+                    [resizeToWidth]="200"
                     format="png"
                     (imageCropped)="imageCropped($event)"
                     (imageLoaded)="imageLoaded()"
@@ -157,7 +157,7 @@
 
                     style="position:absolute;border: 2px dashed #800209; min-width: 250px; min-height: 250px; width: 45%; height:250px; margin-left: 10%; margin-top: 15px"
                 ></image-cropper>
-                <h3 [hidden]="(imageChangedEvent != '')" style="position:absolute; margin-top: 120px;margin-left: 24%; color:grey;">SELECT IMAGE</h3>
+                <h3 [hidden]="(imageChangedEvent != '')" style="position:absolute; margin-top: 120px;margin-left: 30%; color:grey;font-size: 40px"><i class="fa fa-image"></i></h3>
                 <br/>
                 <br/>
                 <br/>
@@ -168,10 +168,10 @@
                 <br/>
                 
 
-                <div style="margin-top:40px;margin-right: 10%;float:right;right:0;bottom: 0">
+                <div style="margin-top:40px;margin-right: -120px;float:right;right:0;bottom: 0">
                     
-                    <a style="color:grey; padding-right: 5px; cursor:pointer;" onclick="alert('test')"><u>I will add it later</u></a>
-                    <button class="button_small" (click)="on_dp_select()">Next</button>        
+                    <a  class="btn btn-link" style="color:grey; padding-right: 15px; cursor:pointer;" onclick="alert('test')"><u>I will add it later</u></a>
+                    <button [disabled]="!(this.imageDirty && !this.imageError) || this.mediaService.uploading" class="btn button_small" (click)="on_dp_select()">Upload</button>        
                 </div>
                 
                 <br/>
@@ -180,7 +180,7 @@
                 <br/>
                 
                 
-                <div style="width: 100%;text-align: right;margin-left: -10%;">
+                <div style="text-align: right;margin-top:15px;margin-right: -235px;float:right;right:0;bottom: 0">
                         <p style="font-size: 10px">Made in Pakistan - Checkarr © 2018</p>
                     </div>
             </div>
@@ -191,7 +191,7 @@
 
     <div class="loading_screen" [hidden]="!registerTry">
         <div class="loading_box">
-          <h5 style="margin-top: 15%;">Setting up your new account...</h5>
+          <h5 style="margin-top: 15%;">{{RegisterMessage}}</h5>
           <div class="loading_icon"></div>
           <h4>Please Wait</h4>
         </div>

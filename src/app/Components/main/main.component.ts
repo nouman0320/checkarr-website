@@ -184,6 +184,7 @@ export class MainComponent implements OnInit {
           this.accountService.isUserAccountActivated = true;
           this.accountVerificationModal.close();
           this.tokenService.removeActivationToken();
+          this.alertifyService.success('Your account has been verified');
       }, error => {
         // alert("ERROR");
           this.accountVerificationErrorMessage = error;
