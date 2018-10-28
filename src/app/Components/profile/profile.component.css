@@ -1,0 +1,252 @@
+.navbar_item_color{
+    color: #776060;
+    cursor: pointer;
+}
+.navbar_item_color:hover{
+
+    color: #3b0104;
+    text-decoration: none;
+}
+
+.navbar {
+    min-height: 30px;
+  }
+  
+  .navbar-brand {
+    padding: 0 15px;
+    height: 40px;
+    line-height: 50px;
+    
+  
+  }
+  
+  .navbar-toggle {
+    /* (80px - button height 34px) / 2 = 23px */
+    margin-top: 23px;
+    padding: 9px 10px !important;
+    
+  }
+  
+  @media (min-width: 768px) {
+    .navbar-nav > li > a {
+      /* (80px - line-height of 27px) / 2 = 26.5px */
+      padding-top: 18.5px;
+      padding-bottom: 18.5px;
+      line-height: 20px;
+      
+    }
+  }
+
+
+.welcome_nav{
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    height: 60px;
+    z-index: 5;
+    border-bottom: 5px solid #ff1017;
+    /*background-color: rgb(65, 11, 88);*/
+    background-color: white;
+    box-shadow: 0 16px 26px 0 rgba(0, 0, 0, 0.2), 0 6px 5px 0 rgba(0, 0, 0, 0.19);
+    
+}
+
+.welcome_nav_elements{
+    color: #F1C9FA;
+}
+.company_title{
+    color: #F1C9FA
+}
+.company_title:hover{
+    color: #F1C9FA
+}
+
+.logo_crop{
+    width: 200px;
+    height: 55px;
+    margin-top: -2px;
+    margin-left: 20px;
+    overflow: hidden;
+}
+
+.main_logo{
+  display: block;
+  margin-top: 0%;
+  margin-left: 0%;
+  max-width:200px;
+  max-height:295px;
+  width: auto;
+  height: auto;
+  clip: rect(0px,0px,0px,0px);
+}
+
+.navbar_profile_image_div{
+    background-image: url('/assets/images/default-profile.jpg');
+    background-size: 100%;
+    width: 55px;
+    height: 55px;
+    border-left: 1px solid gray;
+    cursor: pointer;
+    
+}
+
+.navbar_username{
+    text-decoration: none;
+    color: #776060;
+    cursor: pointer;
+    border-left: 1px solid #eea0a2;
+    border-radius: 0px;
+}
+.navbar_username:hover{
+    color: #3b0104;
+}
+
+.name_dropdown_menu{
+    margin-top: 12px;
+    border-color:1px solid rgba(0, 0, 0, .07);
+    box-shadow: 2px 2px 3px #aaaaaa;
+
+
+    
+}
+/*dropdown arrow*/
+.name_dropdown_menu::after {
+    position: absolute;
+    top: -6px;
+    left: 160px;
+    display: inline-block;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid white;
+    border-left: 8px solid transparent;
+    content: '';
+  }
+
+
+  .fan_icon_div{
+    background-image: url('/assets/images/main/fan_icon.png');
+    background-size: 100%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
+
+  .notification_icon_div{
+    background-image: url('/assets/images/main/notification.png');
+    background-size: 100%;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+  }
+ 
+  .message_icon_div{
+    background-image: url('/assets/images/main/paper-plane.png');
+    background-size: 100%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
+
+  .search_icon_div{
+    background-image: url('/assets/images/main/search.png');
+    background-size: 100%;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+  .separator{
+    border-right: 1px solid #eea0a2;
+  }
+
+  input[type=text]:focus:not([readonly]) + label {
+    color: #ff101865; 
+}
+
+input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #ff101865;
+    box-shadow: 0 1px 0 0 #ff101865; 
+}
+
+  .search_button{
+    margin-left: -35px;
+    border-color: #ced4da;
+    height: 15px;
+  }
+
+.div_left {
+position: fixed;    
+left: 0;
+width: 19.5%;
+height: 100%;
+display: inline-block;
+background-color: #444444;
+}
+
+
+
+.profile_image_div{
+    position: absolute;
+    background-image: url('/assets/images/default-profile.jpg');
+    background-size: 100%;
+    margin-top: 60px;
+    width: 100%;
+    height: 200px;
+    cursor: pointer;
+    border-bottom: 2px solid #6b6b6b;
+    border-right: 1px solid #6b6b6b;
+    object-fit: cover;
+    
+}
+
+.profile_middle_buttons{
+    background-color: rgb(250, 248, 248);
+    width: 100%;
+    margin-bottom: 10px;
+    height:50px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, .07);
+    
+}
+
+
+
+.ul_class {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(250, 248, 248);
+    height:100%
+}
+
+.li_class {
+    float: left;
+    border-right: 1px solid rgb(230, 230, 230);
+}
+
+.li_class_a {
+    display: block;
+    color: #444444;
+    text-align: center;
+    padding: 14px 25px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Change the link color to #111 (black) on hover */
+.li_class_a:hover {
+    background-color: rgb(236, 236, 236);
+}
+
+
+.li_class_a_selected {
+    display: block;
+    background-color:#6d6d6d;
+    text-align: center;
+    padding: 14px 25px;
+    text-decoration: none;
+    font-weight: bold;
+    color:white;
+    cursor: pointer;
+}

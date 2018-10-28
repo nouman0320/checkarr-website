@@ -35,6 +35,9 @@ import { ErrorInterceptorProvider } from './Services/error.interceptor';
 import { LoadingComponent } from './Components/helper-components/loading/loading.component';
 import { AlertifyService } from './Services/alertify.service';
 import { AuthGuard } from './Guard/auth.guard';
+import { ProfileComponent } from './Components/profile/profile.component';
+import { LoadingPostComponent } from './Components/main/middle-main/posts/loading-post/loading-post.component';
+import { TrendNotificationCardComponent } from './Components/profile/trend-notification-card/trend-notification-card.component';
 
 
 @NgModule({
@@ -54,7 +57,10 @@ import { AuthGuard } from './Guard/auth.guard';
     RightMainComponent,
     DefaultPostComponent,
     CreatePostComponent,
-    LoadingComponent
+    LoadingComponent,
+    ProfileComponent,
+    LoadingPostComponent,
+    TrendNotificationCardComponent
   ],
   imports: [
     BrowserModule,

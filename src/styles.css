@@ -1,6 +1,6 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~bootswatch/dist/materia/bootstrap.min.css';
-@import '~font-awesome/css/font-awesome.min.css';
+@import '~font-awesome/css/font-awesome.css';
 @import '~alertifyjs/build/css/alertify.min.css';
 @import '~alertifyjs/build/css/themes/bootstrap.min.css';
 
@@ -63,6 +63,19 @@
    margin: auto;
 }
 
+
+.loading_icon_2{
+    background-image: url('/assets/icons/loading.gif');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 25px;
+    height: 25px;
+    margin: auto;
+ }
+
+
+
 .loader_msg{
     margin-left: auto;
     margin-right: auto;
@@ -91,12 +104,14 @@
     z-index: 10;
     position: absolute; top: 0; left: 0; height: 100%; width: 100%;
     background-color: white;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .noInternetImage{
     margin-left: auto;
     margin-right: auto;
-    margin-top: 7%;
+    margin-top: 3%;
     display: block;
     
     width: 100px;

@@ -12,7 +12,7 @@
 }
 
 .post{
-    background-color: white;
+    background-color: rgb(214, 214, 214);
     border-radius: 2px;
     margin-bottom: 10px;
     padding-top: 10px;
@@ -105,3 +105,19 @@
 .suggest:hover{
     background-color: #fafafa;
 }
+
+.avatar {
+    position: relative;
+    float: left;
+    width: 2rem;
+    border-radius: 50%;
+  }
+
+  .avatar {
+    position: relative;
+    float: left;
+    margin-right:10px;
+    width: 2rem;
+    border-radius: 50%;
+    border:1px solid rgb(212, 212, 212);
+  }

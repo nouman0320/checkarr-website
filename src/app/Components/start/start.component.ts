@@ -37,7 +37,7 @@ export class StartComponent implements OnInit {
 
   modalProgressBar: Boolean = false;
 
-  photo_credit: String = 'Badshahi Mosque, Lahore, Pakistan (@hussainibrahim_hi)';
+  photo_credit: String = 'Photo by @rawpixel';
 
   constructor(public router: Router, private modalService: NgbModal,
     public accountService: AccountService, public tokenService: TokenService,

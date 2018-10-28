@@ -1,0 +1,21 @@
+.not_found_button {
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+    padding: 12px 30px;
+    font-weight: 500;
+    background-color: #f99827;
+    color: #fff;
+    border-radius: 40px;
+    text-decoration: none;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+    cursor: pointer;
+  }
+  
+  .not_found_button:hover {
+    opacity: 0.8;
+  }
+
+  *{
+    font-family: 'Montserrat', sans-serif;
+  }

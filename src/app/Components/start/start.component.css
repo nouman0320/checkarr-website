@@ -61,6 +61,7 @@
 
 
 .main_div{
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) );
     background-image: url('/assets/images/welcome_page/background_start.jpg');
     background-position: center center;
     background-repeat: no-repeat;

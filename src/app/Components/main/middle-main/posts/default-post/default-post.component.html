@@ -26,13 +26,14 @@
       <li class="list-group-item">
         <div style="margin-top: 10px">
             <div class="comment"> <i class="fa fa-angle-double-up "></i> Trend</div>
-            <div class="comment">Comment</div>
+            <div class="comment"><i class="far fa-comment" style="font-size:20px;margin-right:6px;"></i>Comment</div>
             <div class="suggest"><i class="fas fa-broadcast-tower "></i> Suggest</div>
         </div>
       </li>
     </ul>
-    <div class="card-footer text-muted">
-        Nouman Arshad • 2 days ago (Aug 4, 2018)
+    <div class="card-footer" style="padding-top:20px">
+          Nouman Arshad • <i class="far fa-calendar-alt"></i> 2 min • <i class="fas fa-globe"></i> public
+          <img [src]="this.accountService.dp_url" onError="this.src='/assets/images/default-profile.jpg';" style="margin-top:-6px" alt="" class="avatar">  
     </div>
   </div>
 

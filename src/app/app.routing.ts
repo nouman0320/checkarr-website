@@ -9,12 +9,14 @@ import { RecoveryPasswordChangeComponent } from './Components/start/recovery-pas
 import { RedirectRecoveryComponent } from './Components/redirect-components/redirect-recovery/redirect-recovery.component';
 import { RedirectActivationComponent } from './Components/redirect-components/redirect-activation/redirect-activation.component';
 import { AuthGuard } from './Guard/auth.guard';
+import { ProfileComponent } from './Components/profile/profile.component';
 
 const APP_ROUTES: Routes = [
 
     {   path: '', component: MainComponent,  canActivate: [AuthGuard]},
     {   path: 'welcome', component: StartComponent  , canActivate: [AuthGuard]},
     {   path: 'login', component: LoginComponent   },
+    {   path: 'profile/:userID', component: ProfileComponent , canActivate: [AuthGuard]},
     {   path: 'register', component: RegisterComponent , canActivate: [AuthGuard]},
     {   path: 'terms-and-policy', component: TermsAndPolicyComponent },
     {   path: 'password-change', component: RecoveryPasswordChangeComponent },

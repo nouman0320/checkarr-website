@@ -5,11 +5,16 @@
 
 <div [hidden]="!this.accountService.networkProblem" style="z-index: 99;" class="noInternetDiv">
 <img src="/assets/images/Checkarr_logo_transparent.png" class="main_logo" style="margin-left: 30px;margin-top:20px">
-<img src="/assets/images/no-internet.png" class="noInternetImage">
+<img src="/assets/images/emoji.png" class="noInternetImage">
 <div class="noInternetMsgDiv">
-    <h2 class="noInternetMsg">We are unable to connect our services</h2>
-    <p>Either there is some problem is your internet connection or our servers are not responding at the moment</p>
-    <button class="btn btn-primary" onclick="location.reload();">Try again</button>
+    <h2 class="noInternetMsg">Hmm.. we are having trouble connecting you with our awesomeness</h2>
+    <p>Why did this happen?</p>
+    <ul>
+      <li>Our servers are just too busy for our own good.</li>
+      <li>The internet broke.</li>
+      <li>We had a little hiccup.</li>
+    </ul>
+    <a class="not_found_button" onclick="location.reload();">Try again</a>
 </div>
 
 </div>
