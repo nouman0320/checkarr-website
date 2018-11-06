@@ -38,6 +38,8 @@ import { AuthGuard } from './Guard/auth.guard';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { LoadingPostComponent } from './Components/main/middle-main/posts/loading-post/loading-post.component';
 import { TrendNotificationCardComponent } from './Components/profile/trend-notification-card/trend-notification-card.component';
+import { FanCardComponent } from './Components/profile/fan-card/fan-card.component';
+import { LoadingFanCardComponent } from './Components/profile/fan-card/loading-fan-card/loading-fan-card.component';
 
 
 @NgModule({
@@ -60,7 +62,9 @@ import { TrendNotificationCardComponent } from './Components/profile/trend-notif
     LoadingComponent,
     ProfileComponent,
     LoadingPostComponent,
-    TrendNotificationCardComponent
+    TrendNotificationCardComponent,
+    FanCardComponent,
+    LoadingFanCardComponent
   ],
   imports: [
     BrowserModule,

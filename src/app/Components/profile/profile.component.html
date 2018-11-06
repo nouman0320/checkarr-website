@@ -117,8 +117,9 @@
   <div class="card profile_middle_buttons">
 
     <ul class="ul_class">
-      <li class="li_class"><p class="li_class_a_selected" style=" border-top-left-radius: 5px;  border-bottom-left-radius:5px">Feed</p></li>
-      <li class="li_class"><p class="li_class_a">Fans</p></li>
+      <li class="li_class"><p [ngClass]="{'li_class_a_selected': isFeedSelected, 'li_class_a': !isFeedSelected}" (click)="select_category('feed')" style=" border-top-left-radius: 5px;  border-bottom-left-radius:5px">Feed</p></li>
+      <li class="li_class"><p [ngClass]="{'li_class_a_selected': isFanSelected, 'li_class_a': !isFanSelected}" (click)="select_category('fan')">Fans</p></li>
+      <li class="li_class"><p [ngClass]="{'li_class_a_selected': isFollowingSelected, 'li_class_a': !isFollowingSelected}" (click)="select_category('following')">Following</p></li>
       <li class="li_class" style="float:right"><p class="li_class_a" style="font-size:15px"><i class="fa fa-cog"></i></p></li>
     </ul>
 
@@ -127,11 +128,23 @@
   </div>
 
 
+  <div *ngIf="this.isFeedSelected">
+
   <app-default-post></app-default-post>
   <app-default-post></app-default-post>
   <app-default-post></app-default-post>
   <app-default-post></app-default-post>
   <app-default-post></app-default-post>
+
+  </div>
+
+  <div *ngIf="this.isFanSelected">
+    <app-fan-card></app-fan-card>
+    <app-fan-card></app-fan-card>
+    <app-fan-card></app-fan-card>
+    <app-loading-fan-card></app-loading-fan-card>
+  </div>
+
 
 
 

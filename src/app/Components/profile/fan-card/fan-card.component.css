@@ -1,0 +1,94 @@
+.profile_middle_buttons{
+    background-color: rgb(250, 248, 248);
+    width: 100%;
+    margin-bottom: 10px;
+    height:80px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, .07);
+    
+}
+
+
+
+.ul_class {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(250, 248, 248);
+    height:100%
+}
+
+.li_class {
+    float: left;
+    height:100%;
+    vertical-align: middle;
+}
+
+.li_class_detail {
+    float: left;
+    height:100%;
+    vertical-align: middle;
+}
+
+.li_class_a {
+    display: block;
+    color: #444444;
+    text-align: center;
+    padding: 14px 25px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    height: 100%;
+    text-align: center;
+    line-height: 50px;
+    
+}
+
+.button_adjust {
+    display: block;
+    align-content: center;
+    margin-top: 24px;
+    
+}
+
+.li_class_a_detail {
+    display: block;
+    color: #444444;
+    text-align: center;
+    padding: 14px 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    height: 100%;
+    text-align: center;
+    line-height: 50px;
+    
+}
+
+
+
+.li_class_profile_image {
+    display: block;
+    text-align: center;
+    padding: 10px 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color:white;
+    cursor: pointer;
+    padding-left:15px;
+}
+
+.avatar {
+
+}
+.avatar img {
+    width: 60px;
+    height: 60px;
+    max-width: 60px;
+    max-height: 60px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 3px solid rgba(185, 185, 185, 0.5);
+}

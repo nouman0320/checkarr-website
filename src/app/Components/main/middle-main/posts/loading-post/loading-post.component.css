@@ -107,24 +107,3 @@
 }
 
 
-@keyframes placeHolderShimmer{
-    0%{
-        background-position: -468px 0
-    }
-    100%{
-        background-position: 468px 0
-    }
-}
-.linear-background {
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-name: placeHolderShimmer;
-    animation-timing-function: linear;
-    background: #a8a8a8;
-    background: linear-gradient(to right, #e0e0e0 8%, #c5c5c5 18%, #e0e0e0 33%);
-    background-size: 1000px 104px;
-    height: 338px;
-    position: relative;
-    overflow: hidden;
-}
