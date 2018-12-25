@@ -13,9 +13,11 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-    const currentComponentName = next.routeConfig.component.name.toString();
-    this.accountService.authorize(currentComponentName);
+      
+      const currentURL = '/'+next.url.toString();
+      console.log("CURRENT URL: "+currentURL);
+    //const currentComponentName = next.routeConfig.component.name.toString();
+    this.accountService.authorize(currentURL);
     return true;
   }
 }

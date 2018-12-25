@@ -8,7 +8,7 @@ import { AccountService } from '../../../../../Services/account.service';
 })
 export class DefaultPostComponent implements OnInit {
 
-  constructor(private accountService: AccountService) { }
+  constructor(public accountService: AccountService) { }
 
   ngOnInit() {
   }

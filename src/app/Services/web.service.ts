@@ -14,7 +14,8 @@ import { HttpClient, HttpResponse, HttpHeaders } from '../../../node_modules/@an
 export class WebService {
 
   // this is web service....
-  baseURL: String = 'https://localhost:5000/api/';
+  //baseURL: String = 'https://localhost:5000/api/';
+  baseURL: String = 'https://checkarr-api.azurewebsites.net/api/';
 
 
   web_url: String = 'localhost';

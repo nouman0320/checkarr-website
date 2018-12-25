@@ -62,10 +62,13 @@ export class AccountService {
       // no refresh details present in browser
       this.isTokenValidationComplete = true;
       this.tokenService.clearAllTokens();
-      if (componentName == 'RegisterComponent') {
-      } else if (componentName == 'StartComponent' ) {
+      if (componentName == '/register') {
+      } else if (componentName == '/welcome' ) {
       } else {
+        console.log("test "+this.router.url);
         this.router.navigate(['/welcome']);
+        console.log("test after"+this.router.url);
+        console.log('router nAv');
       }
       return;
     }
@@ -85,8 +88,8 @@ export class AccountService {
 
     if (expiry) {
         this.tokenService.clearAllTokens();
-        if (componentName == 'RegisterComponent') {
-        } else if (componentName == 'StartComponent' ) {
+        if (componentName == '/register') {
+        } else if (componentName == '/welcome' ) {
         } else {
          this.router.navigate(['/welcome']);
         }
@@ -120,7 +123,7 @@ export class AccountService {
 
         this.setSessionDetails(data);
 
-        if (componentName == 'StartComponent' || componentName == 'RegisterComponent') {
+        if (componentName == '/welcome' || componentName == '/register') {
           this.router.navigate(['']);
         }
 
@@ -132,8 +135,8 @@ export class AccountService {
           // refresh token is not valid
           this.tokenService.clearAllTokens();
 
-          if (componentName == 'RegisterComponent') {
-          } else if (componentName == 'StartComponent' ) {
+          if (componentName == '/register') {
+          } else if (componentName == '/welcome' ) {
           } else {
             this.router.navigate(['/welcome']);
           }
@@ -151,6 +154,7 @@ export class AccountService {
 
   authorize (componentName: String) {
 
+    
     console.log("authourize");
 
     this.isTokenValidationComplete = false;
@@ -165,8 +169,8 @@ export class AccountService {
     if (localStorageObj == null) {
       // no user details present in browser
       this.isTokenValidationComplete = true;
-      if (componentName == 'RegisterComponent') {
-      } else if (componentName == 'StartComponent' ) {
+      if (componentName == '/register') {
+      } else if (componentName == '/welcome' ) {
       } else {
         this.router.navigate(['/welcome']);
       }
@@ -195,7 +199,7 @@ export class AccountService {
         this.networkProblem = false;
         this.setSessionDetails(data);
 
-        if (componentName == 'StartComponent' || componentName == 'RegisterComponent') {
+        if (componentName == '/welcome' || componentName == '/register') {
           this.router.navigate(['']);
         }
         console.log('Access token is valid');
@@ -212,8 +216,8 @@ export class AccountService {
         } else if (error == 'Unauthorized') {
           // token is valid but stored email is not valid
           this.tokenService.clearAllTokens();
-          if (componentName == 'RegisterComponent') {
-          } else if (componentName == 'StartComponent' ) {
+          if (componentName == '/register') {
+          } else if (componentName == '/welcome' ) {
           } else {
             this.router.navigate(['/welcome']);
           }
@@ -231,6 +235,7 @@ export class AccountService {
         // No errors, route to new page here
       }
     ); // END VERIFY ACCESS TOKEN
+
   }
 
 

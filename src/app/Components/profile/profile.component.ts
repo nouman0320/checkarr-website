@@ -12,7 +12,7 @@ export class ProfileComponent implements OnInit {
   private isFanSelected: Boolean = false;
   private isFollowingSelected: Boolean = false;
 
-  constructor(private accountService: AccountService) {
+  constructor(public accountService: AccountService) {
 
     this.isFeedSelected = true;
 
