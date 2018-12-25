@@ -139,9 +139,9 @@
   </div>
 
   <div *ngIf="this.isFanSelected">
-    <app-fan-card></app-fan-card>
-    <app-fan-card></app-fan-card>
-    <app-fan-card></app-fan-card>
+    <div *ngFor="let fan of userFans">
+        <app-fan-card [fan]="fan"></app-fan-card>
+    </div>
     <app-loading-fan-card></app-loading-fan-card>
   </div>
 

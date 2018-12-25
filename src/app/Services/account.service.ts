@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { WebService } from './web.service';
 
 // tslint:disable-next-line:import-blacklist
-import {Observable} from 'rxjs/Rx';
+import {Observable, BehaviorSubject} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { TokenService } from './token.service';
 import { Router } from '../../../node_modules/@angular/router';
@@ -11,7 +11,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable()
 export class AccountService {
 
-
   loginStatus: Boolean = false;
 
   isUserAccountActivated: Boolean = false;
@@ -19,6 +18,8 @@ export class AccountService {
   USER_EMAIL: String = null;
 
   dp_url: string = "";
+
+  PROFILE_USER_ID = new BehaviorSubject<String>(null);
 
   public showComposePost: Boolean = false;
 
@@ -152,7 +153,7 @@ export class AccountService {
     );
   }
 
-  authorize (componentName: String) {
+  authorize (componentName: String){
 
     
     console.log("authourize");
@@ -236,6 +237,7 @@ export class AccountService {
       }
     ); // END VERIFY ACCESS TOKEN
 
+    console.log("Authorize finised");
   }
 
 
@@ -254,12 +256,15 @@ export class AccountService {
   this.USER_ID = object.user_id;
   this.USER_EMAIL = object.user_email;
   this.dp_url = object.dp_url;
+  this.PROFILE_USER_ID.next(this.USER_ID);
   console.log('== SET SESSION DETAILS ==');
   console.log('isUserAccountActivated ' + this.isUserAccountActivated);
   console.log('USER_ID ' + this.USER_ID);
   console.log('USER_EMAIL ' + this.USER_EMAIL);
   console.log('DP_URL ' + this.dp_url);
   console.log('======');
+
+
 
  }
 
@@ -309,6 +314,18 @@ export class AccountService {
     // alert(this.USER_ID+"\n"+this.USER_EMAIL);
 
     return this.webService.sendActivationMail(jsonStr);
+  }
+
+  getUserFans(id: String): Observable<any>{
+    const localStorageObj = localStorage.getItem('currentUser');
+    
+    var token = "";
+    if(localStorageObj != null)
+    {
+      const currentUser = JSON.parse(localStorageObj);
+      token = currentUser.AccessToken;
+    }
+    return this.webService.getUserFans(id, token);
   }
 
   activate_user_account(activationJson: any, ACTIVATION_CODE: String): Observable<any> {

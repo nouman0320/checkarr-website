@@ -2,15 +2,18 @@
 
   <ul class="ul_class">
     <li class="li_class"><span class="li_class_profile_image" style=" border-top-left-radius: 5px;  border-bottom-left-radius:5px"><div class="avatar">
-      <img alt="" src="http://res.cloudinary.com/checkarr/image/upload/v1535627055/hvc62ahlwsunpdv5vya3.png">
+      <img alt="" [src]="this.fan.photoURL" onError="this.src='/assets/images/default-profile.jpg';">
   </div></span></li>
-    <li class="li_class_detail"><p class="li_class_a_detail" style="font-size:16px">Nouman Arshad <span style="padding-left:8px;font-size: 10px;font-weight: 500;color:rgb(158, 158, 158)">fan since 2018</span></p></li>
+    <li class="li_class_detail"><p class="li_class_a_detail" style="font-size:16px">{{fan.fullName}} </p></li>
 
     
     <li class="li_class" style="float:right"><p class="li_class_a" style="font-size:25px"><i class="fa fa-ellipsis-h"></i></p></li>
-    <li class="li_class" style="float:right"><button class="btn btn-primary btn-sm button_adjust" style="border-radius: 25px" ><i class="fa fa-times" style="padding-right:5px"> </i>Remove</button></li>
+    <li class="li_class" style="float:right"><button class="btn btn-warning btn-sm button_adjust" style="border-radius: 25px" >knock knock</button></li>
   </ul>
 
+  <p style="background:transparent;width:200px;margin-left:90px;margin-top: -30px"><span style="background: transparent;font-size: 10px;font-weight: 500;color:rgb(158, 158, 158)">fan since {{fan.creationTime}}</span></p>
+
  
+  
 
 </div>

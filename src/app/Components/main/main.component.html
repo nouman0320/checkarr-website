@@ -96,7 +96,7 @@
 
 
 
-        <img placement="bottom" (click)="this.router.navigate(['/profile/1'])" ngbTooltip="Profile" [src]="this.accountService.dp_url" onError="this.src='/assets/images/default-profile.jpg';" class="navbar_profile_image_div">
+        <img placement="bottom" (click)="navigateToProfile(accountService.USER_ID)" ngbTooltip="Profile" [src]="this.accountService.dp_url" onError="this.src='/assets/images/default-profile.jpg';" class="navbar_profile_image_div">
 
 
 

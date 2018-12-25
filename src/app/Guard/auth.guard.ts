@@ -18,6 +18,7 @@ export class AuthGuard implements CanActivate {
       console.log("CURRENT URL: "+currentURL);
     //const currentComponentName = next.routeConfig.component.name.toString();
     this.accountService.authorize(currentURL);
+    console.log('canActivate fisnished');
     return true;
   }
 }

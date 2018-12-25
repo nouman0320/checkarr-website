@@ -169,6 +169,12 @@ export class MainComponent implements OnInit {
 
   }
 
+  navigateToProfile(userID: String){
+
+    var path = "/profile/"+userID;
+    this.router.navigate([path]);
+  }
+
 
   verifyActivationCode(activationCode: String) {
 

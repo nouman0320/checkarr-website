@@ -14,8 +14,8 @@ import { HttpClient, HttpResponse, HttpHeaders } from '../../../node_modules/@an
 export class WebService {
 
   // this is web service....
-  //baseURL: String = 'https://localhost:5000/api/';
-  baseURL: String = 'https://checkarr-api.azurewebsites.net/api/';
+  baseURL: String = 'https://localhost:5000/api/';
+  //baseURL: String = 'https://checkarr-api.azurewebsites.net/api/';
 
 
   web_url: String = 'localhost';
@@ -30,6 +30,14 @@ export class WebService {
     });
   }*/
 
+
+  getUserFans(id: String, token: String){
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + token) //Fan/51/fan/find
+    return this.http.get(this.baseURL + 'Fan/' + id + '/fan/find', {
+      headers: headers
+    });
+  }
 
 
   activate_user_account(jsonStr: any) {
