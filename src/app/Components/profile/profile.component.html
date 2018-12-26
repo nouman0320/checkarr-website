@@ -103,18 +103,33 @@
 
 
 <div class="div_left" >
-  <img [src]="this.accountService.dp_url" onError="this.src='/assets/images/default-profile.jpg';" class="profile_image_div">
+  <img [src]="this.userProfileImageUrl" onError="this.src='/assets/images/default-profile.jpg';" class="profile_image_div">
   
+  <div *ngIf="!this.profileLoaded">
+      <p class="linear-background-dark" style="margin-top: 275px;margin-left:10px;width:200px;height: 20px;text-align: left;font-size: 20px;padding-left: 25px; padding-right: 10px;margin-bottom: 1px"></p>
+      <p class="linear-background-dark" style="margin-top:5px;margin-left:10px;width:120px;height: 20px;text-align: left;font-size: 20px;padding-left: 25px; padding-right: 10px;margin-bottom: 1px"></p>  
+  </div>
+
+
+  <div *ngIf="this.profileLoaded">
   <p style="color:white;margin-top: 265px;width:100%;text-align: left;font-size: 20px;padding-left: 25px; padding-right: 10px;margin-bottom: 1px">Nouman Arshad</p>
   <p style="color:rgb(184, 184, 184);width:100%;text-align:left;font-size:12px;padding-left:25px;padding-right:10px;margin-bottom: 1px"><i style="padding-right:6px" class="fa fa-calendar" aria-hidden="true"></i>Joined in 2018</p>
   <p style="color:rgb(184, 184, 184);width:100%;text-align:left;font-size:12px;padding-left:25px;padding-right:10px"><i style="padding-right:6px" class="fa fa-star"></i>Popular among <b>512</b> fans</p>
-  <button class="btn" style="background-color: rgb(190, 3, 28);color:white;margin-left:20px"><i class="fa fa-plus" style="padding-right: 5px"></i>Become Fan</button>
+  <button *ngIf="!this.userSelf" class="btn btn-md" style="background-color: rgb(190, 3, 28);color:white;margin-left:20px"><i class="fa fa-plus" style="padding-right: 5px"></i>Become Fan</button>
+  <button *ngIf="this.userSelf" class="btn btn-default btn-sm" style="margin-left:20px"><i class="fa fa-pencil" style="padding-right: 5px"></i>Edit Profile</button>
+ </div>
+
 </div>
 
 
 <div class="div_middle" style="float:left;background-color: transparent; width: 550px;margin-left:280px;padding-top:80px;">
 
-  <div class="card profile_middle_buttons">
+  <div *ngIf="!this.profileLoaded" class="card profile_middle_buttons linear-background">
+
+        
+  </div>
+
+  <div *ngIf="this.profileLoaded" class="card profile_middle_buttons">
 
     <ul class="ul_class">
       <li class="li_class"><p [ngClass]="{'li_class_a_selected': isFeedSelected, 'li_class_a': !isFeedSelected}" (click)="select_category('feed')" style=" border-top-left-radius: 5px;  border-bottom-left-radius:5px">Feed</p></li>
@@ -128,7 +143,7 @@
   </div>
 
 
-  <div *ngIf="this.isFeedSelected">
+  <div *ngIf="this.isFeedSelected && this.profileLoaded">
 
   <app-default-post></app-default-post>
   <app-default-post></app-default-post>
@@ -154,7 +169,12 @@
 
 <div class="div_right" style="width: 37%; height:100%; position:fixed;background-color: #444444;right:0;margin-top:60px">
 
-  <div style="overflow-y: scroll; height: 100%;">
+    <div *ngIf="!this.profileLoaded">
+        <p class="linear-background-dark" style="margin-top: 20px;margin-left:20px;width:400px;height: 20px;text-align: left;font-size: 20px;padding-left: 25px; padding-right: 10px;margin-bottom: 1px"></p>
+        <p class="linear-background-dark" style="margin-top:5px;margin-left:20px;width:220px;height: 20px;text-align: left;font-size: 20px;padding-left: 25px; padding-right: 10px;margin-bottom: 1px"></p>  
+    </div>
+
+  <div *ngIf="this.profileLoaded" style="overflow-y: scroll; height: 100%;">
     <h5 style="color:white;margin-top: 20px;margin-left: 30px;padding-bottom: 8px"><i class="fa fa-chart-line" style="padding-right:8px"></i>Trended by Nouman</h5>
     <app-trend-notification-card></app-trend-notification-card>
     <app-trend-notification-card></app-trend-notification-card>

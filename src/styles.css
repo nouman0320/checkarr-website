@@ -148,3 +148,17 @@
     position: relative;
     overflow: hidden;
 }
+
+.linear-background-dark {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #a8a8a8;
+    background: linear-gradient(to right, #666666 8%, #9c9c9c 18%, #666666 33%);
+    background-size: 1000px 104px;
+    height: 338px;
+    position: relative;
+    overflow: hidden;
+}

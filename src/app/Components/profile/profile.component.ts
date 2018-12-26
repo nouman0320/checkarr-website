@@ -16,9 +16,18 @@ export class ProfileComponent implements OnInit {
   private isFanSelected: Boolean = false;
   private isFollowingSelected: Boolean = false;
   private targetUserID: String = null;
+
+
   private userSelf: Boolean = false;
+  private profileLoaded: Boolean = true;
+  private userProfileImageUrl: String = null;
+  private userName: String = null;
+  private joinDate: String = null;
+
 
   private userFans: Fan[] = [];
+  
+
 
 
   constructor(public accountService: AccountService, private route: ActivatedRoute) {
