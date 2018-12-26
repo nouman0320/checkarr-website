@@ -316,6 +316,20 @@ export class AccountService {
     return this.webService.sendActivationMail(jsonStr);
   }
 
+
+  becomeFan(id: String, targetID: String):Observable<any>{
+    const localStorageObj = localStorage.getItem('currentUser');
+    
+    var token = "";
+    if(localStorageObj != null)
+    {
+      const currentUser = JSON.parse(localStorageObj);
+      token = currentUser.AccessToken;
+    }
+
+    return this.webService.becomeFan(id, targetID, token);
+  }
+
   getUserFans(id: String): Observable<any>{
     const localStorageObj = localStorage.getItem('currentUser');
     
@@ -351,6 +365,18 @@ export class AccountService {
     };
     console.log(JSON.stringify(jsonStr));
     return this.webService.activate_user_account(jsonStr);
+  }
+
+  getProfileDetails(id: String):Observable<any>{
+    const localStorageObj = localStorage.getItem('currentUser');
+    
+    var token = "";
+    if(localStorageObj != null)
+    {
+      const currentUser = JSON.parse(localStorageObj);
+      token = currentUser.AccessToken;
+    }
+    return this.webService.getUserProfileDetails(id, token);
   }
 
 

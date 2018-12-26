@@ -39,6 +39,24 @@ export class WebService {
     });
   }
 
+  becomeFan(id: String, targetID: String, token: String){
+    const body = {"FanID":targetID};
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Bearer ' + token)
+    return this.http.post(this.baseURL + 'Fan/'+id+'/fan/add', body, {
+      headers: headers
+    });
+  }
+
+  getUserProfileDetails(id: String, token: String){
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + token) //Fan/51/fan/find
+    return this.http.get(this.baseURL + 'Accounts/' + id + '/Profile_details', {
+      headers: headers
+    });
+  }
+
 
   activate_user_account(jsonStr: any) {
     const body = jsonStr;
